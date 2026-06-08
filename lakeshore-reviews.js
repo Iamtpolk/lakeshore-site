@@ -136,3 +136,69 @@
     setTimeout(run, 400);
   }
 })();
+
+
+/* =====================================================================
+   Three-Doors CTA — photos behind, maroon tiles floating, dark scrim.
+   Inserts ABOVE the reviews section, on the homepage only, once.
+   ===================================================================== */
+(function () {
+  try { if ((location.pathname || "").replace(/\/+$/, "") !== "") return; } catch (e) {}
+
+  var IMG = {
+    sell: "https://d8j0ntlcm91z4.cloudfront.net/user_3AADhVAwuk2jsx8PvxfzLHVDquj/hf_20260608_215136_bdaffbeb-7df2-4f0e-ba07-b40b4688282e.png",
+    buy:  "https://d8j0ntlcm91z4.cloudfront.net/user_3AADhVAwuk2jsx8PvxfzLHVDquj/hf_20260608_215118_1ea66de9-7bfe-40df-9a40-b4c23f6bc3a5.png",
+    cash: "https://d8j0ntlcm91z4.cloudfront.net/user_3AADhVAwuk2jsx8PvxfzLHVDquj/hf_20260608_215120_49a54846-9445-4d0b-98cc-060f67c2c136.png"
+  };
+
+  var css =
+"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');" +
+".lst-cta{box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}" +
+".lst-cta *{box-sizing:border-box}" +
+".lst-cta__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}" +
+"@media (max-width:820px){.lst-cta__grid{grid-template-columns:1fr}}" +
+".lst-cta__panel{position:relative;min-height:560px;display:flex;align-items:flex-end;background-size:cover;background-position:center;overflow:hidden}" +
+"@media (max-width:820px){.lst-cta__panel{min-height:460px}}" +
+".lst-cta__panel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,16,15,.30),rgba(15,16,15,.74))}" +
+".lst-cta__tile{position:relative;z-index:2;margin:28px;padding:30px 26px 26px;border-radius:16px;width:100%;display:flex;flex-direction:column;background:linear-gradient(155deg,#331715,#1c0b0a);border:1px solid rgba(216,184,119,.22);box-shadow:0 26px 44px -16px rgba(0,0,0,.78);transition:transform .25s ease,box-shadow .25s ease}" +
+".lst-cta__panel:hover .lst-cta__tile{transform:translateY(-8px);box-shadow:0 40px 60px -18px rgba(0,0,0,.9)}" +
+".lst-cta__icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:rgba(216,184,119,.15);color:#D8B877;border:1px solid rgba(216,184,119,.35)}" +
+".lst-cta__icon svg{width:24px;height:24px}" +
+".lst-cta__ch{font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:600;margin:0 0 9px;color:#f3efe7}" +
+".lst-cta__ct{font-size:14.5px;line-height:1.55;margin:0 0 22px;color:#cdc6ba}" +
+".lst-cta__btn{margin-top:auto;display:inline-block;text-align:center;font-weight:600;font-size:14.5px;padding:13px 18px;border-radius:10px;text-decoration:none;background:#D8B877;color:#201c19}" +
+".lst-cta__btn:hover{background:#e6c98c}";
+
+  var doors = [
+    {img:IMG.sell, icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>', h:"Thinking of Selling?", t:"Get a precise home value and a plan to sell for top dollar.", b:"What's My Home Worth?", u:"/evaluation"},
+    {img:IMG.buy, icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.5 8.5 0 1 0-3.2 6.6l3.7 3.7 1.4-1.4-3.7-3.7A8.46 8.46 0 0 0 21 11.5zm-8.5 6a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z"/></svg>', h:"Looking to Buy?", t:"Search every Acadiana listing and tour homes with a local pro.", b:"Search Homes", u:"/listing"},
+    {img:IMG.cash, icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2v8h6l-8 12v-8H5l8-12z"/></svg>', h:"Need to Sell Fast?", t:"Get a no-obligation cash offer in 24 hours — no repairs, no showings.", b:"Get My Cash Offer", u:"/cash-offer"}
+  ];
+
+  var panels = doors.map(function (d) {
+    return '<div class="lst-cta__panel" style="background-image:url(\'' + d.img + '\')">' +
+      '<div class="lst-cta__tile"><div class="lst-cta__icon">' + d.icon + '</div>' +
+      '<h3 class="lst-cta__ch">' + d.h + '</h3><p class="lst-cta__ct">' + d.t + '</p>' +
+      '<a class="lst-cta__btn" href="' + d.u + '">' + d.b + '</a></div></div>';
+  }).join('');
+
+  function run() {
+    if (document.getElementById("lst-cta-root")) return;
+    var st = document.createElement("style"); st.id = "lst-cta-style"; st.textContent = css; document.head.appendChild(st);
+    var sec = document.createElement("section"); sec.className = "lst-cta"; sec.id = "lst-cta-root";
+    sec.innerHTML = '<div class="lst-cta__grid">' + panels + '</div>';
+
+    var rv = document.getElementById("lst-rv-root");
+    if (rv) { rv.parentNode.insertBefore(sec, rv); return; }
+    function findByText(re, max){var a=document.querySelectorAll("h1,h2,h3,p,span,div");for(var i=0;i<a.length;i++){var t=(a[i].textContent||"").trim();if(t&&t.length<(max||80)&&re.test(t))return a[i];}return null;}
+    function big(el){var n=el,w=document.documentElement.clientWidth*0.9;for(var i=0;i<9&&n&&n.parentElement;i++){n=n.parentElement;if(n.getBoundingClientRect().width>=w)return n;}return el;}
+    var lux=findByText(/Luxury Real Estate in Acadiana/i,80);
+    if(lux){var ls=big(lux);ls.parentNode.insertBefore(sec,ls);return;}
+    document.body.appendChild(sec);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(run, 550); });
+  } else {
+    setTimeout(run, 550);
+  }
+})();

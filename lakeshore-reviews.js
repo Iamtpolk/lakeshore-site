@@ -157,15 +157,15 @@
 ".lst-cta *{box-sizing:border-box}" +
 ".lst-cta__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}" +
 "@media (max-width:820px){.lst-cta__grid{grid-template-columns:1fr}}" +
-".lst-cta__panel{position:relative;min-height:560px;display:flex;align-items:flex-end;background-size:cover;background-position:center;overflow:hidden}" +
-"@media (max-width:820px){.lst-cta__panel{min-height:460px}}" +
+".lst-cta__panel{position:relative;min-height:620px;display:flex;align-items:flex-end;background-size:cover;background-position:center;overflow:hidden}" +
+"@media (max-width:820px){.lst-cta__panel{min-height:520px}}" +
 ".lst-cta__panel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,16,15,.30),rgba(15,16,15,.74))}" +
-".lst-cta__tile{position:relative;z-index:2;margin:28px;padding:30px 26px 26px;border-radius:16px;width:100%;display:flex;flex-direction:column;background:linear-gradient(155deg,#331715,#1c0b0a);border:1px solid rgba(216,184,119,.22);box-shadow:0 26px 44px -16px rgba(0,0,0,.78);transition:transform .25s ease,box-shadow .25s ease}" +
+".lst-cta__tile{position:relative;z-index:2;margin:20px;padding:36px 32px 32px;border-radius:16px;width:100%;display:flex;flex-direction:column;background:linear-gradient(155deg,#331715,#1c0b0a);border:1px solid rgba(216,184,119,.22);box-shadow:0 26px 44px -16px rgba(0,0,0,.78);transition:transform .25s ease,box-shadow .25s ease}" +
 ".lst-cta__panel:hover .lst-cta__tile{transform:translateY(-8px);box-shadow:0 40px 60px -18px rgba(0,0,0,.9)}" +
 ".lst-cta__icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:rgba(216,184,119,.15);color:#D8B877;border:1px solid rgba(216,184,119,.35)}" +
 ".lst-cta__icon svg{width:24px;height:24px}" +
-".lst-cta__ch{font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:600;margin:0 0 9px;color:#f3efe7}" +
-".lst-cta__ct{font-size:14.5px;line-height:1.55;margin:0 0 22px;color:#cdc6ba}" +
+".lst-cta__ch{font-family:'Playfair Display',Georgia,serif;font-size:25px;font-weight:600;margin:0 0 10px;color:#f3efe7}" +
+".lst-cta__ct{font-size:15px;line-height:1.55;margin:0 0 24px;color:#cdc6ba}" +
 ".lst-cta__btn{margin-top:auto;display:inline-block;text-align:center;font-weight:600;font-size:14.5px;padding:13px 18px;border-radius:10px;text-decoration:none;background:#D8B877;color:#201c19}" +
 ".lst-cta__btn:hover{background:#e6c98c}";
 
@@ -188,10 +188,15 @@
     var sec = document.createElement("section"); sec.className = "lst-cta"; sec.id = "lst-cta-root";
     sec.innerHTML = '<div class="lst-cta__grid">' + panels + '</div>';
 
-    var rv = document.getElementById("lst-rv-root");
-    if (rv) { rv.parentNode.insertBefore(sec, rv); return; }
-    function findByText(re, max){var a=document.querySelectorAll("h1,h2,h3,p,span,div");for(var i=0;i<a.length;i++){var t=(a[i].textContent||"").trim();if(t&&t.length<(max||80)&&re.test(t))return a[i];}return null;}
+    function findByText(re, max){var a=document.querySelectorAll("h1,h2,h3,p,span,div,a");for(var i=0;i<a.length;i++){var t=(a[i].textContent||"").trim();if(t&&t.length<(max||80)&&re.test(t))return a[i];}return null;}
     function big(el){var n=el,w=document.documentElement.clientWidth*0.9;for(var i=0;i<9&&n&&n.parentElement;i++){n=n.parentElement;if(n.getBoundingClientRect().width>=w)return n;}return el;}
+    // 1) above the agent / Meet-Tyler section
+    var ba=findByText(/^Book Appointment$/i,40)||findByText(/Book Appointment/i,40);
+    if(ba){var bs=big(ba);bs.parentNode.insertBefore(sec,bs);return;}
+    // 2) fallback: above reviews
+    var rv=document.getElementById("lst-rv-root");
+    if(rv){rv.parentNode.insertBefore(sec,rv);return;}
+    // 3) fallback: above the Luxury section
     var lux=findByText(/Luxury Real Estate in Acadiana/i,80);
     if(lux){var ls=big(lux);ls.parentNode.insertBefore(sec,ls);return;}
     document.body.appendChild(sec);

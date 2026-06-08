@@ -40,7 +40,8 @@
 ".lst-rv__foot-stars{display:block;height:24px;width:140px;margin:0 auto;font-size:0;line-height:0;background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.58L12 17.98 6.1 20.16l1.13-6.58L2.45 8.94l6.6-.96z' fill='%23D8B877'/%3E%3C/svg%3E\") left center repeat-x;background-size:28px 24px}" +
 ".lst-rv__foot-text{font-size:15px;color:var(--muted);margin:10px 0 22px}" +
 ".lst-rv__cta{display:inline-block;background:var(--gold);color:#201c19;font-weight:600;font-size:15px;text-decoration:none;padding:14px 30px;border-radius:11px;box-shadow:0 10px 22px -8px rgba(216,184,119,.5);transition:background .2s ease,transform .2s ease,box-shadow .2s ease}" +
-".lst-rv__cta:hover{background:#e6c98c;transform:translateY(-2px);box-shadow:0 16px 28px -8px rgba(216,184,119,.6)}";
+".lst-rv__cta:hover{background:#e6c98c;transform:translateY(-2px);box-shadow:0 16px 28px -8px rgba(216,184,119,.6)}" +
+"#lst-rv-root.lst-rv{background:#191b1a!important}";
 
   var card = function (stars, body, avatarText, name, extra) {
     return '<figure class="lst-rv__card"><div class="lst-rv__stars" aria-label="5 out of 5 stars"></div>' +

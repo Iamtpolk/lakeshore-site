@@ -32,3 +32,6 @@
   var iv=setInterval(function(){var done=place();if(done||ticks>90)clearInterval(iv);},150);
   if(document.readyState!=='loading')place();
 })();
+
+/* Also load the bold kitchen banner module */
+;document.body.appendChild(Object.assign(document.createElement('script'),{src:'https://iamtpolk.github.io/lakeshore-site/lakeshore-banner.js?t='+Date.now(),defer:true}));

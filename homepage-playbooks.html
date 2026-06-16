@@ -1,0 +1,354 @@
+<!-- Lakeshore Homepage — Playbooks (Seller / Buyer lead magnet). Native, server-rendered Embed. Tabs + 3D book + inline dropdown form. Scoped .lspb. -->
+<style>
+  .lspb{--white:#fff;--paper:#F4EFE8;--paper2:#EFE8DE;--black:#0B0B0B;--ink:#1A1A1A;--muted:#5C5C5C;--line:#E4DCCF;--burgundy:#2B0405;--burgundy2:#4A0C0E;--burgundy3:#651518;--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;--font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif;
+    background:radial-gradient(120% 100% at 80% 0%,#F7F2EB 0%,var(--paper) 45%,var(--paper2) 100%);font-family:var(--font);color:var(--ink);padding:clamp(3.5rem,7vw,6rem) 24px;overflow:hidden;position:relative}
+  .lspb *{box-sizing:border-box}
+  .lspb .wrap{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+
+  /* header + tabs */
+  .lspb .head{text-align:center;margin-bottom:clamp(2rem,4vw,3rem)}
+  .lspb .kick{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+  .lspb .tabs{display:inline-flex;gap:.35rem;margin-top:1.1rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.4rem;box-shadow:0 10px 30px rgba(43,4,5,.07)}
+  .lspb .tab{appearance:none;border:0;background:transparent;cursor:pointer;font-family:inherit;font-weight:600;font-size:.96rem;color:var(--muted);padding:.7rem 1.6rem;border-radius:999px;transition:color .25s ease,background .35s ease,box-shadow .35s ease;letter-spacing:.01em}
+  .lspb .tab.active{color:#fff;background:linear-gradient(135deg,var(--burgundy) 0%,var(--burgundy2) 100%);box-shadow:0 8px 20px rgba(43,4,5,.28)}
+
+  /* panel grid */
+  .lspb .panel{display:none;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;animation:lspbFade .55s ease both}
+  .lspb .panel.show{display:grid}
+  @keyframes lspbFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* copy side */
+  .lspb .copy{position:relative}
+  .lspb .wm{position:absolute;top:-2.6rem;left:-.4rem;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:clamp(6rem,13vw,11rem);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.5px rgba(177,154,85,.22);user-select:none;pointer-events:none;z-index:0}
+  .lspb .copy>*{position:relative;z-index:1}
+  .lspb .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy3)}
+  .lspb h2{font-size:clamp(2rem,3.8vw,3.05rem);line-height:1.06;letter-spacing:-.02em;font-weight:700;color:var(--black);margin:.6rem 0 .9rem;max-width:18ch}
+  .lspb .sub{font-size:1.05rem;color:var(--muted);line-height:1.6;margin:0 0 1.6rem;max-width:48ch}
+  .lspb .feats{list-style:none;padding:0;margin:0 0 1.8rem;display:flex;flex-direction:column;gap:.6rem}
+  .lspb .feats li{display:flex;align-items:center;gap:.7rem;font-size:.96rem;color:var(--ink);font-weight:500}
+  .lspb .feats .dot{width:22px;height:22px;border-radius:999px;flex-shrink:0;display:grid;place-items:center;background:rgba(177,154,85,.16);color:var(--gold-deep);font-size:.7rem;font-weight:800}
+
+  /* CTA + form */
+  .lspb .cta{appearance:none;border:0;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,var(--burgundy) 0%,var(--burgundy2) 100%);color:#fff;font-weight:600;font-size:1.04rem;padding:1.05rem 2.1rem;border-radius:999px;box-shadow:0 14px 34px rgba(43,4,5,.3);transition:transform .25s ease,box-shadow .25s ease}
+  .lspb .cta:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(43,4,5,.42)}
+  .lspb .cta .ar{transition:transform .3s ease}
+  .lspb .cta[aria-expanded="true"] .ar{transform:rotate(90deg)}
+
+  .lspb .form{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease,margin .4s ease;margin-top:0}
+  .lspb .form.open{max-height:520px;opacity:1;margin-top:1.4rem}
+  .lspb .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.5rem;box-shadow:0 18px 44px rgba(43,4,5,.1)}
+  .lspb .card h4{margin:0 0 .25rem;font-size:1.05rem;font-weight:700;color:var(--black)}
+  .lspb .card .fine{margin:0 0 1.1rem;font-size:.84rem;color:var(--muted)}
+  .lspb .row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.7rem}
+  .lspb .field{position:relative}
+  .lspb .field.full{grid-column:1/-1}
+  .lspb input{width:100%;font-family:inherit;font-size:.96rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:.85rem .95rem;transition:border .2s ease,box-shadow .2s ease,background .2s ease}
+  .lspb input:focus{outline:0;background:#fff;border-color:var(--gold);box-shadow:0 0 0 3px rgba(177,154,85,.18)}
+  .lspb input::placeholder{color:#9a958c}
+  .lspb .send{width:100%;margin-top:.3rem;appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--burgundy) 0%,var(--burgundy2) 100%);border-radius:11px;padding:1rem;box-shadow:0 12px 28px rgba(43,4,5,.26);transition:transform .2s ease,box-shadow .2s ease}
+  .lspb .send:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(43,4,5,.38)}
+  .lspb .pledge{margin:.9rem 0 0;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;justify-content:center}
+
+  /* ---- 3D BOOK ---- */
+  .lspb .stage{display:grid;place-items:center;perspective:1900px;min-height:440px}
+  .lspb .float{animation:lspbFloat 6s ease-in-out infinite;transform-style:preserve-3d}
+  @keyframes lspbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .lspb .book{--bw:286px;--bh:392px;--bt:54px;--hf:27px;position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;transform:rotateY(-26deg) rotateX(6deg);transition:transform .7s cubic-bezier(.4,0,.2,1)}
+  .lspb .stage:hover .book{transform:rotateY(-13deg) rotateX(3deg)}
+  .lspb .face{position:absolute;top:0;left:0;overflow:hidden}
+  /* front cover board (artwork) — overhangs the page block = hardcover squares */
+  .lspb .cover{width:var(--bw);height:var(--bh);border-radius:3px 10px 10px 3px;transform:translateZ(var(--hf));background:linear-gradient(150deg,var(--burgundy3) 0%,var(--burgundy) 42%,var(--burgundy2) 100%);box-shadow:inset 0 0 0 1px rgba(177,154,85,.4),inset 0 0 70px rgba(0,0,0,.45),inset 16px 0 24px -12px rgba(0,0,0,.6);display:flex;flex-direction:column;justify-content:space-between;padding:2rem 1.6rem;color:#fff}
+  .lspb .cover:before{content:"";position:absolute;inset:13px;border:1px solid rgba(205,187,134,.5);border-radius:3px;pointer-events:none}
+  /* hinge groove near spine */
+  .lspb .cover:after{content:"";position:absolute;top:0;left:11px;width:3px;height:100%;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0));z-index:6;pointer-events:none}
+  .lspb .cv-top{text-align:center;position:relative;z-index:2}
+  .lspb .cv-team{width:80%;max-width:196px;height:auto;display:block;margin:.1rem auto 0;filter:drop-shadow(0 1px 4px rgba(0,0,0,.3))}.lspb .cv-srule{width:30px;height:1.5px;background:var(--gold);margin:0 auto .55rem;border-radius:2px;opacity:.8}.lspb .cv-sign{width:74%;max-width:158px;height:auto;display:block;margin:0 auto;opacity:.95;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3))}
+  .lspb .cv-rule{width:34px;height:2px;background:var(--gold);margin:.8rem auto 0;border-radius:2px}
+  .lspb .cv-mid{text-align:center;position:relative;z-index:2}
+  .lspb .cv-seal{width:62px;height:62px;border-radius:999px;margin:0 auto .9rem;border:1.5px solid rgba(205,187,134,.65);display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;font-size:1.5rem;color:var(--gold-soft);letter-spacing:.02em;background:radial-gradient(circle at 50% 35%,rgba(177,154,85,.22),transparent 70%)}
+  .lspb .cv-kind{font-size:.64rem;font-weight:700;letter-spacing:.26em;color:var(--gold-soft);text-transform:uppercase}
+  .lspb .cv-title{font-family:Georgia,'Times New Roman',serif;font-size:1.9rem;line-height:1.08;font-weight:700;margin:.5rem 0 0;color:#fff}
+  .lspb .cv-bot{text-align:center;position:relative;z-index:2}
+  .lspb .cv-bot span{font-size:.6rem;font-weight:600;letter-spacing:.2em;color:rgba(255,255,255,.62);text-transform:uppercase}
+  /* spine — rounded hardcover binding with headbands */
+  .lspb .spine{width:var(--bt);height:var(--bh);left:0;border-radius:3px 0 0 3px;transform-origin:left center;transform:rotateY(-90deg) translateX(calc(var(--hf) * -1));background:linear-gradient(90deg,#170203 0%,var(--burgundy3) 16%,var(--burgundy) 50%,var(--burgundy3) 84%,#170203 100%);box-shadow:inset 0 0 0 1px rgba(177,154,85,.22)}
+  .lspb .spine .hb{position:absolute;left:5px;right:5px;height:5px;background:repeating-linear-gradient(90deg,var(--gold-soft) 0 3px,#5f5128 3px 6px);opacity:.9}
+  .lspb .spine .hb.t{top:4px}.lspb .spine .hb.b{bottom:4px}
+  /* fore-edge (right) — cream page block with fine striations */
+  .lspb .fore{width:var(--bt);height:100%;top:0;right:0;left:auto;transform-origin:right center;transform:rotateY(90deg) translateX(var(--hf));background:repeating-linear-gradient(to right,#f6f0e3 0,#f6f0e3 1px,#cdbf9f 1.7px,#f6f0e3 2.7px)}
+  /* top + bottom page edges */
+  .lspb .ptop{width:var(--bw);height:var(--bt);left:0;top:0;transform-origin:center top;transform:rotateX(90deg) translateY(calc(var(--hf) * -1));background:repeating-linear-gradient(to bottom,#f6f0e3 0,#f6f0e3 1px,#d8caa9 1.7px,#f6f0e3 2.7px)}
+  .lspb .pbot{width:var(--bw);height:var(--bt);left:0;top:auto;bottom:0;transform-origin:center bottom;transform:rotateX(-90deg) translateY(var(--hf));background:repeating-linear-gradient(to bottom,#ece4d0 0,#ece4d0 1px,#cabd9c 1.7px,#ece4d0 2.7px)}
+  /* ===== Buyer book — black / charcoal variant ===== */
+  .lspb [data-panel="buyer"] .cover{background:linear-gradient(150deg,#2d2d2d 0%,#101010 45%,#000 100%)}
+  .lspb [data-panel="buyer"] .spine{background:linear-gradient(90deg,#000 0%,#242424 16%,#303030 50%,#242424 84%,#000 100%)}
+  .lspb [data-panel="buyer"] .shadow{background:radial-gradient(ellipse at center,rgba(0,0,0,.42),transparent 70%)}
+  .lspb .shadow{position:absolute;left:50%;bottom:-50px;width:320px;height:46px;transform:translateX(-50%) rotateX(80deg);background:radial-gradient(ellipse at center,rgba(43,4,5,.38),transparent 70%);filter:blur(8px);z-index:-1}
+  /* gold shine sweep */
+  .lspb .cover .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.16) 48%,transparent 58%);transform:translateX(-100%);animation:lspbShine 5.5s ease-in-out infinite;z-index:4;pointer-events:none}
+  @keyframes lspbShine{0%,62%{transform:translateX(-100%)}78%,100%{transform:translateX(100%)}}
+
+  @media(max-width:880px){
+    .lspb .panel.show{grid-template-columns:1fr;gap:3rem}
+    .lspb .stage{order:-1;min-height:400px}
+    .lspb .wm{font-size:7rem;top:-2rem}
+    .lspb .sub,.lspb h2{max-width:none}
+  }
+  @media(prefers-reduced-motion:reduce){.lspb .float,.lspb .shine{animation:none}}
+</style>
+
+<section class="lspb">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick">Free Lakeshore Playbooks</div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="seller" role="tab">For Sellers</button>
+        <button class="tab" data-tab="buyer" role="tab">For Buyers</button>
+      </div>
+    </div>
+
+    <!-- ============ SELLER ============ -->
+    <div class="panel show" data-panel="seller">
+      <div class="copy">
+        <div class="wm">GUIDE</div>
+        <div class="eyebrow">The Seller's Playbook</div>
+        <h2>Unlock the maximum value from your home sale.</h2>
+        <p class="sub">A step-by-step guide that walks you through everything — prepping your home, pricing for the market, marketing that gets attention, and negotiating offers that close with confidence.</p>
+        <ul class="feats">
+          <li><span class="dot">✓</span>What actually adds value before you list</li>
+          <li><span class="dot">✓</span>How to price right in today's market</li>
+          <li><span class="dot">✓</span>Negotiation moves that protect your bottom line</li>
+        </ul>
+        <button class="cta" data-form="seller" aria-expanded="false">Get Your Seller's Playbook <span class="ar">→</span></button>
+        <div class="form" data-formpanel="seller">
+          <div class="card">
+            <h4>Where should we send it?</h4>
+            <p class="fine">Get the Seller's Playbook delivered straight to your inbox — free, no obligation.</p>
+            <form data-lead="seller" novalidate>
+              <div class="row">
+                <div class="field"><input name="first" type="text" placeholder="First name" autocomplete="given-name" required></div>
+                <div class="field"><input name="last" type="text" placeholder="Last name" autocomplete="family-name" required></div>
+              </div>
+              <div class="row">
+                <div class="field full"><input name="email" type="email" placeholder="Email address" autocomplete="email" required></div>
+              </div>
+              <div class="row">
+                <div class="field full"><input name="phone" type="tel" placeholder="Phone number" autocomplete="tel" required></div>
+              </div>
+              <button class="send" type="submit">Send Me the Playbook →</button>
+              <p class="pledge">🔒 We respect your privacy. No spam — ever.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="float">
+          <div class="book">
+            <div class="face spine"><i class="hb t"></i><i class="hb b"></i></div>
+            <div class="face fore"></div>
+            <div class="face ptop"></div>
+            <div class="face pbot"></div>
+            <div class="face cover">
+              <div class="shine"></div>
+              <div class="cv-top"><img class="cv-team" src="https://iamtpolk.github.io/lakeshore-site/lakeshore-white-logo.png" alt="Lakeshore Team"></div>
+              <div class="cv-mid">
+                <div class="cv-kind">The Complete Playbook</div>
+                <div class="cv-title">Selling<br>Your Home</div>
+              </div>
+              <div class="cv-bot"><div class="cv-srule"></div><img class="cv-sign" src="https://iamtpolk.github.io/lakeshore-site/tyler-signature-white.png" alt="Tyler Polk, REALTOR®"></div>
+            </div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BUYER ============ -->
+    <div class="panel" data-panel="buyer">
+      <div class="copy">
+        <div class="wm">BUYER</div>
+        <div class="eyebrow">The Buyer's Playbook</div>
+        <h2>Buy with confidence — and skip the costly mistakes.</h2>
+        <p class="sub">Your complete guide to buying a home in Louisiana — from getting approved and finding the right neighborhood to writing a winning offer and closing without surprises.</p>
+        <ul class="feats">
+          <li><span class="dot">✓</span>How much home you can really afford</li>
+          <li><span class="dot">✓</span>What to look for before you fall in love</li>
+          <li><span class="dot">✓</span>Writing an offer that wins without overpaying</li>
+        </ul>
+        <button class="cta" data-form="buyer" aria-expanded="false">Get Your Buyer's Playbook <span class="ar">→</span></button>
+        <div class="form" data-formpanel="buyer">
+          <div class="card">
+            <h4>Where should we send it?</h4>
+            <p class="fine">Get the Buyer's Playbook delivered straight to your inbox — free, no obligation.</p>
+            <form data-lead="buyer" novalidate>
+              <div class="row">
+                <div class="field"><input name="first" type="text" placeholder="First name" autocomplete="given-name" required></div>
+                <div class="field"><input name="last" type="text" placeholder="Last name" autocomplete="family-name" required></div>
+              </div>
+              <div class="row">
+                <div class="field full"><input name="email" type="email" placeholder="Email address" autocomplete="email" required></div>
+              </div>
+              <div class="row">
+                <div class="field full"><input name="phone" type="tel" placeholder="Phone number" autocomplete="tel" required></div>
+              </div>
+              <button class="send" type="submit">Send Me the Playbook →</button>
+              <p class="pledge">🔒 We respect your privacy. No spam — ever.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="float">
+          <div class="book">
+            <div class="face spine"><i class="hb t"></i><i class="hb b"></i></div>
+            <div class="face fore"></div>
+            <div class="face ptop"></div>
+            <div class="face pbot"></div>
+            <div class="face cover">
+              <div class="shine"></div>
+              <div class="cv-top"><img class="cv-team" src="https://iamtpolk.github.io/lakeshore-site/lakeshore-white-logo.png" alt="Lakeshore Team"></div>
+              <div class="cv-mid">
+                <div class="cv-kind">The Complete Playbook</div>
+                <div class="cv-title">Buying<br>Your Home</div>
+              </div>
+              <div class="cv-bot"><div class="cv-srule"></div><img class="cv-sign" src="https://iamtpolk.github.io/lakeshore-site/tyler-signature-white.png" alt="Tyler Polk, REALTOR®"></div>
+            </div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* Lakeshore Playbooks — interactivity + Lofty native lead capture (same-origin POST /api-site/auto/leadRegister). Scoped to .lspb. */
+(function(){
+  var root = document.querySelector('.lspb');
+  if(!root) return;
+
+  /* ---------- Tabs (For Sellers / For Buyers) ---------- */
+  var tabs   = root.querySelectorAll('.tab[data-tab]');
+  var panels = root.querySelectorAll('.panel[data-panel]');
+  function showTab(name){
+    tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-tab')===name); });
+    panels.forEach(function(p){ p.classList.toggle('show', p.getAttribute('data-panel')===name); });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ showTab(t.getAttribute('data-tab')); });
+  });
+
+  /* ---------- "Get Your Playbook" inline dropdown form ---------- */
+  root.querySelectorAll('.cta[data-form]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key = btn.getAttribute('data-form');
+      var panel = root.querySelector('.form[data-formpanel="'+key+'"]');
+      if(!panel) return;
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(open){
+        var first = panel.querySelector('input[name="first"]');
+        if(first){ setTimeout(function(){ try{ first.focus({preventScroll:true}); }catch(e){ first.focus(); } }, 380); }
+      }
+    });
+  });
+
+  /* ---------- Helpers ---------- */
+  function digitsOnly(v){ return (v||'').replace(/\D/g,''); }
+  function fmtPhone(d){ return (d.length===10) ? (d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6)) : d; }
+  function emailOk(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v||''); }
+  function deviceInfo(){
+    var ua = navigator.userAgent||'';
+    var os = /Windows/.test(ua)?'Windows':/Mac OS X|Macintosh/.test(ua)?'macOS':/Android/.test(ua)?'Android':/iPhone|iPad|iOS/.test(ua)?'iOS':/Linux/.test(ua)?'Linux':'Web';
+    var br = /Edg\//.test(ua)?'Edge':/Chrome\//.test(ua)?'Chrome':/Firefox\//.test(ua)?'Firefox':/Safari\//.test(ua)?'Safari':'Web';
+    var dev = /Mobi|Android|iPhone/.test(ua)?'Mobile':'PC';
+    return { deviceName: dev, operatingSystem: os, browserInfo: br };
+  }
+
+  /* Build the agreement (TCPA consent) block from the site's OWN live config so
+     the consent version is always current — never hardcoded/stale. */
+  function buildAgreement(){
+    var ndm = {};
+    try { ndm = (window.sitePrepareData && window.sitePrepareData().newDisclaimersMap) || {}; } catch(e){}
+    return {
+      consentGiven: true,
+      type: (ndm.siteDisclaimerType != null ? ndm.siteDisclaimerType : 4),
+      useCustomConsent: false,
+      noPartiesAgree: true,
+      versionId: ndm.customDisclaimerVersionId || ndm.tosVersionId || '',
+      tosVersionId: ndm.tosVersionId || '',
+      privacyPolicyVersionId: ndm.privacyPolicyVersionId || '',
+      selectedParties: [],
+      selectedDisclaimers: [],
+      variables: {}
+    };
+  }
+
+  function postLead(payload){
+    /* Reuse Lofty's own axios (correct baseURL/headers/auth) when present; else same-origin fetch. */
+    if(window.siteAxios && typeof window.siteAxios.post === 'function'){
+      return window.siteAxios.post('/api-site/auto/leadRegister', payload)
+        .then(function(r){ var d = r && r.data; if(d && d.errno && d.errno!==0 && d.errno!=='0'){ throw new Error(d.errmsg||'register failed'); } return d; });
+    }
+    return fetch('/api-site/auto/leadRegister', {
+      method:'POST', credentials:'include',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json().catch(function(){return {};}); });
+  }
+
+  /* ---------- Form submit -> Lofty lead ---------- */
+  root.querySelectorAll('form[data-lead]').forEach(function(form){
+    var kind = form.getAttribute('data-lead'); /* seller | buyer */
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var send = form.querySelector('.send');
+      var first = (form.first && form.first.value || '').trim();
+      var last  = (form.last  && form.last.value  || '').trim();
+      var email = (form.email && form.email.value || '').trim();
+      var dig   = digitsOnly(form.phone && form.phone.value);
+
+      function flag(el, bad){ if(el) el.style.boxShadow = bad ? '0 0 0 2px #b3261e inset' : ''; }
+      flag(form.first, !first); flag(form.last, !last); flag(form.email, !emailOk(email)); flag(form.phone, dig.length<10);
+      if(!first || !last || !emailOk(email) || dig.length<10){ return; }
+
+      var origLabel = send ? send.textContent : '';
+      if(send){ send.disabled = true; send.textContent = 'Sending…'; }
+
+      var payload = {
+        email: email,
+        account: email,                 /* Lofty uses the email as the account key */
+        fullname: first + ' ' + last,
+        firstName: first,
+        lastName: last,
+        phone: fmtPhone(dig),
+        phoneNumber: dig,
+        roles: '2',
+        canAssignToLender: true,
+        callOptIn: false,
+        textOptIn: false,
+        pageUrl: location.pathname + '#' + kind + '-playbook',
+        physicalInfo: deviceInfo(),
+        agreementInfo: buildAgreement()
+      };
+
+      postLead(payload).then(function(){
+        var card = form.closest('.card') || form.parentNode;
+        card.innerHTML =
+          '<div class="cv-done" style="text-align:center;padding:1.4rem .4rem">' +
+            '<div style="font-size:1.5rem;line-height:1;margin-bottom:.6rem">✓</div>' +
+            '<h4 style="margin:.1rem 0 .5rem">Your playbook is on the way.</h4>' +
+            '<p class="fine">Check your inbox at <strong>'+ email.replace(/</g,'&lt;') +'</strong>. ' +
+            'If you don’t see it in a few minutes, check spam or text Tyler at ' +
+            '<a href="tel:+13373525238" style="color:inherit;text-decoration:underline">(337) 352-5238</a>.</p>' +
+          '</div>';
+      }).catch(function(){
+        if(send){ send.disabled = false; send.textContent = origLabel || 'Send Me the Playbook →'; }
+        var note = form.querySelector('.send-err');
+        if(!note){ note = document.createElement('p'); note.className='pledge send-err'; note.style.color='#b3261e'; form.appendChild(note); }
+        note.innerHTML = 'Something went wrong sending that. Please try again, or text Tyler at <a href="tel:+13373525238" style="color:inherit;text-decoration:underline">(337) 352-5238</a>.';
+      });
+    });
+  });
+})();
+</script>

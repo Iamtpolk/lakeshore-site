@@ -273,6 +273,7 @@
     var blog=document.querySelector('.md-blog'); if(blog)blog.style.display='none';
     var vid=document.querySelector('.md-video'); if(vid)vid.style.display='none';
     var cta=document.querySelector('.md-cta'); if(cta)cta.style.display='none';
+    var lb=document.getElementById('lst-banner-root'); if(lb)lb.style.display='none';
     [].slice.call(document.querySelectorAll('.md-content')).forEach(function(m){if((m.innerText||'').toUpperCase().indexOf('WHO WE HELP')>-1)m.style.display='none';});
     var soc=document.querySelector('.md-social-post'); if(soc)soc.style.backgroundColor='#FAF8F5';
     var form=document.querySelector('.md-form');

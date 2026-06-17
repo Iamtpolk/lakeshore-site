@@ -95,6 +95,28 @@
   }
   @media(max-width:520px){#lst-about-root .wwh-grid{grid-template-columns:1fr;max-width:420px}}
   .md-form img{object-fit:contain !important;object-position:center !important;}
+
+  .lst-aq-sec{display:none;background:#0B0B0B;padding:clamp(3.5rem,6vw,5.5rem) 24px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+  .lst-aq-sec *{box-sizing:border-box}
+  .lst-aq-sec .aq-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  .lst-aq-sec .aq-eyebrow{color:#B19A55;font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+  .lst-aq-sec h2{font-size:clamp(1.9rem,3.6vw,2.7rem);color:#fff;margin:.5rem 0 .6rem;letter-spacing:-.02em;font-weight:700}
+  .lst-aq-sec .aq-intro p{color:#bdbdbd;font-size:1.02rem;line-height:1.6;max-width:42ch;margin:0 0 1.2rem}
+  .lst-aq-sec .aq-contact{display:flex;flex-direction:column;gap:.5rem}
+  .lst-aq-sec .aq-contact a{color:#eaeaea;text-decoration:none;font-size:.95rem;font-weight:500}
+  .lst-aq-sec .aq-contact a:hover{color:#B19A55}
+  .lst-aq-sec .aq-card{background:#161616;border:1px solid #262626;border-radius:20px;padding:clamp(1.5rem,3vw,2.2rem)}
+  .lst-aq-sec .aq-card form{display:grid;gap:.8rem}
+  .lst-aq-sec .aq-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .lst-aq-sec .aq-card input,.lst-aq-sec .aq-card textarea{width:100%;background:#0d0d0f;border:1px solid #2c2c2c;border-radius:12px;padding:.9rem 1rem;color:#fff;font-family:inherit;font-size:.95rem}
+  .lst-aq-sec .aq-card input::placeholder,.lst-aq-sec .aq-card textarea::placeholder{color:#7a7a7a}
+  .lst-aq-sec .aq-card input:focus,.lst-aq-sec .aq-card textarea:focus{outline:none;border-color:#B19A55}
+  .lst-aq-sec .aq-card textarea{min-height:110px;resize:vertical}
+  .lst-aq-sec .aq-send{margin-top:.3rem;background:#B19A55;color:#1a1306;border:0;border-radius:999px;padding:1rem;font-weight:600;font-size:1rem;cursor:pointer;transition:.25s}
+  .lst-aq-sec .aq-send:hover{background:#c6ad63;transform:translateY(-1px)}
+  .lst-aq-sec .aq-send:disabled{opacity:.7;cursor:default}
+  .lst-aq-sec .aq-fine{color:#8a8a8a;font-size:.72rem;line-height:1.4;margin:.3rem 0 0}
+  @media(max-width:860px){.lst-aq-sec .aq-wrap{grid-template-columns:1fr;gap:2rem}.lst-aq-sec .aq-row{grid-template-columns:1fr}}
 </style>
 <div id="lst-about-root">
   <section class="lsa lst-reveal">
@@ -198,6 +220,34 @@
       </article>
     </div>
   </section>
+  <section class="lst-aq-sec" id="lst-aq">
+    <div class="aq-wrap">
+      <div class="aq-intro">
+        <span class="aq-eyebrow">We're Here to Help</span>
+        <h2>Any Questions? Submit Below</h2>
+        <p>Buying, selling, or just exploring your options? Send a note and Tyler will get back to you personally.</p>
+        <div class="aq-contact">
+          <a href="tel:+13372414963">&#9742; (337) 241-4963</a>
+          <a href="mailto:tyler.polk@exprealty.com">&#9993; tyler.polk@exprealty.com</a>
+        </div>
+      </div>
+      <div class="aq-card">
+        <form novalidate>
+          <div class="aq-row">
+            <input name="first" type="text" placeholder="First name" autocomplete="given-name">
+            <input name="last" type="text" placeholder="Last name" autocomplete="family-name">
+          </div>
+          <div class="aq-row">
+            <input name="phone" type="tel" placeholder="Phone" autocomplete="tel">
+            <input name="email" type="email" placeholder="Email" autocomplete="email">
+          </div>
+          <textarea name="message" placeholder="How can we help?"></textarea>
+          <button type="submit" class="aq-send">Submit Question</button>
+          <p class="aq-fine">By submitting, you agree to this site's Privacy Policy and Terms of Service and consent to receive calls, texts, and emails (including via automated technology) from eXp Realty and the Lakeshore Team at the number provided. Consent is not a condition of purchase; message and data rates may apply. Reply STOP to opt out.</p>
+        </form>
+      </div>
+    </div>
+  </section>
 </div>
 <script>
 (function(){
@@ -271,6 +321,17 @@
     });
     tile.addEventListener('mouseleave',function(){tile.style.transform='';});
   });
+  
+  /* Custom Any Questions form -> Lofty CRM lead (same endpoint/payload as the native form) */
+  function aqDigits(v){var o='';v=v||'';for(var i=0;i<v.length;i++){var ch=v.charAt(i);if(ch>='0'&&ch<='9')o+=ch;}return o;}
+  function aqFmt(d){return d.length===10?(d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6)):d;}
+  function aqEmailOk(v){v=v||'';var at=v.indexOf('@');var dot=v.lastIndexOf('.');return at>0&&dot>at+1&&dot<v.length-1;}
+  function aqDevice(){var ua=navigator.userAgent||'';var os=ua.indexOf('Windows')>-1?'Windows':(ua.indexOf('Mac')>-1?'macOS':(ua.indexOf('Android')>-1?'Android':(ua.indexOf('iPhone')>-1||ua.indexOf('iPad')>-1?'iOS':(ua.indexOf('Linux')>-1?'Linux':'Web'))));var br=ua.indexOf('Edg/')>-1?'Edge':(ua.indexOf('Chrome')>-1?'Chrome':(ua.indexOf('Firefox')>-1?'Firefox':(ua.indexOf('Safari')>-1?'Safari':'Web')));var dev=(ua.indexOf('Mobi')>-1||ua.indexOf('Android')>-1||ua.indexOf('iPhone')>-1)?'Mobile':'PC';return {deviceName:dev,operatingSystem:os,browserInfo:br};}
+  function aqAgreement(){var ndm={};try{ndm=(window.sitePrepareData&&window.sitePrepareData().newDisclaimersMap)||{};}catch(e){}return {consentGiven:true,type:(ndm.siteDisclaimerType!=null?ndm.siteDisclaimerType:4),useCustomConsent:false,noPartiesAgree:true,versionId:ndm.customDisclaimerVersionId||ndm.tosVersionId||'',tosVersionId:ndm.tosVersionId||'',privacyPolicyVersionId:ndm.privacyPolicyVersionId||'',selectedParties:[],selectedDisclaimers:[],variables:{}};}
+  function aqPost(p){if(window.siteAxios&&typeof window.siteAxios.post==='function'){return window.siteAxios.post('/api-site/auto/leadRegister',p).then(function(r){var d=r&&r.data;if(d&&d.errno&&d.errno!==0&&d.errno!=='0'){throw new Error(d.errmsg||'failed');}return d;});}return fetch('/api-site/auto/leadRegister',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p)}).then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);return res.json().catch(function(){return {};});});}
+  var aqForm=root.querySelector('#lst-aq form');
+  if(aqForm){aqForm.addEventListener('submit',function(ev){ev.preventDefault();var send=aqForm.querySelector('.aq-send');var first=(aqForm.first&&aqForm.first.value||'').trim();var last=(aqForm.last&&aqForm.last.value||'').trim();var email=(aqForm.email&&aqForm.email.value||'').trim();var dig=aqDigits(aqForm.phone&&aqForm.phone.value);var msg=(aqForm.message&&aqForm.message.value||'').trim();function flag(el,bad){if(el)el.style.boxShadow=bad?'0 0 0 2px #b3261e inset':'';}flag(aqForm.first,!first);flag(aqForm.last,!last);flag(aqForm.email,!aqEmailOk(email));flag(aqForm.phone,dig.length<10);if(!first||!last||!aqEmailOk(email)||dig.length<10)return;var orig=send?send.textContent:'';if(send){send.disabled=true;send.textContent='Sending...';}var payload={email:email,account:email,fullname:first+' '+last,firstName:first,lastName:last,phone:aqFmt(dig),phoneNumber:dig,roles:'2',canAssignToLender:true,callOptIn:false,textOptIn:false,note:msg,pageUrl:location.pathname+'#any-questions',physicalInfo:aqDevice(),agreementInfo:aqAgreement()};aqPost(payload).then(function(){var box=aqForm.closest('.aq-card')||aqForm.parentNode;box.innerHTML='<div style="text-align:center;padding:1.6rem .4rem"><div style="font-size:1.6rem;margin-bottom:.5rem;color:#B19A55">&#10003;</div><h3 style="margin:.1rem 0 .5rem;color:#fff">Thanks - your message is in.</h3><p style="color:#cfcfcf;font-size:.92rem;line-height:1.5">Tyler will reach out to you personally. Need something now? Call or text (337) 241-4963.</p></div>';}).catch(function(){if(send){send.disabled=false;send.textContent=orig||'Submit Question';}var nn=aqForm.querySelector('.aq-err');if(!nn){nn=document.createElement('p');nn.className='aq-err';nn.style.cssText='color:#ff9b94;font-size:.85rem;margin:.6rem 0 0';aqForm.appendChild(nn);}nn.textContent='Something went wrong. Please try again, or call (337) 241-4963.';});});}
+
   var tries=0;
   function place(){
     tries++;
@@ -287,6 +348,7 @@
     [].slice.call(document.querySelectorAll('.md-content')).forEach(function(m){if((m.innerText||'').toUpperCase().indexOf('WHO WE HELP')>-1)m.style.display='none';});
     var soc=document.querySelector('.md-social-post'); if(soc){soc.style.backgroundColor='#FAF8F5'; soc.querySelectorAll('h1,h2,h3,h4,p,span,div').forEach(function(el){if(el.children.length===0){var stx=(el.textContent||'').trim(); if(stx==='Social Feed'||stx==='Follow Along'){el.textContent='Follow Along'; el.style.textAlign='center'; el.style.color='#0B0B0B'; if(el.parentElement)el.parentElement.style.textAlign='center';}}});}
     var form=document.querySelector('.md-form');
+    var aq=document.getElementById('lst-aq'); if(form&&aq&&form.parentNode){ if(aq.nextSibling!==form){form.parentNode.insertBefore(aq,form);} aq.style.display='block'; form.style.display='none'; }
     if(form){
       form.querySelectorAll('h1,h2,h3,h4,span,div,p,button').forEach(function(el){
         if(el.children.length===0){var tx=(el.textContent||'').trim().toUpperCase();if(tx==='GET MORE INFORMATION'){el.textContent='Any Questions? Submit';}}

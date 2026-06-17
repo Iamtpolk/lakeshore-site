@@ -16,8 +16,7 @@
     if(!document.getElementById('lst-banner-style')){var st=document.createElement('style');st.id='lst-banner-style';st.textContent=CSS;document.head.appendChild(st);}
     var sec=document.createElement('section');sec.id='lst-banner-root';sec.className='lst-banner';sec.style.backgroundImage=bg;sec.innerHTML=HTML;
     if(rv){rv.parentNode.insertBefore(sec,rv.nextSibling);}else{nat.parentNode.insertBefore(sec,nat);}
-    nat.style.cssText='height:0!important;min-height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important;opacity:0!important;pointer-events:none!important;display:block!important';
-    nat.setAttribute('data-lst-hidden','1');
+    try{nat.remove();}catch(e){}
     return true;
   }
   var n=0,iv=setInterval(function(){if(build()||++n>80)clearInterval(iv);},150);

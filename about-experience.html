@@ -1,4 +1,4 @@
-<!-- Lakeshore /about experience: charcoal Meet Tyler (eXp S&E watermark) + animated iPhone testimonials + auto-scroll reviews carousel. Injected via the site-wide /about loader. -->
+<!-- Lakeshore /about experience: charcoal Meet Tyler + iPhone testimonials + reviews carousel + 3D Who We Help tiles + native polish. Injected via the /about loader. -->
 <style>
   #lst-about-root{--white:#fff;--paper:#FAF8F5;--black:#0B0B0B;--ink:#1A1A1A;--muted:#5C5C5C;--line:#ECE7DF;--burgundy:#2B0405;--burgundy2:#420a0c;--gold:#B19A55;--gold-soft:#cdbb86;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-family:var(--font);display:block}
   #lst-about-root *{box-sizing:border-box}
@@ -62,6 +62,26 @@
   #lst-about-root .who .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-soft),var(--burgundy));display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem}
   #lst-about-root .who .nm{font-size:.85rem;font-weight:700;color:var(--black)}
   #lst-about-root .who .mt{font-size:.74rem;color:var(--muted)}
+  #lst-about-root .wwh{background:var(--paper);padding:clamp(3.5rem,6vw,5.5rem) 24px}
+  #lst-about-root .wwh .wwh-head{text-align:center;max-width:680px;margin:0 auto 2.6rem}
+  #lst-about-root .wwh .eyebrow{color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+  #lst-about-root .wwh h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--black);margin:.5rem 0 .6rem;letter-spacing:-.02em}
+  #lst-about-root .wwh .wwh-head p{color:var(--muted);font-size:1.02rem;line-height:1.6;margin:0}
+  #lst-about-root .wwh-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;perspective:1100px}
+  #lst-about-root .tile{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:2rem 1.5rem 1.7rem;box-shadow:0 10px 30px rgba(11,11,11,.06);transition:box-shadow .3s ease,transform .15s ease;transform-style:preserve-3d;will-change:transform;overflow:hidden;opacity:0;transform:translateY(26px)}
+  #lst-about-root .wwh.in .tile{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+  #lst-about-root .wwh.in .tile:nth-child(1){transition-delay:.05s}
+  #lst-about-root .wwh.in .tile:nth-child(2){transition-delay:.15s}
+  #lst-about-root .wwh.in .tile:nth-child(3){transition-delay:.25s}
+  #lst-about-root .wwh.in .tile:nth-child(4){transition-delay:.35s}
+  #lst-about-root .tile .ic{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#9a8442);display:grid;place-items:center;margin-bottom:1.1rem;box-shadow:0 8px 18px rgba(177,154,85,.35);transform:translateZ(40px)}
+  #lst-about-root .tile .ic svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.7}
+  #lst-about-root .tile h3{font-size:1.08rem;font-weight:700;color:var(--black);margin:0 0 .5rem;letter-spacing:-.01em;transform:translateZ(22px)}
+  #lst-about-root .tile p{font-size:.92rem;line-height:1.55;color:var(--muted);margin:0;transform:translateZ(14px)}
+  #lst-about-root .tile .edge{position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--burgundy));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+  #lst-about-root .tile:hover{box-shadow:0 26px 60px rgba(11,11,11,.16)}
+  #lst-about-root .tile:hover .edge{transform:scaleX(1)}
+  @media(max-width:980px){#lst-about-root .wwh-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:860px){
     #lst-about-root .lsa .wrap{grid-template-columns:1fr;gap:2.4rem}
     #lst-about-root .lsa .frame{aspect-ratio:1/1;max-width:420px;margin:0 auto}
@@ -70,6 +90,8 @@
     #lst-about-root .ph-sec .copy p{margin-left:auto;margin-right:auto}
     #lst-about-root .ph-tabs{justify-content:center}
   }
+  @media(max-width:620px){#lst-about-root .wwh-grid{grid-template-columns:1fr;max-width:420px}}
+  .md-form img{object-fit:contain !important;object-position:center !important;}
 </style>
 <div id="lst-about-root">
   <section class="lsa lst-reveal">
@@ -133,6 +155,39 @@
       <h2>Trusted across Acadiana &amp; Southwest Louisiana</h2>
     </div>
     <div class="track-mask"><div class="track" id="lstRevTrack"></div></div>
+  </section>
+  <section class="wwh lst-reveal">
+    <div class="wwh-head">
+      <span class="eyebrow">Who We Help</span>
+      <h2>However you're moving, we've got you</h2>
+      <p>Every client and every situation is different. Here's how Tyler guides each one across Acadiana and Southwest Louisiana.</p>
+    </div>
+    <div class="wwh-grid">
+      <article class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"></circle><path d="M11 11l8 8m-3 0l3 0 0-3"></path></svg></div>
+        <h3>First-Time Homebuyers</h3>
+        <p>Step-by-step guidance so you know exactly what to expect - and feel confident from your first showing to closing day.</p>
+        <span class="edge"></span>
+      </article>
+      <article class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-5v-6H10v6H5a1 1 0 01-1-1z"></path></svg></div>
+        <h3>Home Sellers</h3>
+        <p>Smart pricing, standout marketing, and sharp negotiation to attract strong offers and sell for top dollar.</p>
+        <span class="edge"></span>
+      </article>
+      <article class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.6-7-11a7 7 0 0114 0c0 5.4-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></div>
+        <h3>Relocation Clients</h3>
+        <p>New to the area? Get the inside view on neighborhoods, schools, and the right fit so your move feels effortless.</p>
+        <span class="edge"></span>
+      </article>
+      <article class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 9l3-4h8l3 4-7 11z"></path><path d="M5 9h14M10 5l-2 4 4 11 4-11-2-4"></path></svg></div>
+        <h3>Luxury &amp; New Construction</h3>
+        <p>From custom builds to high-end homes, expert guidance through the details, negotiations, and opportunities that matter most.</p>
+        <span class="edge"></span>
+      </article>
+    </div>
   </section>
 </div>
 <script>
@@ -198,22 +253,38 @@
     d.appendChild(s);d.appendChild(p);d.appendChild(who);return d;
   }
   reviews.concat(reviews).forEach(function(r){track.appendChild(card(r));});
+  root.querySelectorAll('.wwh .tile').forEach(function(tile){
+    tile.addEventListener('mousemove',function(e){
+      var r=tile.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width-0.5;
+      var py=(e.clientY-r.top)/r.height-0.5;
+      tile.style.transform='translateY(-6px) rotateX('+(-py*7).toFixed(2)+'deg) rotateY('+(px*7).toFixed(2)+'deg)';
+    });
+    tile.addEventListener('mouseleave',function(){tile.style.transform='';});
+  });
   var tries=0;
   function place(){
     tries++;
     var banners=[].slice.call(document.querySelectorAll('.md-banner'));
+    var hero=banners.filter(function(b){return (b.innerText||'').indexOf('About Tyler')>-1;})[0]||banners[0];
     var meet=banners.filter(function(b){return (b.innerText||'').indexOf('Meet Tyler Polk')>-1;})[0];
-    if(meet && meet.parentNode){
-      if(root.parentNode!==meet.parentNode || root.nextSibling!==meet){meet.parentNode.insertBefore(root,meet);}
-      meet.style.display='none';
-    }
+    if(meet){meet.style.display='none';}
+    if(hero && hero.parentNode && hero.nextSibling!==root){hero.parentNode.insertBefore(root,hero.nextSibling);}
     var blog=document.querySelector('.md-blog'); if(blog)blog.style.display='none';
     var vid=document.querySelector('.md-video'); if(vid)vid.style.display='none';
+    var cta=document.querySelector('.md-cta'); if(cta)cta.style.display='none';
+    [].slice.call(document.querySelectorAll('.md-content')).forEach(function(m){if((m.innerText||'').toUpperCase().indexOf('WHO WE HELP')>-1)m.style.display='none';});
+    var soc=document.querySelector('.md-social-post'); if(soc)soc.style.backgroundColor='#FAF8F5';
     var form=document.querySelector('.md-form');
     if(form){
       form.querySelectorAll('h1,h2,h3,h4,span,div,p,button').forEach(function(el){
         if(el.children.length===0){var tx=(el.textContent||'').trim().toUpperCase();if(tx==='GET MORE INFORMATION'){el.textContent='Any Questions? Submit';}}
       });
+      form.querySelectorAll('button,a,[class*="submit"],[class*="Submit"]').forEach(function(b){
+        var t=(b.innerText||'').trim().toUpperCase();
+        if(t==='SUBMIT'){b.style.backgroundColor='#B19A55';b.style.borderColor='#B19A55';}
+      });
+      var im=form.querySelector('img'); if(im){im.style.objectFit='contain';im.style.objectPosition='center';}
     }
     if(tries<40)setTimeout(place,250);
   }

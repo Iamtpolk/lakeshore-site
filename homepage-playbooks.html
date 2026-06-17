@@ -485,3 +485,15 @@ main.page-content > .md-house{background:#FFFFFF!important}
   .md-hero .media-content-v2{font-size:14px!important;line-height:1.5!important}
 }
 </style>
+<!-- Reviews insurance: if the reviews section failed to inject (mobile timing), re-run its loader (its own guard prevents duplicates). -->
+<script>
+(function(){
+  function ensureReviews(tag){
+    if(document.getElementById('lst-rv-root')) return;
+    var s=document.createElement('script');
+    s.src='https://iamtpolk.github.io/lakeshore-site/lakeshore-reviews.js?ins='+tag+Date.now();
+    s.defer=true; document.body.appendChild(s);
+  }
+  [3500,7000,11000].forEach(function(t,i){ setTimeout(function(){ ensureReviews(i); }, t); });
+})();
+</script>

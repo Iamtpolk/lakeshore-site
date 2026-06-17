@@ -5,7 +5,10 @@
   #lst-about-root .lst-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
   #lst-about-root .lst-reveal.in{opacity:1;transform:none}
   #lst-about-root .lsa{background:#0B0B0B;padding:clamp(3.5rem,6vw,5.5rem) 24px;position:relative;overflow:hidden}
-  #lst-about-root .lsa::after{content:"";position:absolute;inset:0;background:url('https://iamtpolk.github.io/lakeshore-site/exp-se-white.png') no-repeat 24% center;background-size:min(1000px,62%) auto;opacity:.045;pointer-events:none;z-index:0}
+  #lst-about-root .lsa-logos{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;display:flex;align-items:center}
+  #lst-about-root .lsa-logos-track{display:flex;gap:90px;align-items:center;width:max-content;animation:lstmarq 60s linear infinite;opacity:.05;padding:0 45px}
+  #lst-about-root .lsa-logos-track img{height:clamp(80px,11vw,170px);width:auto;display:block}
+  @keyframes lstmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   #lst-about-root .lsa .wrap{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(2rem,5vw,4rem);align-items:center;position:relative;z-index:1}
   #lst-about-root .lsa .photo{position:relative}
   #lst-about-root .lsa .frame{border-radius:18px;overflow:hidden;display:grid;place-items:center;aspect-ratio:4/5;background:#161616;border:1px solid #262626;box-shadow:0 24px 60px rgba(0,0,0,.45)}
@@ -26,10 +29,9 @@
   #lst-about-root .lsa .cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#1a1306;font-weight:600;font-size:1.02rem;padding:1rem 2rem;border-radius:999px;text-decoration:none;box-shadow:0 12px 30px rgba(177,154,85,.3);transition:transform .25s ease,box-shadow .25s ease}
   #lst-about-root .lsa .cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(177,154,85,.45)}
   #lst-about-root .ph-sec{background:var(--burgundy);color:#fff;padding:clamp(3.5rem,7vw,6rem) 24px;position:relative;overflow:hidden}
-  #lst-about-root .ph-logos{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;display:flex;align-items:center}
-  #lst-about-root .ph-logos-track{display:flex;gap:90px;align-items:center;width:max-content;animation:lstlogo 55s linear infinite;opacity:.07;padding:0 45px}
-  #lst-about-root .ph-logos-track img{height:clamp(90px,13vw,190px);width:auto;display:block}
-  @keyframes lstlogo{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  #lst-about-root .ph-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;display:flex;align-items:center}
+  #lst-about-root .ph-stars-track{display:flex;gap:48px;align-items:center;width:max-content;animation:lstmarq 70s linear infinite;opacity:.08;white-space:nowrap}
+  #lst-about-root .ph-stars-track span{font-size:clamp(80px,15vw,210px);line-height:1;color:#cdbb86;letter-spacing:.06em}
   #lst-about-root .ph-sec .inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,4.5rem);align-items:center;position:relative;z-index:1}
   #lst-about-root .ph-sec .eyebrow{color:var(--gold-soft);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
   #lst-about-root .ph-sec h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.08;letter-spacing:-.02em;margin:.6rem 0 1rem;font-weight:700;color:#fff}
@@ -124,6 +126,7 @@
 </style>
 <div id="lst-about-root">
   <section class="lsa lst-reveal">
+    <div class="lsa-logos" aria-hidden="true"><div class="lsa-logos-track"><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""></div></div>
     <div class="wrap">
       <div class="photo">
         <div class="frame"><img src="https://iamtpolk.github.io/lakeshore-site/tyler-headshot.png" alt="Tyler Polk, REALTOR - Lakeshore Team at eXp Realty"></div>
@@ -152,7 +155,7 @@
     </div>
   </section>
   <section class="ph-sec lst-reveal">
-    <div class="ph-logos" aria-hidden="true"><div class="ph-logos-track"><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""><img src="https://iamtpolk.github.io/lakeshore-site/exp-se-white.png" alt=""></div></div>
+    <div class="ph-stars" aria-hidden="true"><div class="ph-stars-track"><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span><span>★★★★★</span></div></div>
     <div class="inner">
       <div class="copy">
         <span class="eyebrow">What It's Like to Work Together</span>

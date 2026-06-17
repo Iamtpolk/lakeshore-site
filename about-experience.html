@@ -278,6 +278,7 @@
     var meet=banners.filter(function(b){return (b.innerText||'').indexOf('Meet Tyler Polk')>-1;})[0];
     if(meet){meet.style.display='none';}
     if(hero && hero.parentNode && hero.nextSibling!==root){hero.parentNode.insertBefore(root,hero.nextSibling);}
+    var lsaEl=root.querySelector('.lsa'); if(lsaEl){var topAbove=root.getBoundingClientRect().top+window.scrollY; lsaEl.style.paddingTop=(topAbove<220?'clamp(7rem,11vw,10.5rem)':'');}
     var blog=document.querySelector('.md-blog'); if(blog)blog.style.display='none';
     var vid=document.querySelector('.md-video'); if(vid)vid.style.display='none';
     var cta=document.querySelector('.md-cta'); if(cta)cta.style.display='none';

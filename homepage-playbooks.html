@@ -428,3 +428,33 @@
 .md-hero .media-content-v2{font-size:clamp(15px,1.55vw,18px)!important;font-weight:500!important;line-height:1.6!important;text-shadow:0 1px 10px rgba(0,0,0,.55)!important}
 .lspb .kick{color:#6E5E2A!important}
 </style>
+
+<!-- Homepage section reorder: proof + listings earlier; agent + luxury as closing reinforcement.
+     Order: Hero > Search > Paths > Trust bar > Reviews > Featured Listings > Buyer Roadmap > Playbooks > Meet Agent > Luxury > Footer.
+     Implemented with flexbox order (reversible: remove this block). -->
+<script>
+(function(){
+  if(window.__lstReordered) return;
+  function go(){
+    if(window.__lstReordered) return true;
+    var main=document.querySelector('main.page-content'); if(!main) return false;
+    var pbm=document.getElementById('lakeshore-playbooks-mount'); var pb=pbm?pbm.closest('.md-custom-code'):null;
+    var ccs=Array.prototype.slice.call(main.querySelectorAll(':scope > .md-custom-code'));
+    var road=null; for(var i=0;i<ccs.length;i++){ if(ccs[i]!==pb && /roadmap/i.test(ccs[i].textContent||'')){ road=ccs[i]; break; } }
+    var need=['lst-cta-root','lst-trust-bar','lst-rv-root','lst-agent-root','lst-banner-root'];
+    for(var j=0;j<need.length;j++){ if(!document.getElementById(need[j])) return false; }
+    var hero=main.querySelector(':scope > .md-hero'), house=main.querySelector(':scope > .md-house'), footer=main.querySelector(':scope > .md-footer');
+    if(!pb||!road||!hero||!house||!footer) return false;
+    var map=[
+      [main.querySelector(':scope > .md-header'),0],[hero,1],[main.querySelector(':scope > .md-listing-search'),2],
+      [document.getElementById('lst-cta-root'),3],[document.getElementById('lst-trust-bar'),4],[document.getElementById('lst-rv-root'),5],
+      [house,6],[road,7],[pb,8],[document.getElementById('lst-agent-root'),9],[document.getElementById('lst-banner-root'),10],[footer,11]
+    ];
+    main.style.display='flex'; main.style.flexDirection='column';
+    map.forEach(function(m){ if(m[0]) m[0].style.order=m[1]; });
+    Array.prototype.slice.call(main.children).forEach(function(c){ if(c.style.order==='') c.style.order='20'; });
+    window.__lstReordered=true; return true;
+  }
+  var n=0, iv=setInterval(function(){ if(go()||++n>60) clearInterval(iv); },200);
+})();
+</script>

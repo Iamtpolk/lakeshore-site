@@ -352,3 +352,31 @@
   });
 })();
 </script>
+
+<!-- Homepage enhancements (hero CTA + pinch-zoom accessibility fix). Runs via the playbooks loader on the homepage. -->
+<script>
+(function(){
+  'use strict';
+  /* 1) Accessibility: re-enable pinch-zoom (template viewport blocks it) */
+  try{ var vp=document.querySelector('meta[name=viewport]'); if(vp){ vp.setAttribute('content','width=device-width, initial-scale=1, viewport-fit=cover'); } }catch(e){}
+  /* 2) Hero primary CTA: "Get Your Home's Value" -> /evaluation */
+  function addHeroCta(){
+    if(document.getElementById('lst-hero-cta')) return true;
+    var hero=document.querySelector('.md-hero'); if(!hero) return false;
+    var h1=hero.querySelector('h1'); if(!h1) return false;
+    var container=h1.parentElement || hero;
+    var wrap=document.createElement('div');
+    wrap.style.cssText='text-align:center;width:100%;margin-top:1.4rem';
+    var a=document.createElement('a');
+    a.id='lst-hero-cta'; a.href='/evaluation'; a.setAttribute('aria-label','Get your home’s value');
+    a.innerHTML='Get Your Home’s Value <span aria-hidden="true" style="margin-left:.4rem">→</span>';
+    a.style.cssText=['display:inline-flex','align-items:center','justify-content:center','padding:0.95rem 2.2rem','font:700 1.02rem/1 Inter,system-ui,Arial,sans-serif','letter-spacing:.01em','color:#0B0B0B','text-decoration:none','background:linear-gradient(135deg,#C7A75A 0%,#B19A55 100%)','border-radius:999px','box-shadow:0 14px 34px rgba(0,0,0,.35)','cursor:pointer','transition:transform .2s ease,box-shadow .2s ease'].join(';');
+    a.addEventListener('mouseenter',function(){a.style.transform='translateY(-2px)';a.style.boxShadow='0 18px 42px rgba(0,0,0,.45)';});
+    a.addEventListener('mouseleave',function(){a.style.transform='';a.style.boxShadow='0 14px 34px rgba(0,0,0,.35)';});
+    wrap.appendChild(a); container.appendChild(wrap);
+    return true;
+  }
+  var n=0, iv=setInterval(function(){ if(addHeroCta()||++n>60) clearInterval(iv); },150);
+  if(document.readyState!=='loading') addHeroCta();
+})();
+</script>

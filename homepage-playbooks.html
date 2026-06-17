@@ -380,3 +380,45 @@
   if(document.readyState!=='loading') addHeroCta();
 })();
 </script>
+
+<!-- Homepage enhancements 2: stats/awards trust bar (after the 3-path cards) + sticky Call/Text Tyler button. -->
+<script>
+(function(){
+  'use strict';
+  function animate(scope){
+    scope.querySelectorAll('.lst-num').forEach(function(el){
+      var raw=el.getAttribute('data-to'), to=parseFloat(raw), pre=el.getAttribute('data-prefix')||'', suf=el.getAttribute('data-suffix')||'', dec=(raw.indexOf('.')>-1)?1:0, start=null, dur=1500;
+      function tick(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1), e=1-Math.pow(1-p,3); el.textContent=pre+(to*e).toFixed(dec)+suf; if(p<1)requestAnimationFrame(tick); else el.textContent=pre+to.toFixed(dec)+suf; }
+      requestAnimationFrame(tick);
+    });
+  }
+  function addTrustBar(){
+    if(document.getElementById('lst-trust-bar')) return true;
+    var anchor=document.getElementById('lst-cta-root'); if(!anchor) return false;
+    var bar=document.createElement('section'); bar.id='lst-trust-bar';
+    bar.style.cssText='background:linear-gradient(180deg,#F7F2EB,#EFE8DE);padding:clamp(2.2rem,4vw,3.2rem) 1.2rem;text-align:center;font-family:Inter,system-ui,Arial,sans-serif';
+    bar.innerHTML=''
+      +'<div style="max-width:1080px;margin:0 auto">'
+      +'<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(2rem,7vw,5.5rem);align-items:flex-start">'
+      +'<div><div class="lst-num" data-to="49.5" data-prefix="$" data-suffix="M+" style="font:700 clamp(2.3rem,5vw,3.3rem)/1 Georgia,Times,serif;color:#2B0405">$49.5M+</div><div style="margin-top:.45rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#5C5C5C">In Sales</div></div>'
+      +'<div><div class="lst-num" data-to="225" data-suffix="+" style="font:700 clamp(2.3rem,5vw,3.3rem)/1 Georgia,Times,serif;color:#2B0405">225+</div><div style="margin-top:.45rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#5C5C5C">Families Served</div></div>'
+      +'</div>'
+      +'<div style="width:46px;height:2px;background:#B19A55;margin:1.4rem auto"></div>'
+      +'<div style="font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#5C5C5C;line-height:1.95">Top Agent Magazine Cover &nbsp;&middot;&nbsp; People&#39;s Choice Top 5 &nbsp;&middot;&nbsp; Homesnap &amp; Homes.com Client Service Award</div>'
+      +'</div>';
+    anchor.parentNode.insertBefore(bar, anchor.nextSibling);
+    try{ var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){animate(en.target);io.unobserve(en.target);}});},{threshold:.35}); io.observe(bar); }catch(e){ animate(bar); }
+    return true;
+  }
+  function addStickyCall(){
+    if(document.getElementById('lst-sticky-call')) return true;
+    var a=document.createElement('a'); a.id='lst-sticky-call'; a.href='tel:+13373525238';
+    a.setAttribute('aria-label','Call or text Tyler at (337) 352-5238');
+    a.innerHTML='<span aria-hidden="true" style="font-size:1.02rem">☎</span> Call or Text Tyler';
+    a.style.cssText='position:fixed;left:18px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.25rem;font:700 .9rem/1 Inter,system-ui,Arial,sans-serif;color:#fff;text-decoration:none;background:linear-gradient(135deg,#2B0405,#4A0C0E);border:1px solid rgba(177,154,85,.5);border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.35)';
+    document.body.appendChild(a); return true;
+  }
+  var n=0, iv=setInterval(function(){ var done=addTrustBar(); addStickyCall(); if(done||++n>60) clearInterval(iv); },150);
+  if(document.readyState!=='loading'){ addTrustBar(); addStickyCall(); }
+})();
+</script>

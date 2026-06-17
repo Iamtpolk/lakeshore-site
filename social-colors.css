@@ -1,0 +1,10 @@
+/* Footer social icons: platform-colored circle, white logo. Loaded site-wide via the global script. */
+.md-footer .share-item{transition:filter .2s ease,transform .2s ease}
+.md-footer .share-item .iconfont{color:#fff !important}
+.md-footer .share-item:has(.icon-facebook-sign){background:#1877F2 !important;border-color:#1877F2 !important}
+.md-footer .share-item:has(.icon-linkedin){background:#0A66C2 !important;border-color:#0A66C2 !important}
+.md-footer .share-item:has(.icon-zillow){background:#006AFF !important;border-color:#006AFF !important}
+.md-footer .share-item:has(.icon-youtube){background:#FF0000 !important;border-color:#FF0000 !important}
+.md-footer .share-item:has(.icon-google1){background:#4285F4 !important;border-color:#4285F4 !important}
+.md-footer .share-item:has(.icon-instagram){background:#E1306C !important;border-color:#E1306C !important}
+.md-footer .share-item:hover{filter:brightness(1.12);transform:translateY(-2px)}

@@ -67,13 +67,14 @@
   #lst-about-root .wwh .eyebrow{color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
   #lst-about-root .wwh h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--black);margin:.5rem 0 .6rem;letter-spacing:-.02em}
   #lst-about-root .wwh .wwh-head p{color:var(--muted);font-size:1.02rem;line-height:1.6;margin:0}
-  #lst-about-root .wwh-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;perspective:1100px}
+  #lst-about-root .wwh-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;perspective:1100px}
   #lst-about-root .tile{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:2rem 1.5rem 1.7rem;box-shadow:0 10px 30px rgba(11,11,11,.06);transition:box-shadow .3s ease,transform .15s ease;transform-style:preserve-3d;will-change:transform;overflow:hidden;opacity:0;transform:translateY(26px)}
   #lst-about-root .wwh.in .tile{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
   #lst-about-root .wwh.in .tile:nth-child(1){transition-delay:.05s}
   #lst-about-root .wwh.in .tile:nth-child(2){transition-delay:.15s}
   #lst-about-root .wwh.in .tile:nth-child(3){transition-delay:.25s}
   #lst-about-root .wwh.in .tile:nth-child(4){transition-delay:.35s}
+  #lst-about-root .wwh.in .tile:nth-child(5){transition-delay:.45s}
   #lst-about-root .tile .ic{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#9a8442);display:grid;place-items:center;margin-bottom:1.1rem;box-shadow:0 8px 18px rgba(177,154,85,.35);transform:translateZ(40px)}
   #lst-about-root .tile .ic svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.7}
   #lst-about-root .tile h3{font-size:1.08rem;font-weight:700;color:var(--black);margin:0 0 .5rem;letter-spacing:-.01em;transform:translateZ(22px)}
@@ -81,7 +82,8 @@
   #lst-about-root .tile .edge{position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--burgundy));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
   #lst-about-root .tile:hover{box-shadow:0 26px 60px rgba(11,11,11,.16)}
   #lst-about-root .tile:hover .edge{transform:scaleX(1)}
-  @media(max-width:980px){#lst-about-root .wwh-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:1080px){#lst-about-root .wwh-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:760px){#lst-about-root .wwh-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:860px){
     #lst-about-root .lsa .wrap{grid-template-columns:1fr;gap:2.4rem}
     #lst-about-root .lsa .frame{aspect-ratio:1/1;max-width:420px;margin:0 auto}
@@ -90,7 +92,7 @@
     #lst-about-root .ph-sec .copy p{margin-left:auto;margin-right:auto}
     #lst-about-root .ph-tabs{justify-content:center}
   }
-  @media(max-width:620px){#lst-about-root .wwh-grid{grid-template-columns:1fr;max-width:420px}}
+  @media(max-width:520px){#lst-about-root .wwh-grid{grid-template-columns:1fr;max-width:420px}}
   .md-form img{object-fit:contain !important;object-position:center !important;}
 </style>
 <div id="lst-about-root">
@@ -185,6 +187,12 @@
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 9l3-4h8l3 4-7 11z"></path><path d="M5 9h14M10 5l-2 4 4 11 4-11-2-4"></path></svg></div>
         <h3>Luxury &amp; New Construction</h3>
         <p>From custom builds to high-end homes, expert guidance through the details, negotiations, and opportunities that matter most.</p>
+        <span class="edge"></span>
+      </article>
+      <article class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"></circle><path d="M9 13l-2 8 5-3 5 3-2-8"></path><path d="M12 7l.8 1.6 1.8.3-1.3 1.25.3 1.85L12 11.1l-1.6 .9.3-1.85L9.4 8.9l1.8-.3z"></path></svg></div>
+        <h3>Military &amp; Veterans</h3>
+        <p>VA loan know-how and a smooth, respectful process for those who served and their families - including PCS moves and relocation.</p>
         <span class="edge"></span>
       </article>
     </div>

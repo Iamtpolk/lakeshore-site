@@ -1,0 +1,222 @@
+<!-- Lakeshore /about experience: charcoal Meet Tyler (eXp S&E watermark) + animated iPhone testimonials + auto-scroll reviews carousel. Injected via the site-wide /about loader. -->
+<style>
+  #lst-about-root{--white:#fff;--paper:#FAF8F5;--black:#0B0B0B;--ink:#1A1A1A;--muted:#5C5C5C;--line:#ECE7DF;--burgundy:#2B0405;--burgundy2:#420a0c;--gold:#B19A55;--gold-soft:#cdbb86;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-family:var(--font);display:block}
+  #lst-about-root *{box-sizing:border-box}
+  #lst-about-root .lst-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  #lst-about-root .lst-reveal.in{opacity:1;transform:none}
+  #lst-about-root .lsa{background:#0B0B0B;padding:clamp(3.5rem,6vw,5.5rem) 24px;position:relative;overflow:hidden}
+  #lst-about-root .lsa::after{content:"";position:absolute;inset:0;background:url('https://iamtpolk.github.io/lakeshore-site/exp-se-white.png') no-repeat center;background-size:min(1400px,90%) auto;opacity:.08;pointer-events:none;z-index:0}
+  #lst-about-root .lsa .wrap{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(2rem,5vw,4rem);align-items:center;position:relative;z-index:1}
+  #lst-about-root .lsa .photo{position:relative}
+  #lst-about-root .lsa .frame{border-radius:18px;overflow:hidden;display:grid;place-items:center;aspect-ratio:4/5;background:#161616;border:1px solid #262626;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  #lst-about-root .lsa .frame img{width:100%;height:100%;object-fit:contain;display:block}
+  #lst-about-root .lsa .badge{position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);background:var(--gold);color:#1a1306;border-radius:999px;padding:.6rem 1.2rem;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+  #lst-about-root .lsa .badge b{color:#1a1306}
+  #lst-about-root .lsa .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  #lst-about-root .lsa h2{font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spacing:-.02em;font-weight:700;color:#fff;margin:.5rem 0 .2rem}
+  #lst-about-root .lsa .title{font-size:.95rem;font-weight:600;color:#eee;letter-spacing:.02em}
+  #lst-about-root .lsa .lic{font-size:.82rem;color:#9a9a9a;margin-top:.15rem}
+  #lst-about-root .lsa .areas{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 1.3rem}
+  #lst-about-root .lsa .chip{font-size:.8rem;font-weight:600;color:#eee;background:#161616;border:1px solid #2c2c2c;border-radius:999px;padding:.4rem .9rem}
+  #lst-about-root .lsa .bio p{font-size:1rem;color:#bdbdbd;line-height:1.65;margin:0 0 .9rem;max-width:60ch}
+  #lst-about-root .lsa .contact{display:flex;flex-direction:column;gap:.55rem;margin:1.4rem 0 1.6rem;padding-top:1.3rem;border-top:1px solid #262626}
+  #lst-about-root .lsa .contact a,#lst-about-root .lsa .contact span{display:flex;align-items:center;gap:.65rem;font-size:.94rem;color:#eaeaea;text-decoration:none;font-weight:500}
+  #lst-about-root .lsa .contact .ic{width:30px;height:30px;border-radius:8px;background:#161616;border:1px solid #2c2c2c;display:grid;place-items:center;color:var(--gold);flex-shrink:0;font-size:.9rem}
+  #lst-about-root .lsa .contact a:hover{color:var(--gold)}
+  #lst-about-root .lsa .cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#1a1306;font-weight:600;font-size:1.02rem;padding:1rem 2rem;border-radius:999px;text-decoration:none;box-shadow:0 12px 30px rgba(177,154,85,.3);transition:transform .25s ease,box-shadow .25s ease}
+  #lst-about-root .lsa .cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(177,154,85,.45)}
+  #lst-about-root .ph-sec{background:var(--burgundy);color:#fff;padding:clamp(3.5rem,7vw,6rem) 24px;position:relative;overflow:hidden}
+  #lst-about-root .ph-sec .inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,4.5rem);align-items:center}
+  #lst-about-root .ph-sec .eyebrow{color:var(--gold-soft);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+  #lst-about-root .ph-sec h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.08;letter-spacing:-.02em;margin:.6rem 0 1rem;font-weight:700;color:#fff}
+  #lst-about-root .ph-sec .copy p{color:#e8d9d9;font-size:1.04rem;line-height:1.65;max-width:46ch}
+  #lst-about-root .ph-tabs{display:flex;gap:.6rem;margin-top:1.6rem;flex-wrap:wrap}
+  #lst-about-root .ph-tab{font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;cursor:pointer;transition:.2s}
+  #lst-about-root .ph-tab.active{background:var(--gold);border-color:var(--gold);color:#1a1306}
+  #lst-about-root .phone-stage{display:flex;justify-content:center}
+  #lst-about-root .phone{width:300px;max-width:82vw;aspect-ratio:9/19.5;background:#0a0a0a;border-radius:46px;padding:12px;box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 0 0 2px #2a2a2a;position:relative}
+  #lst-about-root .screen{width:100%;height:100%;background:#0d0d0f;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+  #lst-about-root .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;background:#000;border-radius:18px;z-index:5}
+  #lst-about-root .ph-top{background:#1c1c1e;padding:30px 14px 10px;text-align:center;border-bottom:1px solid #2a2a2c}
+  #lst-about-root .ph-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--burgundy2));margin:0 auto 5px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.95rem}
+  #lst-about-root .ph-name{color:#fff;font-size:.86rem;font-weight:600}
+  #lst-about-root .ph-sub{color:#8e8e93;font-size:.66rem;margin-top:1px}
+  #lst-about-root .ph-body{flex:1;background:#0d0d0f;padding:14px 12px;overflow:hidden;display:flex;flex-direction:column;gap:8px}
+  #lst-about-root .msg{max-width:80%;padding:8px 13px;border-radius:18px;font-size:.82rem;line-height:1.35;opacity:0;transform:translateY(10px);animation:lstpop .45s ease forwards}
+  #lst-about-root .msg.them{align-self:flex-start;background:#2c2c2e;color:#fff;border-bottom-left-radius:5px}
+  #lst-about-root .msg.me{align-self:flex-end;background:#0a84ff;color:#fff;border-bottom-right-radius:5px}
+  @keyframes lstpop{to{opacity:1;transform:none}}
+  #lst-about-root .ph-foot{background:#1c1c1e;padding:9px 12px;display:flex;align-items:center;gap:8px;border-top:1px solid #2a2a2c}
+  #lst-about-root .ph-foot .field{flex:1;height:30px;border-radius:16px;border:1px solid #3a3a3c;background:#0d0d0f;color:#6b6b70;font-size:.72rem;display:flex;align-items:center;padding:0 12px}
+  #lst-about-root .rev{background:var(--white);padding:clamp(3.5rem,6vw,5.5rem) 0;overflow:hidden}
+  #lst-about-root .rev .head{text-align:center;max-width:680px;margin:0 auto 2.4rem;padding:0 24px}
+  #lst-about-root .rev .eyebrow{color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+  #lst-about-root .rev h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--black);margin:.5rem 0 0;letter-spacing:-.02em}
+  #lst-about-root .rev .track{display:flex;gap:1.4rem;width:max-content;padding:.5rem 24px;animation:lstscroll 46s linear infinite}
+  #lst-about-root .rev .track:hover{animation-play-state:paused}
+  @keyframes lstscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  #lst-about-root .card{width:340px;flex-shrink:0;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:.8rem}
+  #lst-about-root .stars{color:var(--gold);font-size:.95rem;letter-spacing:2px}
+  #lst-about-root .card p{font-size:.95rem;line-height:1.6;color:var(--ink);margin:0;flex:1}
+  #lst-about-root .who{display:flex;align-items:center;gap:.7rem;margin-top:.3rem}
+  #lst-about-root .who .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-soft),var(--burgundy));display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem}
+  #lst-about-root .who .nm{font-size:.85rem;font-weight:700;color:var(--black)}
+  #lst-about-root .who .mt{font-size:.74rem;color:var(--muted)}
+  @media(max-width:860px){
+    #lst-about-root .lsa .wrap{grid-template-columns:1fr;gap:2.4rem}
+    #lst-about-root .lsa .frame{aspect-ratio:1/1;max-width:420px;margin:0 auto}
+    #lst-about-root .ph-sec .inner{grid-template-columns:1fr;gap:2.6rem}
+    #lst-about-root .ph-sec .copy{text-align:center}
+    #lst-about-root .ph-sec .copy p{margin-left:auto;margin-right:auto}
+    #lst-about-root .ph-tabs{justify-content:center}
+  }
+</style>
+<div id="lst-about-root">
+  <section class="lsa lst-reveal">
+    <div class="wrap">
+      <div class="photo">
+        <div class="frame"><img src="https://iamtpolk.github.io/lakeshore-site/tyler-headshot.png" alt="Tyler Polk, REALTOR - Lakeshore Team at eXp Realty"></div>
+        <span class="badge">Founder of <b>Lakeshore Team</b></span>
+      </div>
+      <div class="content">
+        <span class="eyebrow">Meet Your Agent</span>
+        <h2>Tyler Polk</h2>
+        <div class="title">Team Leader &middot; Lakeshore Team | eXp Realty</div>
+        <div class="lic">REALTOR &middot; License ID 995706344</div>
+        <div class="areas">
+          <span class="chip">Lafayette</span><span class="chip">Lake Charles</span>
+          <span class="chip">Acadiana</span><span class="chip">Southwest Louisiana</span><span class="chip">Baton Rouge</span>
+        </div>
+        <div class="bio">
+          <p>Tyler Polk built the Lakeshore Team on a simple belief: real estate should be guided by strategy, not guesswork. As the team's owner and lead advisor, he helps clients across Lafayette, Lake Charles, and the surrounding Acadiana communities make confident, informed decisions.</p>
+          <p>Known for steady guidance and attention to detail, Tyler works with clients at every stage - from the first conversation through closing - delivering a smooth, well-organized experience tailored to each goal, whether it's a purchase, a sale, or a life transition.</p>
+        </div>
+        <div class="contact">
+          <a href="tel:+13372414963"><span class="ic">&#9742;</span>(337) 241-4963</a>
+          <a href="mailto:tyler.polk@exprealty.com"><span class="ic">&#9993;</span>tyler.polk@exprealty.com</a>
+          <span><span class="ic">&#8982;</span>100 General Mouton Ave, Lafayette, LA 70501</span>
+        </div>
+        <a class="cta" href="https://calendly.com/tyler-lakeshoreteam/30min" target="_blank" rel="noopener">Book an Appointment &rarr;</a>
+      </div>
+    </div>
+  </section>
+  <section class="ph-sec lst-reveal">
+    <div class="inner">
+      <div class="copy">
+        <span class="eyebrow">What It's Like to Work Together</span>
+        <h2>Every client, every situation - handled with care</h2>
+        <p>A look at the kinds of conversations Tyler has with clients - whether they're closing on a dream home or working through a tough season. Tap a story to follow along.</p>
+        <div class="ph-tabs">
+          <button class="ph-tab active" data-c="0">The luxury listing</button>
+          <button class="ph-tab" data-c="1">The hard season</button>
+        </div>
+      </div>
+      <div class="phone-stage">
+        <div class="phone">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="ph-top">
+              <div class="ph-avatar" id="lstPhAv">MB</div>
+              <div class="ph-name" id="lstPhName">Marissa Boudreaux</div>
+              <div class="ph-sub">iMessage</div>
+            </div>
+            <div class="ph-body" id="lstPhBody"></div>
+            <div class="ph-foot"><div class="field">Text Message</div><div style="color:#0a84ff;font-size:1rem">&#8593;</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="rev lst-reveal">
+    <div class="head">
+      <span class="eyebrow">Client Reviews</span>
+      <h2>Trusted across Acadiana &amp; Southwest Louisiana</h2>
+    </div>
+    <div class="track-mask"><div class="track" id="lstRevTrack"></div></div>
+  </section>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('lst-about-root');
+  if(!root||root.getAttribute('data-init'))return;
+  root.setAttribute('data-init','1');
+  try{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
+    root.querySelectorAll('.lst-reveal').forEach(function(el){io.observe(el);});
+  }catch(e){root.querySelectorAll('.lst-reveal').forEach(function(el){el.classList.add('in');});}
+  var convos=[
+    {av:'MB',name:'Marissa Boudreaux',msgs:[
+      ['them',"Tyler!! We just got the keys to the lake house"],
+      ['me',"Congratulations - you two earned every bit of this."],
+      ['them',"Honestly the smoothest thing we've ever done. You made a $675k purchase feel easy."],
+      ['me',"That's the goal. Luxury should feel calm, never stressful."],
+      ['them',"We're already telling everyone about you."]
+    ]},
+    {av:'JR',name:'Jordan Reaux',msgs:[
+      ['them',"Tyler, being honest - I've fallen behind on the mortgage and I'm scared."],
+      ['me',"I hear you. Take a breath. You have more options than you think - let's look at all of them together."],
+      ['me',"We could list it, explore a cash offer, or a couple of other paths. No pressure, no judgment."],
+      ['them',"I didn't realize I had choices. That's a huge weight off."],
+      ['me',"We'll figure out the right move, one step at a time."],
+      ['them',"Thank you. I can actually sleep tonight."]
+    ]}
+  ];
+  var cur=0,timer=null;
+  var body=document.getElementById('lstPhBody'),nm=document.getElementById('lstPhName'),av=document.getElementById('lstPhAv');
+  function syncTab(){root.querySelectorAll('.ph-tab').forEach(function(x){if(+x.dataset.c===cur)x.classList.add('active');else x.classList.remove('active');});}
+  function play(i){
+    cur=i;clearTimeout(timer);syncTab();
+    var c=convos[i];nm.textContent=c.name;av.textContent=c.av;body.innerHTML='';
+    var d=0;
+    c.msgs.forEach(function(m,idx){
+      d+=idx===0?300:900;
+      setTimeout(function(){var el=document.createElement('div');el.className='msg '+m[0];el.textContent=m[1];body.appendChild(el);},d);
+    });
+    timer=setTimeout(function(){play((i+1)%convos.length);},d+5200);
+  }
+  root.querySelectorAll('.ph-tab').forEach(function(t){t.addEventListener('click',function(){play(+t.dataset.c);});});
+  play(0);
+  var reviews=[
+    {n:'Ashley T.',m:'Sold in Lafayette',t:"Tyler sold our home above asking in under two weeks. Every step was explained and we never felt rushed."},
+    {n:'Marcus D.',m:'Bought in Lake Charles',t:"First-time buyer and nervous. Tyler walked us through everything and found us the perfect place."},
+    {n:'Renee G.',m:'Luxury listing',t:"Marketing on our home was stunning. It felt like a true luxury experience from start to finish."},
+    {n:'Brandon P.',m:'Relocation',t:"Moved from out of state and Tyler made it effortless. Knew exactly which neighborhoods fit us."},
+    {n:'Camille B.',m:'Cash offer',t:"Needed to sell fast. He laid out every option and we closed on our timeline. No stress at all."},
+    {n:'Derek L.',m:'Investment property',t:"Sharp on the numbers and honest about each deal. Exactly the advisor I wanted in my corner."}
+  ];
+  var track=document.getElementById('lstRevTrack');
+  function card(r){
+    var d=document.createElement('div');d.className='card';
+    var s=document.createElement('div');s.className='stars';s.textContent='★★★★★';
+    var p=document.createElement('p');p.textContent='"'+r.t+'"';
+    var who=document.createElement('div');who.className='who';
+    var avx=document.createElement('div');avx.className='av';avx.textContent=r.n.charAt(0);
+    var info=document.createElement('div');
+    var nmx=document.createElement('div');nmx.className='nm';nmx.textContent=r.n;
+    var mtx=document.createElement('div');mtx.className='mt';mtx.textContent=r.m;
+    info.appendChild(nmx);info.appendChild(mtx);who.appendChild(avx);who.appendChild(info);
+    d.appendChild(s);d.appendChild(p);d.appendChild(who);return d;
+  }
+  reviews.concat(reviews).forEach(function(r){track.appendChild(card(r));});
+  var tries=0;
+  function place(){
+    tries++;
+    var banners=[].slice.call(document.querySelectorAll('.md-banner'));
+    var meet=banners.filter(function(b){return (b.innerText||'').indexOf('Meet Tyler Polk')>-1;})[0];
+    if(meet && meet.parentNode){
+      if(root.parentNode!==meet.parentNode || root.nextSibling!==meet){meet.parentNode.insertBefore(root,meet);}
+      meet.style.display='none';
+    }
+    var blog=document.querySelector('.md-blog'); if(blog)blog.style.display='none';
+    var vid=document.querySelector('.md-video'); if(vid)vid.style.display='none';
+    var form=document.querySelector('.md-form');
+    if(form){
+      form.querySelectorAll('h1,h2,h3,h4,span,div,p,button').forEach(function(el){
+        if(el.children.length===0){var tx=(el.textContent||'').trim().toUpperCase();if(tx==='GET MORE INFORMATION'){el.textContent='Any Questions? Submit';}}
+      });
+    }
+    if(tries<40)setTimeout(place,250);
+  }
+  place();
+})();
+</script>

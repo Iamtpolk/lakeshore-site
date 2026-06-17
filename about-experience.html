@@ -285,7 +285,7 @@
     var cta=document.querySelector('.md-cta'); if(cta)cta.style.display='none';
     var lb=document.getElementById('lst-banner-root'); if(lb)lb.style.display='none';
     [].slice.call(document.querySelectorAll('.md-content')).forEach(function(m){if((m.innerText||'').toUpperCase().indexOf('WHO WE HELP')>-1)m.style.display='none';});
-    var soc=document.querySelector('.md-social-post'); if(soc){soc.style.backgroundColor='#FAF8F5'; soc.querySelectorAll('h1,h2,h3,h4,p,span,div').forEach(function(el){if(el.children.length===0){var stx=(el.textContent||'').trim(); if(stx==='Social Feed'){el.textContent='Follow Along'; el.style.textAlign='center'; if(el.parentElement)el.parentElement.style.textAlign='center';}}});}
+    var soc=document.querySelector('.md-social-post'); if(soc){soc.style.backgroundColor='#FAF8F5'; soc.querySelectorAll('h1,h2,h3,h4,p,span,div').forEach(function(el){if(el.children.length===0){var stx=(el.textContent||'').trim(); if(stx==='Social Feed'||stx==='Follow Along'){el.textContent='Follow Along'; el.style.textAlign='center'; el.style.color='#0B0B0B'; if(el.parentElement)el.parentElement.style.textAlign='center';}}});}
     var form=document.querySelector('.md-form');
     if(form){
       form.querySelectorAll('h1,h2,h3,h4,span,div,p,button').forEach(function(el){

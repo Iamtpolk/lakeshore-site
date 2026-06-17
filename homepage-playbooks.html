@@ -429,27 +429,34 @@
 .lspb .kick{color:#6E5E2A!important}
 </style>
 
-<!-- Homepage section reorder (DOM-order based, consistent on mobile + desktop): proof + listings earlier; agent + luxury closing.
+<!-- Homepage section reorder (DOM-order, mobile+desktop consistent; re-runs to catch late-loading sections).
      Order: Hero > Search > Paths > Trust bar > Reviews > Featured Listings > Buyer Roadmap > Playbooks > Meet Agent > Luxury > Footer. (Reversible: remove this block.) -->
 <script>
 (function(){
-  if(window.__lstReordered) return;
-  function go(){
-    if(window.__lstReordered) return true;
-    var main=document.querySelector('main.page-content'); if(!main) return false;
+  function reorder(){
+    var main=document.querySelector('main.page-content'); if(!main) return;
+    main.style.display=''; main.style.flexDirection='';
     var pbm=document.getElementById('lakeshore-playbooks-mount'); var pb=pbm?pbm.closest('.md-custom-code'):null;
     var ccs=Array.prototype.slice.call(main.querySelectorAll(':scope > .md-custom-code'));
     var road=null; for(var i=0;i<ccs.length;i++){ if(ccs[i]!==pb && /roadmap/i.test(ccs[i].textContent||'')){ road=ccs[i]; break; } }
-    var need=['lst-cta-root','lst-trust-bar','lst-rv-root','lst-agent-root','lst-banner-root'];
-    for(var j=0;j<need.length;j++){ if(!document.getElementById(need[j])) return false; }
-    var hero=main.querySelector(':scope > .md-hero'), search=main.querySelector(':scope > .md-listing-search'), house=main.querySelector(':scope > .md-house'), footer=main.querySelector(':scope > .md-footer');
-    if(!pb||!road||!hero||!house||!footer) return false;
-    main.style.display=''; main.style.flexDirection='';
-    var seq=[hero, search, document.getElementById('lst-cta-root'), document.getElementById('lst-trust-bar'), document.getElementById('lst-rv-root'), house, road, pb, document.getElementById('lst-agent-root'), document.getElementById('lst-banner-root'), footer];
+    var seq=[
+      main.querySelector(':scope > .md-hero'),
+      main.querySelector(':scope > .md-listing-search'),
+      document.getElementById('lst-cta-root'),
+      document.getElementById('lst-trust-bar'),
+      document.getElementById('lst-rv-root'),
+      main.querySelector(':scope > .md-house'),
+      road, pb,
+      document.getElementById('lst-agent-root'),
+      document.getElementById('lst-banner-root'),
+      main.querySelector(':scope > .md-footer')
+    ];
     seq.forEach(function(el){ if(el){ el.style.order=''; main.appendChild(el); } });
-    window.__lstReordered=true; return true;
   }
-  var n=0, iv=setInterval(function(){ if(go()||++n>60) clearInterval(iv); },200);
+  if(document.readyState!=='loading') reorder();
+  document.addEventListener('DOMContentLoaded', reorder);
+  window.addEventListener('load', reorder);
+  [400,900,1600,2600,4000,6000,8500].forEach(function(t){ setTimeout(reorder, t); });
 })();
 </script>
 
@@ -468,4 +475,13 @@ main.page-content > .md-house{background:#FFFFFF!important}
 #lst-agent-root::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("https://iamtpolk.github.io/lakeshore-site/exp-se-white.png") no-repeat center;background-size:min(1400px,90%) auto;opacity:.12}
 #lst-agent-root .la-wrap{position:relative;z-index:2}
 #lst-agent-root .la-brandmark{display:none!important}
+</style>
+
+
+<!-- Mobile: clear hero content below the fixed nav + size hero subtext for small screens -->
+<style>
+@media (max-width:768px){
+  .md-hero{padding-top:96px!important;padding-bottom:34px!important}
+  .md-hero .media-content-v2{font-size:14px!important;line-height:1.5!important}
+}
 </style>

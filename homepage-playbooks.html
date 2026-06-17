@@ -429,9 +429,8 @@
 .lspb .kick{color:#6E5E2A!important}
 </style>
 
-<!-- Homepage section reorder: proof + listings earlier; agent + luxury as closing reinforcement.
-     Order: Hero > Search > Paths > Trust bar > Reviews > Featured Listings > Buyer Roadmap > Playbooks > Meet Agent > Luxury > Footer.
-     Implemented with flexbox order (reversible: remove this block). -->
+<!-- Homepage section reorder (DOM-order based, consistent on mobile + desktop): proof + listings earlier; agent + luxury closing.
+     Order: Hero > Search > Paths > Trust bar > Reviews > Featured Listings > Buyer Roadmap > Playbooks > Meet Agent > Luxury > Footer. (Reversible: remove this block.) -->
 <script>
 (function(){
   if(window.__lstReordered) return;
@@ -443,16 +442,11 @@
     var road=null; for(var i=0;i<ccs.length;i++){ if(ccs[i]!==pb && /roadmap/i.test(ccs[i].textContent||'')){ road=ccs[i]; break; } }
     var need=['lst-cta-root','lst-trust-bar','lst-rv-root','lst-agent-root','lst-banner-root'];
     for(var j=0;j<need.length;j++){ if(!document.getElementById(need[j])) return false; }
-    var hero=main.querySelector(':scope > .md-hero'), house=main.querySelector(':scope > .md-house'), footer=main.querySelector(':scope > .md-footer');
+    var hero=main.querySelector(':scope > .md-hero'), search=main.querySelector(':scope > .md-listing-search'), house=main.querySelector(':scope > .md-house'), footer=main.querySelector(':scope > .md-footer');
     if(!pb||!road||!hero||!house||!footer) return false;
-    var map=[
-      [main.querySelector(':scope > .md-header'),0],[hero,1],[main.querySelector(':scope > .md-listing-search'),2],
-      [document.getElementById('lst-cta-root'),3],[document.getElementById('lst-trust-bar'),4],[document.getElementById('lst-rv-root'),5],
-      [house,6],[road,7],[pb,8],[document.getElementById('lst-agent-root'),9],[document.getElementById('lst-banner-root'),10],[footer,11]
-    ];
-    main.style.display='flex'; main.style.flexDirection='column';
-    map.forEach(function(m){ if(m[0]) m[0].style.order=m[1]; });
-    Array.prototype.slice.call(main.children).forEach(function(c){ if(c.style.order==='') c.style.order='20'; });
+    main.style.display=''; main.style.flexDirection='';
+    var seq=[hero, search, document.getElementById('lst-cta-root'), document.getElementById('lst-trust-bar'), document.getElementById('lst-rv-root'), house, road, pb, document.getElementById('lst-agent-root'), document.getElementById('lst-banner-root'), footer];
+    seq.forEach(function(el){ if(el){ el.style.order=''; main.appendChild(el); } });
     window.__lstReordered=true; return true;
   }
   var n=0, iv=setInterval(function(){ if(go()||++n>60) clearInterval(iv); },200);

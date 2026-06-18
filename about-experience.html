@@ -101,6 +101,7 @@
   }
   @media(max-width:520px){#lst-about-root .wwh-grid{grid-template-columns:1fr;max-width:420px}}
   .md-form img{object-fit:contain !important;object-position:center !important;}
+  @media (prefers-reduced-motion: reduce){#lst-about-root .lsa-logos-track,#lst-about-root .ph-stars-track,#lst-about-root .rev .track{animation:none !important}#lst-about-root .msg{animation:none !important;opacity:1 !important;transform:none !important}#lst-about-root .lst-reveal{transition:none !important;opacity:1 !important;transform:none !important}#lst-about-root .wwh.in .tile,#lst-about-root .tile{transition:none !important;opacity:1 !important;transform:none !important}}
 
   .lst-aq-sec{display:none;background:#0B0B0B !important;padding:clamp(3.5rem,6vw,5.5rem) 24px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
   .lst-aq-sec *{box-sizing:border-box}
@@ -302,7 +303,10 @@
   var reviews=[
     {n:'Derrek Comeaux',m:'Lake Charles, LA - RateMyAgent',t:"He didn't try to hide any details just to sell a house - straightforward, and he had our best interest in mind. From now on, if anyone asks if I know a realtor, I'm pointing them straight to Tyler."},
     {n:'Darrell Bowie',m:'Lake Charles, LA - Realtor.com',t:"Tyler was more than an agent. He was an educator, a friend, and most of all led the way to the best deal for me. Thanks again, Tyler!"},
-    {n:'Billy Wayne Beaudeaux',m:'Starks, LA - Realtor.com',t:"Tyler is an amazing realtor, but more important, I now consider him a friend. Even when I wanted to wash my hands of selling, he encouraged me it was gonna work out."}
+    {n:'Billy Wayne Beaudeaux',m:'Starks, LA - Realtor.com',t:"Tyler is an amazing realtor, but more important, I now consider him a friend. Even when I wanted to wash my hands of selling, he encouraged me it was gonna work out."},
+    {n:'Craig Antilla',m:'Lake Charles, LA - Realtor.com',t:"Extremely honest and upfront, and he found time to show us homes around our busy schedules. Tyler made a tough sale with the seller a lot more enjoyable."},
+    {n:'Michelle',m:'Sulphur, LA - Realtor.com',t:"An advocate for me and my family - very responsive even through a difficult sale. He answered my questions any time of day and saw it all the way through with us."},
+    {n:'Malori Thibodeaux',m:'Sulphur, LA - Realtor.com',t:"My family absolutely loved working with Tyler. Fun to work with, laid back, and easy to communicate with. We highly recommend him for buying or selling."}
   ];
   var track=document.getElementById('lstRevTrack');
   function card(r){

@@ -454,12 +454,12 @@
       document.getElementById('lst-banner-root'),
       main.querySelector(':scope > .md-footer')
     ];
-    seq.forEach(function(el){ if(el){ el.style.order=''; main.appendChild(el); } });
+    var seqf=seq.filter(Boolean);seqf.forEach(function(el){if(el.style.order)el.style.order='';});var ok=seqf.length>0&&main.lastElementChild===seqf[seqf.length-1];if(ok){for(var k=0;k<seqf.length-1;k++){if(seqf[k].nextElementSibling!==seqf[k+1]){ok=false;break;}}}if(!ok){seqf.forEach(function(el){main.appendChild(el);});}
   }
   if(document.readyState!=='loading') reorder();
   document.addEventListener('DOMContentLoaded', reorder);
   window.addEventListener('load', reorder);
-  [400,900,1600,2600,4000,6000,8500].forEach(function(t){ setTimeout(reorder, t); });
+  var _m=document.querySelector('main.page-content');if(_m&&window.MutationObserver){var _t,_mo=new MutationObserver(function(){clearTimeout(_t);_t=setTimeout(reorder,60);});_mo.observe(_m,{childList:true});setTimeout(function(){_mo.disconnect();},5000);}else{[400,1200,2500].forEach(function(t){setTimeout(reorder,t);});}
 })();
 </script>
 
@@ -497,7 +497,7 @@ main.page-content > .md-house{background:#FFFFFF!important}
     s.src='https://iamtpolk.github.io/lakeshore-site/lakeshore-reviews.js?ins='+tag+Date.now();
     s.defer=true; document.body.appendChild(s);
   }
-  [3500,7000,11000].forEach(function(t,i){ setTimeout(function(){ ensureReviews(i); }, t); });
+  [2500,6000].forEach(function(t,i){ setTimeout(function(){ ensureReviews(i); }, t); });
 })();
 </script>
 

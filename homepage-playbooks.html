@@ -329,7 +329,10 @@
         textOptIn: false,
         pageUrl: location.pathname + '#' + kind + '-playbook',
         physicalInfo: deviceInfo(),
-        agreementInfo: buildAgreement()
+        agreementInfo: buildAgreement(),
+        source: (kind === 'seller' ? 'Seller Playbook' : 'Buyer Playbook'),
+        tags: [ kind === 'seller' ? 'Seller Playbook' : 'Buyer Playbook' ],
+        leadType: [ kind === 'seller' ? 'Seller' : 'Buyer' ]
       };
 
       postLead(payload).then(function(){

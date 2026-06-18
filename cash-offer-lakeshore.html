@@ -35,7 +35,16 @@
   #lst-cash .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   #lst-cash .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){#lst-cash .reveal{transition:none!important;opacity:1!important;transform:none!important}}
-
+  /* slim header */
+  #lst-cash .lch{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(177,154,85,.22)}
+  #lst-cash .lch-logo img{height:34px;width:auto;display:block}
+  #lst-cash .lch-r{display:flex;align-items:center;gap:16px}
+  #lst-cash .lch-phone{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:14px;font-weight:500}
+  #lst-cash .lch-phone i{color:var(--gold)}
+  #lst-cash .lch-phone:hover{color:var(--gold)}
+  #lst-cash .lch-cta{background:var(--gold);color:var(--black);border:none;border-radius:8px;padding:10px 18px;font-weight:600;font-size:14px;cursor:pointer;font-family:var(--font);transition:background .2s}
+  #lst-cash .lch-cta:hover{background:#c2aa64}
+  @media(max-width:600px){#lst-cash .lch{padding:10px 16px}#lst-cash .lch-phone span{display:none}#lst-cash .lch-logo img{height:28px}#lst-cash .lch-cta{padding:9px 14px;font-size:13px}}
   /* hero */
   #lst-cash .stage{position:relative;width:100%;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--black);padding:96px 24px}
   #lst-cash .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:600;font-size:clamp(70px,16vw,230px);color:rgba(177,154,85,.07);white-space:nowrap;letter-spacing:.04em;pointer-events:none;z-index:1}
@@ -192,6 +201,16 @@
 <body>
 
 <div id="lst-cash">
+
+  <!-- ===== SLIM HEADER ===== -->
+  <div class="lch">
+    <a class="lch-logo" href="/" aria-label="Lakeshore Team home"><img src="https://iamtpolk.github.io/lakeshore-site/lakeshore-white-logo.png" alt="Lakeshore Team"></a>
+    <div class="lch-r">
+      <!-- EDIT-PHONE -->
+      <a class="lch-phone" href="tel:+13372414963"><i class="ti ti-phone"></i><span>(337) 241-4963</span></a>
+      <button class="lch-cta" data-cta>Get My Cash Offer</button>
+    </div>
+  </div>
 
   <!-- ===== HERO ===== -->
   <div class="stage">

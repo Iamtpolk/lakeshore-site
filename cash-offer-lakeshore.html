@@ -31,6 +31,9 @@
     font-family:var(--font);color:var(--char);background:var(--white);display:block
   }
   #lst-cash *{box-sizing:border-box;margin:0;padding:0}
+  /* full-bleed: break out of Lofty's centered content container so section backgrounds span edge-to-edge */
+  .mg-container:has(#lst-cash),.custom-code-html-content:has(#lst-cash){max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+  .md-custom-code:has(#lst-cash){max-width:none!important;width:100%!important;padding-left:0!important;padding-right:0!important}
   /* subtle scroll reveal */
   #lst-cash .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   #lst-cash .reveal.in{opacity:1;transform:none}

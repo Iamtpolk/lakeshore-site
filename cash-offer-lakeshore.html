@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cash Offer Program — Lakeshore Team | eXp Realty</title>
+
+<!--  ============================================================
+      LAKESHORE TEAM · CASH OFFER LANDING PAGE
+      Rebrand of the KM Collective structure in Lakeshore branding.
+      Palette: black / white / Luxury Gold #B19A55 / Heritage Burgundy #2B0405.
+      Single-file: paste into a Lofty Custom Code / HTML block.
+
+      CUSTOMIZE (search "EDIT-"):
+        • EDIT-LOFTY  – lead-capture wiring (in the <script> at bottom)
+        • EDIT-PHONE  – phone number (appears twice)
+        • EDIT-NAME   – team name / market / brokerage / badges
+        • EDIT-REVIEWS – testimonials
+      ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+  #lst-cash{
+    --black:#0B0B0B;--burg:#2B0405;--burg2:#420a0c;--gold:#B19A55;--gold-d:#9a8442;
+    --paper:#FAF8F5;--white:#FFFFFF;--char:#1A1A1A;--stone:#5C5C5C;--line:#ECE7DF;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --serif:'Playfair Display',Georgia,serif;
+    font-family:var(--font);color:var(--char);background:var(--white);display:block
+  }
+  #lst-cash *{box-sizing:border-box;margin:0;padding:0}
+  /* subtle scroll reveal */
+  #lst-cash .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  #lst-cash .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){#lst-cash .reveal{transition:none!important;opacity:1!important;transform:none!important}}
+
+  /* hero */
+  #lst-cash .stage{position:relative;width:100%;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--black);padding:96px 24px}
+  #lst-cash .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:600;font-size:clamp(70px,16vw,230px);color:rgba(177,154,85,.07);white-space:nowrap;letter-spacing:.04em;pointer-events:none;z-index:1}
+  #lst-cash .heroin{position:relative;z-index:3;max-width:1040px}
+  #lst-cash .eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:600}
+  #lst-cash .stage h1{font-family:var(--serif);font-weight:500;color:#fff;font-size:clamp(36px,6.4vw,78px);line-height:1.07;letter-spacing:.01em}
+  #lst-cash .stage h1 .g{color:var(--gold)}
+  #lst-cash .hsub{font-size:clamp(15px,1.6vw,18px);line-height:1.6;color:rgba(255,255,255,.82);margin:22px auto 32px;max-width:560px}
+  /* buttons */
+  #lst-cash .btn{display:inline-block;font-size:16px;font-weight:600;color:var(--black);background:var(--gold);border:none;border-radius:10px;padding:16px 36px;cursor:pointer;text-decoration:none;transition:background .2s ease,transform .15s ease,box-shadow .2s ease;box-shadow:0 12px 28px -10px rgba(177,154,85,.55)}
+  #lst-cash .btn:hover{background:#c2aa64;transform:translateY(-2px);box-shadow:0 18px 36px -10px rgba(177,154,85,.6)}
+  #lst-cash .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  #lst-cash .btnsh{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600;border:none;cursor:pointer;border-radius:12px;padding:17px 34px;background:var(--black);color:#fff;box-shadow:0 12px 26px -10px rgba(0,0,0,.4);transition:transform .15s ease,box-shadow .15s ease;text-decoration:none}
+  #lst-cash .btnsh:hover{transform:translateY(-3px);box-shadow:0 18px 34px -10px rgba(0,0,0,.5)}
+  #lst-cash .btnsh i{color:var(--gold)}
+  #lst-cash .btnsh.alt{background:transparent;color:var(--char);border:1.5px solid var(--line)}
+  #lst-cash .btnsh.alt:hover{border-color:var(--gold)}
+  #lst-cash .btnbig{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:600;border:none;cursor:pointer;border-radius:12px;padding:18px 42px;background:var(--gold);color:var(--black);box-shadow:0 14px 30px -10px rgba(0,0,0,.45);transition:transform .15s ease,box-shadow .15s ease;text-decoration:none}
+  #lst-cash .btnbig:hover{transform:translateY(-3px);box-shadow:0 22px 40px -10px rgba(0,0,0,.5)}
+  /* hero trust strip */
+  #lst-cash .herotrust{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:15px}
+  #lst-cash .ht-agent{display:flex;align-items:center;gap:11px}
+  #lst-cash .ht-agent img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;border:1.5px solid rgba(177,154,85,.6)}
+  #lst-cash .ht-agent b{display:block;color:#fff;font-size:14px;font-weight:600;text-align:left}
+  #lst-cash .ht-agent span{display:block;color:rgba(255,255,255,.7);font-size:12px;text-align:left}
+  #lst-cash .ht-pts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;color:rgba(255,255,255,.82);font-size:12.5px}
+  #lst-cash .ht-pts span{display:inline-flex;align-items:center;gap:6px}
+  #lst-cash .ht-pts i{color:var(--gold);font-size:15px}
+  #lst-cash .ht-stars{color:var(--gold);letter-spacing:1px}
+  /* options / paths */
+  #lst-cash .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px auto 0;max-width:840px;text-align:left}
+  #lst-cash .path{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 14px 30px -18px rgba(43,4,5,.18)}
+  #lst-cash .path i{color:var(--gold);font-size:24px}
+  #lst-cash .path b{display:block;font-family:var(--serif);font-size:16px;color:var(--burg);font-weight:600;margin:8px 0 3px}
+  #lst-cash .path span{font-size:12.5px;color:var(--stone);line-height:1.5}
+  /* comparison note */
+  #lst-cash .cmpnote{color:rgba(255,255,255,.78);font-size:13px;line-height:1.6;text-align:center;max-width:680px;margin:22px auto 0}
+  #lst-cash .cmpnote b{color:var(--gold);font-weight:600}
+  @media(max-width:860px){#lst-cash .paths{grid-template-columns:1fr;max-width:420px}}
+  /* layout */
+  #lst-cash .sec{padding:clamp(48px,6vw,72px) 28px}
+  #lst-cash .wrap{max-width:1100px;margin:0 auto}
+  #lst-cash .center{text-align:center}
+  #lst-cash .h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,34px);line-height:1.14;letter-spacing:-.01em}
+  #lst-cash .lead{font-size:15px;line-height:1.7;color:var(--stone)}
+  #lst-cash .secnum{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase;display:block;margin-bottom:6px}
+  /* trust bar */
+  #lst-cash .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  #lst-cash .t{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 16px;text-align:center;font-size:13.5px;color:var(--char);font-weight:600;line-height:1.4;box-shadow:0 14px 30px -18px rgba(43,4,5,.25);transition:transform .2s ease,box-shadow .2s ease}
+  #lst-cash .t:hover{transform:translateY(-5px);box-shadow:0 24px 38px -18px rgba(43,4,5,.32)}
+  #lst-cash .t i{font-size:30px;color:var(--gold);display:block;margin-bottom:10px}
+  /* steps */
+  #lst-cash .steps-h{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:32px}
+  #lst-cash .steph{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 14px;text-align:center;box-shadow:0 14px 30px -18px rgba(43,4,5,.22);transition:transform .2s ease,box-shadow .2s ease}
+  #lst-cash .steph:hover{transform:translateY(-6px);box-shadow:0 24px 38px -18px rgba(43,4,5,.3)}
+  #lst-cash .steph .num{width:44px;height:44px;margin:0 auto 12px;border-radius:50%;background:var(--burg);color:var(--gold);font-family:var(--serif);font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  #lst-cash .steph i{color:var(--gold);font-size:22px}
+  #lst-cash .steph h3{font-family:var(--serif);font-size:15.5px;color:var(--char);margin:8px 0 5px;line-height:1.2;font-weight:600}
+  #lst-cash .steph p{font-size:12px;color:var(--stone);line-height:1.45}
+  /* expect */
+  #lst-cash .expect{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+  #lst-cash .expect .e{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--char);line-height:1.55}
+  #lst-cash .expect .e i{color:var(--gold);font-size:20px;flex:0 0 auto}
+  #lst-cash .expect .e b{color:var(--burg)}
+  /* comparison (burgundy band) */
+  #lst-cash .cmpwrap{margin-top:34px}
+  #lst-cash .cmpcard{border-radius:18px;overflow:hidden;background:#fff;border:1px solid rgba(255,255,255,.14);box-shadow:0 26px 50px -24px rgba(0,0,0,.55)}
+  #lst-cash .cmpgrid{display:grid;grid-template-columns:.82fr 1.08fr 1fr}
+  #lst-cash .cmpgrid>div{display:flex;flex-direction:column}
+  #lst-cash .head{min-height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:600;font-size:13.5px;padding:12px 14px;line-height:1.25}
+  #lst-cash .cell{min-height:56px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;padding:8px 10px;border-top:1px solid var(--line)}
+  #lst-cash .col-lab .cell{justify-content:flex-start;padding-left:20px;font-weight:600;background:#fbfaf7;color:var(--char)}
+  #lst-cash .col-km .head{background:#fff;color:var(--burg);border-bottom:3px solid var(--gold)}
+  #lst-cash .col-km .cell{background:#fff;color:var(--char);font-weight:600}
+  #lst-cash .col-km .cell::before{content:"\2713";color:var(--gold);font-weight:700;margin-right:7px}
+  #lst-cash .col-trad .head{background:#fff;color:var(--stone);border-bottom:3px solid #ddd}
+  #lst-cash .col-trad .cell{background:#fbfaf7;color:var(--stone)}
+  #lst-cash .col-trad .cell::before{content:"\2715";color:#b9b9b9;margin-right:7px}
+  #lst-cash .pill{background:var(--gold);color:var(--black);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:10px;font-weight:700}
+  /* who it's for */
+  #lst-cash .sit{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  #lst-cash .sit .s{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;font-size:13px;box-shadow:0 14px 30px -18px rgba(43,4,5,.2);transition:transform .2s ease,box-shadow .2s ease}
+  #lst-cash .sit .s:hover{transform:translateY(-5px);box-shadow:0 24px 38px -18px rgba(43,4,5,.3)}
+  #lst-cash .sit .s i{color:var(--gold);font-size:24px}
+  #lst-cash .sit .s b{display:block;color:var(--burg);font-family:var(--serif);font-size:16px;margin:8px 0 4px;font-weight:600}
+  #lst-cash .sit .s span{color:var(--stone);line-height:1.5}
+  /* reviews */
+  #lst-cash .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  #lst-cash .rev{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 14px 30px -18px rgba(43,4,5,.24);transition:transform .2s ease,box-shadow .2s ease}
+  #lst-cash .rev:hover{transform:translateY(-5px);box-shadow:0 24px 38px -18px rgba(43,4,5,.32)}
+  #lst-cash .stars{color:var(--gold);font-size:15px;letter-spacing:2px}
+  #lst-cash .rev p{font-size:13.5px;color:var(--char);line-height:1.6;margin:10px 0}
+  #lst-cash .rev .by{font-size:12.5px;color:var(--stone);font-weight:600}
+  #lst-cash .badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  #lst-cash .badge{font-size:12px;color:var(--char);background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-weight:500}
+  /* faq */
+  #lst-cash .faq{max-width:760px;margin:26px auto 0}
+  #lst-cash .faq .item{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:14px;overflow:hidden;box-shadow:0 12px 26px -18px rgba(43,4,5,.22)}
+  #lst-cash .faq .q{background:transparent;border:none;width:100%;border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:14px;text-align:left}
+  #lst-cash .faq .q span{font-size:14.5px;font-weight:600;color:var(--char)}
+  #lst-cash .faq .q i{color:var(--gold);flex:0 0 auto;transition:transform .2s ease}
+  #lst-cash .faq .item.open .q i{transform:rotate(45deg)}
+  #lst-cash .faq .qa{font-size:13.5px;color:var(--stone);line-height:1.65;padding:0 20px;max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease}
+  #lst-cash .faq .item.open .qa{max-height:260px;padding:0 20px 18px}
+  #lst-cash .faqsec{position:relative;overflow:hidden;padding-top:120px}
+  #lst-cash .faqsec .wrap{position:relative;z-index:1}
+  #lst-cash .faqband{position:absolute;top:42px;left:0;width:100%;text-align:center;font-family:var(--serif);font-weight:600;font-size:clamp(42px,7vw,82px);line-height:1;color:rgba(43,4,5,.07);white-space:nowrap;pointer-events:none;z-index:0;letter-spacing:.04em}
+  #lst-cash .faqband i{color:rgba(177,154,85,.55);font-family:var(--font);font-style:normal;font-size:.42em;vertical-align:middle;margin:0 .22em}
+  @media(max-width:860px){#lst-cash .faqsec{padding-top:92px}#lst-cash .faqband{top:30px}}
+  /* final cta (burgundy band) */
+  #lst-cash .finalsec{background:var(--burg);padding:clamp(56px,7vw,80px) 28px;position:relative;overflow:hidden;text-align:center}
+  #lst-cash .ghostcta{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:600;font-size:clamp(86px,16vw,210px);color:rgba(255,255,255,.05);white-space:nowrap;letter-spacing:.06em;pointer-events:none;z-index:0;margin:0;line-height:1}
+  #lst-cash .finalin{position:relative;z-index:2;max-width:780px;margin:0 auto}
+  #lst-cash .finalin h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,42px);color:#fff;line-height:1.08;margin:6px 0 0}
+  #lst-cash .finalin p.sub{color:rgba(255,255,255,.88);font-size:15px;margin:14px auto 0;max-width:620px;line-height:1.6}
+  #lst-cash .finalin .call{color:rgba(255,255,255,.8);font-size:13.5px;margin-top:24px}
+  #lst-cash .finalin .call a{color:var(--gold);text-decoration:none;font-weight:600}
+  /* lead modal */
+  #lst-cash-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(11,11,11,.62);backdrop-filter:blur(3px)}
+  #lst-cash-modal.open{display:flex}
+  #lst-cash-modal .box{background:#fff;border-radius:18px;max-width:460px;width:100%;padding:30px 26px 26px;position:relative;box-shadow:0 40px 90px -20px rgba(0,0,0,.5);font-family:var(--font)}
+  #lst-cash-modal .x{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;background:none;color:var(--stone);font-size:22px;cursor:pointer;line-height:1}
+  #lst-cash-modal .x:hover{color:var(--char)}
+  #lst-cash-modal .meyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  #lst-cash-modal h3{font-family:var(--serif);font-size:23px;color:var(--char);margin:4px 0 4px;font-weight:600}
+  #lst-cash-modal .msub{font-size:13px;color:var(--stone);line-height:1.5;margin-bottom:16px}
+  #lst-cash-modal .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #lst-cash-modal input,#lst-cash-modal textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-family:inherit;font-size:14px;color:var(--char);margin-bottom:10px;background:#fff}
+  #lst-cash-modal input:focus,#lst-cash-modal textarea:focus{outline:none;border-color:var(--gold)}
+  #lst-cash-modal textarea{min-height:74px;resize:vertical}
+  #lst-cash-modal .submit{width:100%;background:var(--gold);color:var(--black);border:none;border-radius:10px;padding:14px;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s,transform .15s}
+  #lst-cash-modal .submit:hover{background:#c2aa64;transform:translateY(-1px)}
+  #lst-cash-modal .submit:disabled{opacity:.65;cursor:default}
+  #lst-cash-modal .fine{font-size:10.5px;color:var(--stone);line-height:1.45;margin-top:10px}
+  #lst-cash-modal .done{text-align:center;padding:14px 6px}
+  #lst-cash-modal .done .ck{font-size:30px;color:var(--gold)}
+  /* responsive */
+  @media(max-width:860px){
+    #lst-cash .trust{grid-template-columns:repeat(2,1fr)}
+    #lst-cash .steps-h{grid-template-columns:repeat(2,1fr)}
+    #lst-cash .expect{grid-template-columns:1fr}
+    #lst-cash .sit{grid-template-columns:1fr}
+    #lst-cash .revs{grid-template-columns:1fr}
+    #lst-cash .cmpgrid{grid-template-columns:1fr;font-size:13px}
+    #lst-cash .col-lab{display:none}
+    #lst-cash .col-km .cell::before,#lst-cash .col-trad .cell::before{content:attr(data-l);display:block;font-size:11px;color:var(--stone);font-weight:500;margin-bottom:2px}
+    #lst-cash .col-km .cell,#lst-cash .col-trad .cell{flex-direction:column;min-height:64px}
+    #lst-cash .btnbig{font-size:16px;padding:16px 34px}
+    #lst-cash-modal .row{grid-template-columns:1fr}
+  }
+  @media(max-width:480px){#lst-cash .trust,#lst-cash .steps-h{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="lst-cash">
+
+  <!-- ===== HERO ===== -->
+  <div class="stage">
+    <div class="ghost">CASH OFFER</div>
+    <div class="heroin">
+      <!-- EDIT-NAME -->
+      <p class="eyebrow">Lakeshore Team &middot; eXp Realty</p>
+      <h1>Sell Your Home <span class="g">On Your Terms.</span></h1>
+      <p class="hsub">Need to sell fast and as-is? We'll get you a real cash offer in as little as 24 hours. Want to see what the open market could bring instead? We'll show you that too — then help you choose. No pressure, ever.</p>
+      <button class="btn" data-cta>See My Cash Offer &rarr;</button>
+      <div class="herotrust">
+        <div class="ht-agent">
+          <img src="https://iamtpolk.github.io/lakeshore-site/tyler-headshot.png" alt="Tyler Polk, Lakeshore Team">
+          <div><b>Tyler Polk</b><span>Lakeshore Team &middot; eXp Realty</span></div>
+        </div>
+        <div class="ht-pts">
+          <span><span class="ht-stars">★★★★★</span> 5-star rated locally</span>
+          <span><i class="ti ti-map-pin"></i> Acadiana &rarr; Baton Rouge</span>
+          <span><i class="ti ti-shield-check"></i> Free &amp; no-obligation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TRUST BAR ===== -->
+  <div class="sec" style="background:var(--paper)">
+    <div class="wrap trust reveal">
+      <div class="t"><i class="ti ti-clock"></i>Cash offer in 24 hours</div>
+      <div class="t"><i class="ti ti-cash"></i>$0 fees &middot; $0 closing costs</div>
+      <div class="t"><i class="ti ti-hammer"></i>No repairs or showings</div>
+      <!-- EDIT-NAME (market area) -->
+      <div class="t"><i class="ti ti-map-pin"></i>Local Acadiana, Lake Charles &amp; Baton Rouge team</div>
+    </div>
+  </div>
+
+  <!-- ===== PROGRAM INTRO ===== -->
+  <div class="sec center" style="background:var(--white)">
+    <div class="wrap reveal">
+      <span class="secnum">A Smarter Way to Sell</span>
+      <h2 class="h2" style="color:var(--char);max-width:600px;margin:6px auto 0">You have options — we'll help you find the right one.</h2>
+      <p class="lead" style="max-width:600px;margin:16px auto 0">Selling a home isn't one-size-fits-all. A cash offer is the fastest, simplest path for many sellers — no repairs, no showings, no fees. But it's not your only option, and we'll never push it. We'll show you a real cash offer <em>and</em> what your home could bring on the open market, then help you choose with clear numbers and zero pressure.</p>
+      <div class="paths">
+        <div class="path"><i class="ti ti-cash"></i><b>Sell for cash</b><span>Fast and as-is, no fees — close in about two weeks.</span></div>
+        <div class="path"><i class="ti ti-home-dollar"></i><b>List on the market</b><span>Maximize your final price with full marketing.</span></div>
+        <div class="path"><i class="ti ti-messages"></i><b>Not sure yet?</b><span>We'll walk through both options with you.</span></div>
+      </div>
+      <div class="ctas">
+        <button class="btnsh" data-cta><i class="ti ti-cash"></i><span>See My Cash Offer</span></button>
+        <!-- EDIT-PHONE -->
+        <a class="btnsh alt" href="tel:+13372414963"><i class="ti ti-phone"></i><span>Talk Through My Options</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <div class="sec" style="background:var(--paper)">
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum">How It Works</span><h2 class="h2" style="color:var(--char)">Getting your cash offer, step by step</h2><p class="lead" style="max-width:540px;margin:14px auto 0">From "just curious" to cash in hand — with us beside you the whole way.</p></div>
+      <div class="steps-h">
+        <div class="steph"><div class="num">1</div><i class="ti ti-home"></i><h3>Tell us about your home</h3><p>A few quick questions — about 60 seconds.</p></div>
+        <div class="steph"><div class="num">2</div><i class="ti ti-users"></i><h3>We line up offers</h3><p>Submitted to our vetted investor network.</p></div>
+        <div class="steph"><div class="num">3</div><i class="ti ti-cash"></i><h3>Offers in 24 hours</h3><p>Real cash offers — not estimates.</p></div>
+        <div class="steph"><div class="num">4</div><i class="ti ti-clipboard-check"></i><h3>Review together</h3><p>We walk you through every number.</p></div>
+        <div class="steph"><div class="num">5</div><i class="ti ti-key"></i><h3>Pick your date</h3><p>Close in ~2 weeks &amp; get paid.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WHAT TO EXPECT ===== -->
+  <div class="sec" style="background:var(--white)">
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum">What to Expect</span><h2 class="h2" style="color:var(--char)">What a cash sale looks like</h2></div>
+      <div class="expect">
+        <div class="e"><i class="ti ti-check"></i><span><b>A clear number</b> — no commissions, $0 closing costs on your side.</span></div>
+        <div class="e"><i class="ti ti-check"></i><span><b>As-is sale</b> — no repairs, no cleaning, no showings.</span></div>
+        <div class="e"><i class="ti ti-check"></i><span><b>Simple paperwork</b> — handled with a trusted local title company.</span></div>
+        <div class="e"><i class="ti ti-check"></i><span><b>You pick the date</b> — close in ~2 weeks or whenever you're ready.</span></div>
+        <div class="e"><i class="ti ti-check"></i><span><b>Payment your way</b> — wire or check, confirmed at closing.</span></div>
+        <div class="e"><i class="ti ti-check"></i><span><b>Zero obligation</b> — see your offer first, decide later.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== COMPARISON ===== -->
+  <div class="sec" style="background:var(--burg)">
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum" style="color:var(--gold)">An honest comparison</span><h2 class="h2" style="color:#fff">Cash offer vs. a traditional listing</h2></div>
+      <div class="cmpwrap"><div class="cmpcard"><div class="cmpgrid">
+        <div class="col-lab">
+          <div class="head"></div>
+          <div class="cell">Fees / commissions</div>
+          <div class="cell">Closing costs</div>
+          <div class="cell">Repairs</div>
+          <div class="cell">Showings</div>
+          <div class="cell">Timeline</div>
+        </div>
+        <div class="col-km">
+          <!-- EDIT-NAME -->
+          <div class="head"><span class="pill">Fast &amp; simple</span>Cash Offer &middot; Lakeshore Team</div>
+          <div class="cell" data-l="Fees / commissions">None</div>
+          <div class="cell" data-l="Closing costs">We cover them</div>
+          <div class="cell" data-l="Repairs">Zero — sold as-is</div>
+          <div class="cell" data-l="Showings">None</div>
+          <div class="cell" data-l="Timeline">7–14 days</div>
+        </div>
+        <div class="col-trad">
+          <div class="head">Traditional Listing</div>
+          <div class="cell" data-l="Fees / commissions">6% on average</div>
+          <div class="cell" data-l="Closing costs">~2% of sale price</div>
+          <div class="cell" data-l="Repairs">You fix first</div>
+          <div class="cell" data-l="Showings">Dozens of strangers</div>
+          <div class="cell" data-l="Timeline">60–90+ days</div>
+        </div>
+      </div></div></div>
+      <p class="cmpnote">Neither path is automatically "better." A traditional listing often nets a <b>higher final price</b>; a cash offer trades some of that for <b>speed, certainty, and zero hassle</b>. We'll run both numbers with you so the choice is clear.</p>
+    </div>
+  </div>
+
+  <!-- ===== WHO IT'S FOR ===== -->
+  <div class="sec" style="background:var(--white)">
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum">Who it's for</span><h2 class="h2" style="color:var(--char)">Life happens — a cash offer can help</h2></div>
+      <div class="sit">
+        <div class="s"><i class="ti ti-truck"></i><b>Relocating</b><span>Moving on a deadline without juggling showings.</span></div>
+        <div class="s"><i class="ti ti-home-heart"></i><b>Inherited home</b><span>Probate &amp; clean-outs handled, on your timeline.</span></div>
+        <div class="s"><i class="ti ti-scale"></i><b>Divorce</b><span>One clear number, a firm date you both accept.</span></div>
+        <div class="s"><i class="ti ti-tools"></i><b>Home needs work</b><span>Sell as-is — skip repairs and contractor stress.</span></div>
+        <div class="s"><i class="ti ti-building"></i><b>Tired landlord</b><span>We'll take the house — tenants and all.</span></div>
+        <div class="s"><i class="ti ti-sun"></i><b>Downsizing</b><span>Simplify the move with zero pressure.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REVIEWS ===== -->
+  <div class="sec" style="background:var(--paper)">
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum" style="color:var(--gold)">Proof</span><h2 class="h2" style="color:var(--char)">Trusted across Acadiana &amp; Southwest Louisiana</h2></div>
+      <!-- EDIT-REVIEWS -->
+      <div class="revs">
+        <div class="rev"><div class="stars">★★★★★</div><p>"He didn't try to hide any details just to sell a house — straightforward, and he had our best interest in mind. From now on, if anyone asks if I know a realtor, I'm pointing them straight to Tyler."</p><div class="by">— Derrek Comeaux, Lake Charles</div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>"Tyler was more than an agent. He was an educator, a friend, and most of all led the way to the best deal for me. Thanks again, Tyler!"</p><div class="by">— Darrell Bowie, Lake Charles</div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>"An advocate for me and my family — very responsive even through a difficult sale. He answered my questions any time of day and saw it all the way through with us."</p><div class="by">— Michelle, Sulphur</div></div>
+      </div>
+      <!-- EDIT-NAME (brokerage / MLS badges) -->
+      <div class="badges"><span class="badge">Brokered by eXp Realty</span><span class="badge">REALTOR®</span><span class="badge">Local MLS</span></div>
+    </div>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <div class="sec faqsec" style="background:var(--white)">
+    <div class="faqband" aria-hidden="true">FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ <i>&#10022;</i> FAQ</div>
+    <div class="wrap reveal">
+      <div class="center"><span class="secnum">FAQ's</span><h2 class="h2" style="color:var(--char)">All your answers in one place</h2></div>
+      <div class="faq">
+        <div class="item"><button class="q" type="button"><span>How do I know my cash offer is fair?</span><i class="ti ti-plus"></i></button><div class="qa">We show you the comps and the full math behind your number — after-repair value, repairs, resale costs, and margin — so you can decide with complete confidence. No black boxes.</div></div>
+        <div class="item"><button class="q" type="button"><span>Are there any fees or commissions?</span><i class="ti ti-plus"></i></button><div class="qa">No. With a cash offer there are $0 agent commissions and we cover the closing costs on your side. The number we present is the number you walk away with.</div></div>
+        <div class="item"><button class="q" type="button"><span>How fast can I close?</span><i class="ti ti-plus"></i></button><div class="qa">Most cash sales close in about 7–14 days, but you pick the date. Need more time to move? We'll work around your schedule.</div></div>
+        <div class="item"><button class="q" type="button"><span>Am I obligated to accept the offer?</span><i class="ti ti-plus"></i></button><div class="qa">Never. Getting your offer is completely free and no-obligation. Review it with us, take your time, and only move forward if it's right for you.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FINAL CTA ===== -->
+  <div class="finalsec">
+    <span class="ghostcta" aria-hidden="true">CASH OFFER</span>
+    <div class="finalin reveal">
+      <span class="secnum" style="color:var(--gold)">Ready when you are</span>
+      <h2>See your cash offer — and your options</h2>
+      <p class="sub">Get a real cash offer and your open-market value, then decide what's right for you. Free, no-obligation, no pressure.</p>
+      <div style="margin-top:30px"><button class="btnbig" data-cta><span>See My Cash Offer &rarr;</span></button></div>
+      <!-- EDIT-PHONE -->
+      <p class="call">Prefer to talk it through? Call or text us at <a href="tel:+13372414963">(337) 241-4963</a></p>
+    </div>
+  </div>
+
+  <!-- ===== LEAD MODAL ===== -->
+  <div id="lst-cash-modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-label="Get your cash offer">
+      <button class="x" type="button" data-close aria-label="Close">&times;</button>
+      <div class="formwrap">
+        <div class="meyebrow">Cash Offer Program</div>
+        <h3>Get your free cash offer</h3>
+        <p class="msub">Tell us about your home and we'll get to work. No obligation — just a real number.</p>
+        <form id="lst-cash-form" novalidate>
+          <div class="row">
+            <input name="first" type="text" placeholder="First name" autocomplete="given-name" aria-label="First name">
+            <input name="last" type="text" placeholder="Last name" autocomplete="family-name" aria-label="Last name">
+          </div>
+          <div class="row">
+            <input name="phone" type="tel" placeholder="Phone" autocomplete="tel" aria-label="Phone">
+            <input name="email" type="email" placeholder="Email" autocomplete="email" aria-label="Email">
+          </div>
+          <input name="address" type="text" placeholder="Property address" autocomplete="street-address" aria-label="Property address">
+          <textarea name="message" placeholder="Anything we should know? (optional)" aria-label="Message"></textarea>
+          <button type="submit" class="submit">Get My Cash Offer</button>
+          <p class="fine">By submitting, you agree to our Privacy Policy and Terms and consent to receive calls, texts, and emails (including via automated technology) from eXp Realty and the Lakeshore Team at the number provided. Consent is not a condition of purchase; message &amp; data rates may apply. Reply STOP to opt out.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('lst-cash');
+  var modal = document.getElementById('lst-cash-modal');
+
+  /* ---- subtle scroll reveal ---- */
+  try{
+    var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    root.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }catch(e){ root.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');}); }
+
+  /* ---- FAQ accordions ---- */
+  root.querySelectorAll('.faq .item').forEach(function(it){
+    it.querySelector('.q').addEventListener('click', function(){ it.classList.toggle('open'); });
+  });
+
+  /* ---- modal open/close ---- */
+  function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); var f=modal.querySelector('input[name=first]'); if(f) setTimeout(function(){f.focus();},50); }
+  function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+  root.querySelectorAll('[data-cta]').forEach(function(b){ b.addEventListener('click', openModal); });
+  modal.addEventListener('click', function(e){ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  /* ============================================================
+     EDIT-LOFTY:  Lead capture -> Lofty CRM.
+     When this page is embedded on lakeshoreteam.homes (same origin),
+     the form posts directly to Lofty's lead endpoint and creates a
+     real CRM lead (Source: Website, Lead Type defaults to Buyer —
+     Lofty whitelists fields, so set Seller/Cash-Offer tagging in CRM
+     or via a native valuation widget if you need it distinguished).
+     Off-site (e.g. this preview) it falls back gracefully.
+     ============================================================ */
+  function digits(v){ return (v||'').replace(/[^0-9]/g,''); }
+  function emailOk(v){ v=v||''; var a=v.indexOf('@'),d=v.lastIndexOf('.'); return a>0&&d>a+1&&d<v.length-1; }
+
+  function buildAgreement(){
+    try{
+      var cfg = window.sitePrepareData && window.sitePrepareData().newDisclaimersMap;
+      if(cfg){ return {type:cfg.siteDisclaimerType, versionId:cfg.customDisclaimerVersionId, tosVersionId:cfg.tosVersionId, privacyPolicyVersionId:cfg.privacyPolicyVersionId, consentGiven:true, useCustomConsent:false, noPartiesAgree:true}; }
+    }catch(e){}
+    return {consentGiven:true, useCustomConsent:false, noPartiesAgree:true};
+  }
+
+  var form = document.getElementById('lst-cash-form');
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var first=(form.first.value||'').trim(), last=(form.last.value||'').trim();
+    var email=(form.email.value||'').trim(), phone=digits(form.phone.value);
+    var address=(form.address.value||'').trim(), message=(form.message.value||'').trim();
+    function flag(el,bad){ el.style.borderColor = bad ? '#b3261e' : ''; }
+    flag(form.first,!first); flag(form.last,!last); flag(form.email,!emailOk(email)); flag(form.phone,phone.length<10);
+    if(!first||!last||!emailOk(email)||phone.length<10) return;
+
+    var btn = form.querySelector('.submit'); var orig = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    var payload = {
+      email:email, account:email, fullname:first+' '+last, firstName:first, lastName:last,
+      phone: phone.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3'), phoneNumber: phone,
+      roles:"2", canAssignToLender:true, callOptIn:false, textOptIn:false,
+      pageUrl: location.href,
+      note: 'CASH OFFER request' + (address?(' — Property: '+address):'') + (message?(' — '+message):''),
+      physicalInfo:{ deviceName:navigator.platform||'', operatingSystem:navigator.platform||'', browserInfo:navigator.userAgent||'' },
+      agreementInfo: buildAgreement()
+    };
+
+    function done(){ var bx=modal.querySelector('.formwrap'); bx.innerHTML = '<div class="done"><div class="ck">&#10003;</div><h3>Thanks — your request is in.</h3><p class="msub">Tyler will reach out personally with your cash offer details. Need something now? Call or text (337) 241-4963.</p></div>'; }
+    function fail(){ btn.disabled=false; btn.textContent=orig; var n=form.querySelector('.err'); if(!n){ n=document.createElement('p'); n.className='err'; n.style.cssText='color:#b3261e;font-size:12px;margin-top:8px'; form.appendChild(n);} n.textContent='Something went wrong. Please try again, or call (337) 241-4963.'; }
+
+    try{
+      var post = (window.siteAxios && window.siteAxios.post)
+        ? window.siteAxios.post('/api-site/auto/leadRegister', payload)
+        : fetch('/api-site/auto/leadRegister',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){return r.json();});
+      Promise.resolve(post).then(function(res){
+        var ok = res && (res.status ? res.status.code===0 : true);
+        if(ok) done(); else fail();
+      }).catch(fail);
+    }catch(e){ fail(); }
+  });
+})();
+</script>
+</body>
+</html>

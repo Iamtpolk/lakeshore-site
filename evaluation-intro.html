@@ -1,0 +1,61 @@
+<!-- Lakeshore /evaluation branded intro band — injected ABOVE the native Lofty valuation widget (.md-evaluation-banner). Keeps the widget functional, adds brand + trust + light widget styling. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+  #lst-eval{--black:#0B0B0B;--burg:#2B0405;--gold:#B19A55;--paper:#FAF8F5;--char:#1A1A1A;--stone:#5C5C5C;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--serif:'Playfair Display',Georgia,serif;
+    font-family:var(--font);display:block}
+  #lst-eval *{box-sizing:border-box;margin:0;padding:0}
+  /* full-bleed out of Lofty's centered container */
+  .mg-container:has(#lst-eval),.custom-code-html-content:has(#lst-eval){max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+  .md-custom-code:has(#lst-eval){max-width:none!important;width:100%!important;padding-left:0!important;padding-right:0!important}
+  #lst-eval .evh{position:relative;background:var(--black);text-align:center;padding:clamp(84px,8vw,120px) clamp(24px,4vw,48px) clamp(40px,5vw,64px);overflow:hidden}
+  #lst-eval .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:600;font-size:clamp(70px,15vw,200px);color:rgba(177,154,85,.06);white-space:nowrap;pointer-events:none;z-index:0}
+  #lst-eval .evin{position:relative;z-index:2;max-width:760px;margin:0 auto}
+  #lst-eval .eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+  #lst-eval h1{font-family:var(--serif);font-weight:500;color:#fff;font-size:clamp(34px,4.4vw,60px);line-height:1.08;letter-spacing:.01em}
+  #lst-eval h1 .g{color:var(--gold)}
+  #lst-eval .sub{font-size:clamp(15px,1.4vw,18px);line-height:1.65;color:rgba(255,255,255,.84);margin:20px auto 28px;max-width:620px}
+  #lst-eval .agent{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:14px}
+  #lst-eval .agent img{width:50px;height:50px;border-radius:50%;object-fit:cover;object-position:center top;border:1.5px solid rgba(177,154,85,.6)}
+  #lst-eval .agent b{display:block;color:#fff;font-size:14px;font-weight:600;text-align:left}
+  #lst-eval .agent span{display:block;color:rgba(255,255,255,.7);font-size:12px;text-align:left}
+  #lst-eval .pts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;color:rgba(255,255,255,.82);font-size:12.5px;margin-bottom:22px}
+  #lst-eval .pts span{display:inline-flex;align-items:center;gap:6px}
+  #lst-eval .pts i{color:var(--gold);font-size:15px}
+  #lst-eval .stars{color:var(--gold);letter-spacing:1px}
+  #lst-eval .cue{display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+  #lst-eval .cue i{font-size:18px;animation:lstbob 1.8s ease-in-out infinite}
+  @keyframes lstbob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+  @media(prefers-reduced-motion:reduce){#lst-eval .cue i{animation:none}}
+
+  /* ---- light brand styling for the native valuation widget below ---- */
+  .md-evaluation-banner .site-title{font-family:'Playfair Display',Georgia,serif!important;color:#1A1A1A!important;text-transform:none!important;letter-spacing:-.01em!important}
+  .md-evaluation-banner .site-subtitle{color:#B19A55!important;letter-spacing:.18em!important;font-weight:700!important}
+  .md-evaluation-banner .submit-btn{background:#B19A55!important;color:#0B0B0B!important;border-color:#B19A55!important;font-weight:600!important}
+  .md-evaluation-banner .submit-btn:hover{background:#c2aa64!important}
+  .md-evaluation-banner .step-icon{color:#B19A55!important}
+</style>
+<div id="lst-eval">
+  <section class="evh">
+    <div class="ghost" aria-hidden="true">HOME VALUE</div>
+    <div class="evin">
+      <!-- EDIT-NAME -->
+      <p class="eyebrow">Lakeshore Team &middot; eXp Realty</p>
+      <h1>Know What Your Home Is <span class="g">Really Worth.</span></h1>
+      <p class="sub">A free, no-obligation home value report built on real Acadiana sold data — not an automated estimate. Enter your address below and Tyler will follow up personally with your number and a pricing strategy.</p>
+      <div class="agent">
+        <img src="https://iamtpolk.github.io/lakeshore-site/tyler-headshot.png" alt="Tyler Polk, Lakeshore Team">
+        <div><b>Tyler Polk</b><span>Lakeshore Team &middot; eXp Realty</span></div>
+      </div>
+      <div class="pts">
+        <span><span class="stars">★★★★★</span> 5-star rated locally</span>
+        <span><i class="ti ti-map-pin"></i> Acadiana &rarr; Baton Rouge</span>
+        <span><i class="ti ti-shield-check"></i> Free &amp; no-obligation</span>
+      </div>
+      <div class="cue"><span>Start your free report below</span><i class="ti ti-arrow-down"></i></div>
+    </div>
+  </section>
+</div>

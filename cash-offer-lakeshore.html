@@ -468,7 +468,11 @@
   /* ---- modal open/close ---- */
   function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); var f=modal.querySelector('input[name=first]'); if(f) setTimeout(function(){f.focus();},50); }
   function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
-  root.querySelectorAll('[data-cta]').forEach(function(b){ b.addEventListener('click', openModal); });
+  /* ---- Open the Lakeshore Cash Offer (Tally) form as an on-page modal — no redirect ---- */
+function lstLoadTally(cb){ if(window.Tally){ cb(); return; } var ex=document.querySelector('script[data-lst-tally]'); if(ex){ ex.addEventListener('load', function(){ cb(); }); return; } var s=document.createElement('script'); s.src='https://tally.so/widgets/embed.js'; s.setAttribute('data-lst-tally','1'); s.onload=function(){ cb(); }; document.head.appendChild(s); }
+lstLoadTally(function(){});
+function lstOpenCashOffer(){ lstLoadTally(function(){ if(window.Tally){ Tally.openPopup('RGbj2Q', {layout:'modal', width:720, overlay:true}); } }); }
+root.querySelectorAll('[data-cta]').forEach(function(b){ b.addEventListener('click', function(ev){ ev.preventDefault(); lstOpenCashOffer(); }); });
 
 /* ---- mobile nav toggle ---- */
 var lchBurger = root.querySelector('.lch-burger'), lchMobile = root.querySelector('.lch-mobile');

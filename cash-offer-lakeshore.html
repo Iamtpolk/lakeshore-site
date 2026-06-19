@@ -39,7 +39,20 @@
   #lst-cash .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){#lst-cash .reveal{transition:none!important;opacity:1!important;transform:none!important}}
   /* slim header */
-  #lst-cash .lch{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(177,154,85,.22)}
+  #lst-cash .lch-bar{position:sticky;top:0;z-index:60}
+#lst-cash .lch{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 28px;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(177,154,85,.22)}
+#lst-cash .lch-nav{display:flex;align-items:center;gap:24px}
+#lst-cash .lch-nav a{color:rgba(255,255,255,.86);text-decoration:none;font-size:13.5px;font-weight:500;letter-spacing:.01em;white-space:nowrap;transition:color .2s}
+#lst-cash .lch-nav a:hover{color:var(--gold)}
+#lst-cash .lch-nav a.active{color:var(--gold)}
+#lst-cash .lch-burger{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:4px;line-height:1}
+#lst-cash .lch-burger i{font-size:26px}
+#lst-cash .lch-mobile{display:none;background:rgba(11,11,11,.98);border-bottom:1px solid rgba(177,154,85,.22);padding:6px 16px 14px}
+#lst-cash .lch-mobile.open{display:block}
+#lst-cash .lch-mobile a{display:block;color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:500;padding:13px 6px;border-bottom:1px solid rgba(255,255,255,.08)}
+#lst-cash .lch-mobile a:last-child{border-bottom:none}
+#lst-cash .lch-mobile a.active{color:var(--gold)}
+@media(max-width:980px){#lst-cash .lch-nav{display:none}#lst-cash .lch-burger{display:inline-flex;align-items:center}}
   #lst-cash .lch-logo img{height:34px;width:auto;display:block}
   #lst-cash .lch-r{display:flex;align-items:center;gap:16px}
   #lst-cash .lch-phone{display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:14px;font-weight:500}
@@ -205,14 +218,33 @@
 
 <div id="lst-cash">
 
-  <!-- ===== SLIM HEADER ===== -->
+  <!-- ===== SLIM HEADER + SITE NAV ===== -->
+  <div class="lch-bar">
   <div class="lch">
     <a class="lch-logo" href="/" aria-label="Lakeshore Team home"><img src="https://iamtpolk.github.io/lakeshore-site/lakeshore-white-logo.png" alt="Lakeshore Team"></a>
+    <nav class="lch-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="https://tylerpolk.expluxagent.com/">Luxury</a>
+      <a href="/lafayette-homes-for-sale">Buy</a>
+      <a href="/sell">Sell</a>
+      <a href="/cash-offer" class="active" aria-current="page">Cash Offer</a>
+      <a href="/about">About</a>
+    </nav>
     <div class="lch-r">
       <!-- EDIT-PHONE -->
       <a class="lch-phone" href="tel:+13372414963"><i class="ti ti-phone"></i><span>(337) 241-4963</span></a>
       <button class="lch-cta" data-cta>Get My Cash Offer</button>
+      <button class="lch-burger" type="button" aria-label="Open menu" aria-expanded="false"><i class="ti ti-menu-2"></i></button>
     </div>
+  </div>
+  <nav class="lch-mobile" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="https://tylerpolk.expluxagent.com/">Luxury</a>
+    <a href="/lafayette-homes-for-sale">Buy</a>
+    <a href="/sell">Sell</a>
+    <a href="/cash-offer" class="active" aria-current="page">Cash Offer</a>
+    <a href="/about">About</a>
+  </nav>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -437,6 +469,13 @@
   function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); var f=modal.querySelector('input[name=first]'); if(f) setTimeout(function(){f.focus();},50); }
   function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
   root.querySelectorAll('[data-cta]').forEach(function(b){ b.addEventListener('click', openModal); });
+
+/* ---- mobile nav toggle ---- */
+var lchBurger = root.querySelector('.lch-burger'), lchMobile = root.querySelector('.lch-mobile');
+if(lchBurger && lchMobile){
+lchBurger.addEventListener('click', function(){ var op = lchMobile.classList.toggle('open'); lchBurger.setAttribute('aria-expanded', op ? 'true':'false'); });
+lchMobile.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ lchMobile.classList.remove('open'); lchBurger.setAttribute('aria-expanded','false'); }); });
+}
   modal.addEventListener('click', function(e){ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 

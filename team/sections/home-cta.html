@@ -1,72 +1,69 @@
-<!-- Lakeshore TEAM (lakeshoreteam.com) — Homepage path-CTA trio (Sell / Buy / Cash). Photo top + solid burgundy body, full-width gold button. Scoped .lstcta. Photos repo-hosted in /team/assets. -->
+<!-- Lakeshore TEAM (lakeshoreteam.com) — Homepage path-CTA trio. The 3 photos ARE the section background (edge-to-edge, 3 panels); a floating glass card sits on each. Compact. Scoped .lstcta. Photos repo-hosted in /team/assets. -->
 <style>
-  .lstcta{--white:#fff;--paper:#F7F4EF;--paper2:#EFEAE2;--char:#262522;--ink:#1F1E1B;--muted:#5C5A54;--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;
-    --burg:#4A1618;--burg2:#3A1012;--burg3:#2C0B0D;
+  .lstcta{--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;--dark:#17120F;
     --font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif;--serif:'Playfair Display',Georgia,'Times New Roman',serif;
-    background:radial-gradient(120% 90% at 50% 0%,#FBF8F3 0%,var(--paper) 55%,var(--paper2) 100%);font-family:var(--font);color:var(--ink);padding:clamp(4rem,8vw,7rem) 24px}
+    position:relative;font-family:var(--font);background:var(--dark);overflow:hidden}
   .lstcta *{box-sizing:border-box}
-  .lstcta .wrap{max-width:1240px;margin:0 auto}
-  .lstcta .head{text-align:center;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
-  .lstcta .kick{font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
-  .lstcta h2{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,3.8vw,2.9rem);line-height:1.1;color:var(--char);margin:.6rem 0 0}
 
-  .lstcta .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.6rem)}
-  .lstcta .card{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 22px 50px rgba(38,37,34,.22);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease}
-  .lstcta .card:hover{transform:translateY(-7px);box-shadow:0 34px 66px rgba(38,37,34,.34)}
+  /* photo panels = the section background, edge to edge */
+  .lstcta .panels{display:grid;grid-template-columns:repeat(3,1fr)}
+  .lstcta .panel{position:relative;min-height:clamp(360px,42vw,440px);background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:clamp(1.2rem,2vw,1.7rem)}
+  .lstcta .panel.p-sell{background-image:url('https://iamtpolk.github.io/lakeshore-site/team/assets/tile-sell.jpg')}
+  .lstcta .panel.p-buy{background-image:url('https://iamtpolk.github.io/lakeshore-site/team/assets/tile-buy.jpg')}
+  .lstcta .panel.p-cash{background-image:url('https://iamtpolk.github.io/lakeshore-site/team/assets/tile-cash.jpg')}
+  .lstcta .panel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,10,.55) 0%,rgba(15,12,10,.22) 38%,rgba(12,9,8,.50) 70%,rgba(10,8,6,.82) 100%)}
 
-  /* photo top (clear) */
-  .lstcta .photo{position:relative;height:clamp(220px,24vw,290px);overflow:hidden}
-  .lstcta .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-  .lstcta .card:hover .photo img{transform:scale(1.05)}
+  /* floating glass card on each photo */
+  .lstcta .card{position:relative;z-index:2;width:100%;background:rgba(20,16,14,.50);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(177,154,85,.42);border-radius:14px;padding:clamp(1.3rem,1.7vw,1.55rem);box-shadow:0 18px 44px rgba(0,0,0,.45);transition:transform .35s ease,box-shadow .35s ease}
+  .lstcta .panel:hover .card{transform:translateY(-5px);box-shadow:0 28px 58px rgba(0,0,0,.55)}
+  .lstcta .ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:rgba(177,154,85,.20);border:1px solid rgba(177,154,85,.55);color:var(--gold-soft);margin-bottom:.85rem}
+  .lstcta .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7}
+  .lstcta .card h3{font-family:var(--serif);font-weight:700;font-size:clamp(1.4rem,1.7vw,1.7rem);color:#fff;margin:0 0 .45rem;line-height:1.12}
+  .lstcta .card p{font-size:.95rem;color:rgba(255,255,255,.86);line-height:1.55;margin:0 0 1.2rem}
+  .lstcta .btn{display:block;width:100%;text-align:center;background:linear-gradient(95deg,var(--gold-soft),var(--gold) 60%,var(--gold-deep));color:#241c0a;font-weight:700;font-size:.96rem;padding:.85rem 1.4rem;border-radius:9px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.34);transition:transform .25s ease,filter .25s ease}
+  .lstcta .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
-  /* solid burgundy body */
-  .lstcta .body{background:linear-gradient(180deg,var(--burg) 0%,var(--burg2) 70%,var(--burg3) 100%);padding:clamp(1.5rem,2.6vw,2rem) clamp(1.5rem,2.6vw,2rem) clamp(1.7rem,2.8vw,2.1rem);display:flex;flex-direction:column;flex:1}
-  .lstcta .ic{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;background:rgba(177,154,85,.20);border:1px solid rgba(177,154,85,.5);color:var(--gold-soft);margin-bottom:1rem}
-  .lstcta .ic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7}
-  .lstcta .body h3{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,2vw,1.85rem);color:#fff;margin:0 0 .55rem;line-height:1.12}
-  .lstcta .body p{font-size:1rem;color:rgba(255,255,255,.80);line-height:1.6;margin:0 0 1.5rem;flex:1}
-  .lstcta .btn{display:block;width:100%;text-align:center;background:linear-gradient(95deg,var(--gold-soft),var(--gold) 60%,var(--gold-deep));color:#2a0e0e;font-weight:700;font-size:1rem;padding:1rem 1.5rem;border-radius:10px;text-decoration:none;box-shadow:0 12px 26px rgba(0,0,0,.3);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-  .lstcta .btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(0,0,0,.42);filter:brightness(1.04)}
+  /* header overlaid at top of the photo band */
+  .lstcta .head{position:absolute;top:0;left:0;right:0;z-index:4;text-align:center;padding:clamp(1.5rem,3vw,2.3rem) 24px 0;pointer-events:none}
+  .lstcta .kick{font-size:.76rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);text-shadow:0 1px 10px rgba(0,0,0,.7)}
+  .lstcta h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:#fff;margin:.45rem 0 0;text-shadow:0 2px 16px rgba(0,0,0,.7)}
 
-  @media(max-width:900px){.lstcta .grid{grid-template-columns:1fr;gap:1.4rem}.lstcta .photo{height:240px}}
+  @media(max-width:900px){
+    .lstcta .panels{grid-template-columns:1fr}
+    .lstcta .panel{min-height:300px;align-items:flex-end}
+    .lstcta .head{position:static;padding:clamp(2rem,7vw,2.6rem) 24px clamp(1.4rem,5vw,1.8rem);background:var(--dark)}
+  }
 </style>
 
 <section class="lstcta" aria-label="How can we help you move">
-  <div class="wrap">
-    <div class="head">
-      <span class="kick">How can we help you move?</span>
-      <h2>Three ways to start with Lakeshore</h2>
+  <div class="panels">
+    <div class="panel p-sell">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div>
+        <h3>Thinking of Selling?</h3>
+        <p>Get a precise home value and a plan to sell for top dollar.</p>
+        <a class="btn" href="/evaluation">What's My Home Worth?</a>
+      </div>
     </div>
-    <div class="grid">
-      <article class="card">
-        <div class="photo"><img src="https://iamtpolk.github.io/lakeshore-site/team/assets/tile-sell.jpg" alt="" loading="lazy"></div>
-        <div class="body">
-          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div>
-          <h3>Thinking of Selling?</h3>
-          <p>Get a precise home value and a plan to sell for top dollar.</p>
-          <a class="btn" href="/evaluation">What's My Home Worth?</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="photo"><img src="https://iamtpolk.github.io/lakeshore-site/team/assets/tile-buy.jpg" alt="" loading="lazy"></div>
-        <div class="body">
-          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-          <h3>Looking to Buy?</h3>
-          <p>Search every Acadiana listing and tour homes with a local pro.</p>
-          <a class="btn" href="/listing">Search Homes</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="photo"><img src="https://iamtpolk.github.io/lakeshore-site/team/assets/tile-cash.jpg" alt="" loading="lazy"></div>
-        <div class="body">
-          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-          <h3>Need to Sell Fast?</h3>
-          <p>Get a no-obligation cash offer in 24 hours — no repairs, no showings.</p>
-          <a class="btn" href="/cash-offer">Get My Cash Offer</a>
-        </div>
-      </article>
+    <div class="panel p-buy">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Looking to Buy?</h3>
+        <p>Search every Acadiana listing and tour homes with a local pro.</p>
+        <a class="btn" href="/listing">Search Homes</a>
+      </div>
     </div>
+    <div class="panel p-cash">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Need to Sell Fast?</h3>
+        <p>Get a no-obligation cash offer in 24 hours — no repairs, no showings.</p>
+        <a class="btn" href="/cash-offer">Get My Cash Offer</a>
+      </div>
+    </div>
+  </div>
+  <div class="head">
+    <span class="kick">How can we help you move?</span>
+    <h2>Three ways to start with Lakeshore</h2>
   </div>
 </section>

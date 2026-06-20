@@ -14,14 +14,14 @@
   .lstcta .card:hover{transform:translateY(-7px);box-shadow:0 34px 66px rgba(38,37,34,.34)}
 
   /* photo header — sits BEHIND the icon + title */
-  .lstcta .photo{position:relative;min-height:clamp(220px,24vw,280px);background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .lstcta .photo{position:relative;min-height:clamp(260px,26vw,310px);background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
   .lstcta .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
   .lstcta .card:hover .photo img{transform:scale(1.05)}
-  .lstcta .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,19,16,.15) 0%,rgba(20,19,16,.30) 55%,rgba(38,37,34,.96) 100%)}
+  .lstcta .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,19,16,0) 0%,rgba(20,19,16,.04) 40%,rgba(24,22,18,.50) 76%,rgba(38,37,34,.97) 100%)}
   .lstcta .ph-in{position:relative;z-index:2;padding:clamp(1.4rem,2.4vw,1.8rem) clamp(1.5rem,2.6vw,2rem) clamp(1rem,1.6vw,1.2rem)}
   .lstcta .ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(177,154,85,.20);border:1px solid rgba(177,154,85,.55);color:var(--gold-soft);margin-bottom:.9rem;backdrop-filter:blur(2px)}
   .lstcta .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6}
-  .lstcta .card h3{font-family:var(--serif);font-weight:700;font-size:clamp(1.55rem,2vw,1.9rem);color:#fff;margin:0;line-height:1.1;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+  .lstcta .card h3{font-family:var(--serif);font-weight:700;font-size:clamp(1.55rem,2vw,1.9rem);color:#fff;margin:0;line-height:1.1;text-shadow:0 2px 18px rgba(0,0,0,.7)}
 
   /* charcoal body */
   .lstcta .body{padding:clamp(1.3rem,2.4vw,1.7rem) clamp(1.5rem,2.6vw,2rem) clamp(1.6rem,2.6vw,2rem);display:flex;flex-direction:column;flex:1}

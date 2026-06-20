@@ -25,8 +25,9 @@
   var ALL = BEFORE.concat([AFTER]);
   var html = {};
 
+  var VER = Date.now();  /* cache-bust section fetches so edits appear immediately (no stale GitHub Pages cache) */
   ALL.forEach(function(s){
-    fetch(BASE + s.file).then(function(r){return r.text();}).then(function(t){
+    fetch(BASE + s.file + '?v=' + VER).then(function(r){return r.text();}).then(function(t){
       html[s.id] = t; try{ if(place()) mo.disconnect(); }catch(e){}
     });
   });

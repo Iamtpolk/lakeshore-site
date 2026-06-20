@@ -44,10 +44,13 @@
     var featured = houses[0];
     var sold = houses[houses.length-1];
 
-    /* CTA -> Trust -> Reviews, immediately before Featured Listings (each insertBefore keeps order) */
-    if(featured){
+    /* CTA -> Trust -> Reviews, immediately before Featured Listings.
+       Insert only once ALL three are fetched, so DOM order matches array order
+       regardless of which fetch finishes first. */
+    var beforeReady = BEFORE.every(function(s){ return html[s.id]; });
+    if(featured && beforeReady){
       BEFORE.forEach(function(s){
-        if(html[s.id] && !document.getElementById(s.id)){ pc.insertBefore(el(s.id, html[s.id]), featured); }
+        if(!document.getElementById(s.id)){ pc.insertBefore(el(s.id, html[s.id]), featured); }
       });
     }
     /* Playbooks right after Sold Listings (lands between Sold and Meet the Team) */

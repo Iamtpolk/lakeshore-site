@@ -33,6 +33,29 @@
 
   function el(id, h){ var d=document.createElement('div'); d.id=id; d.innerHTML=h; return d; }
 
+  /* Stat-bar count-up: animate each [data-to] number from 0 when it scrolls into view. */
+  function setupCounts(){
+    var nums = document.querySelectorAll('#lst-home-trust .num[data-to]');
+    if(!nums.length) return;
+    [].forEach.call(nums, function(node){
+      if(node.dataset.cinit) return; node.dataset.cinit = '1';
+      var to=parseFloat(node.dataset.to), dec=parseInt(node.dataset.dec||'0',10), pre=node.dataset.pre||'', suf=node.dataset.suf||'';
+      node.textContent = pre + (0).toFixed(dec) + suf;          /* from-state (set below the fold, no visible flash) */
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting) return;
+          io.unobserve(node);
+          var start=null, dur=1700;
+          function tick(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1); var k=1-Math.pow(1-p,3);
+            node.textContent = pre + (to*k).toFixed(dec) + suf;
+            if(p<1) requestAnimationFrame(tick); else node.textContent = pre + to.toFixed(dec) + suf; }
+          requestAnimationFrame(tick);
+        });
+      }, {threshold:0.6});
+      io.observe(node);
+    });
+  }
+
   function place(){
     var pc = document.querySelector('main.page-content, .page-content'); if(!pc) return false;
 
@@ -57,6 +80,8 @@
     if(sold && html[AFTER.id] && !document.getElementById(AFTER.id)){
       sold.insertAdjacentElement('afterend', el(AFTER.id, html[AFTER.id]));
     }
+
+    setupCounts();   /* arm the stat-bar count-up once the trust bar is in the DOM */
 
     return ALL.every(function(s){ return !!document.getElementById(s.id); });
   }

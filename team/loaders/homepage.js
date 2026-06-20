@@ -33,6 +33,17 @@
 
   function el(id, h){ var d=document.createElement('div'); d.id=id; d.innerHTML=h; return d; }
 
+  /* innerHTML does NOT execute <script> tags — re-create them so injected sections
+     (e.g. the Playbooks tab switching + lead form) actually run. */
+  function runScripts(container){
+    [].forEach.call(container.querySelectorAll('script'), function(old){
+      var s = document.createElement('script');
+      [].forEach.call(old.attributes, function(a){ s.setAttribute(a.name, a.value); });
+      if(old.src){ s.src = old.src; } else { s.textContent = old.textContent; }
+      old.parentNode.replaceChild(s, old);
+    });
+  }
+
   /* Stat-bar count-up: animate each [data-to] number from 0 when it scrolls into view. */
   function setupCounts(){
     var nums = document.querySelectorAll('#lst-home-trust .num[data-to]');
@@ -73,12 +84,12 @@
     var beforeReady = BEFORE.every(function(s){ return html[s.id]; });
     if(featured && beforeReady){
       BEFORE.forEach(function(s){
-        if(!document.getElementById(s.id)){ pc.insertBefore(el(s.id, html[s.id]), featured); }
+        if(!document.getElementById(s.id)){ var node=el(s.id, html[s.id]); pc.insertBefore(node, featured); runScripts(node); }
       });
     }
     /* Playbooks right after Sold Listings (lands between Sold and Meet the Team) */
     if(sold && html[AFTER.id] && !document.getElementById(AFTER.id)){
-      sold.insertAdjacentElement('afterend', el(AFTER.id, html[AFTER.id]));
+      var pbn=el(AFTER.id, html[AFTER.id]); sold.insertAdjacentElement('afterend', pbn); runScripts(pbn);
     }
 
     setupCounts();   /* arm the stat-bar count-up once the trust bar is in the DOM */

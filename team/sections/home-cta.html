@@ -1,8 +1,8 @@
 <!-- Lakeshore TEAM (lakeshoreteam.com) — Homepage path-CTA trio. The 3 photos ARE the section background (edge-to-edge, 3 panels); a floating glass card sits on each. Compact. Scoped .lstcta. Photos repo-hosted in /team/assets. -->
 <style>
-  .lstcta{--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;--dark:#17120F;
+  .lstcta{--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;--dark:#17120F;--paper:#F7F4EF;--paper2:#EFEAE2;--char:#262522;
     --font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif;--serif:'Playfair Display',Georgia,'Times New Roman',serif;
-    position:relative;font-family:var(--font);background:var(--dark);overflow:hidden}
+    position:relative;font-family:var(--font);background:radial-gradient(120% 70% at 50% 0%,#FBF8F3 0%,var(--paper) 60%,var(--paper2) 100%);overflow:hidden;padding:0}
   .lstcta *{box-sizing:border-box}
 
   /* photo panels = the section background, edge to edge */
@@ -23,19 +23,22 @@
   .lstcta .btn{display:block;width:100%;text-align:center;background:linear-gradient(95deg,var(--gold-soft),var(--gold) 60%,var(--gold-deep));color:#241c0a;font-weight:700;font-size:.96rem;padding:.85rem 1.4rem;border-radius:9px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.34);transition:transform .25s ease,filter .25s ease}
   .lstcta .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
-  /* header overlaid at top of the photo band */
-  .lstcta .head{position:absolute;top:0;left:0;right:0;z-index:4;text-align:center;padding:clamp(1.5rem,3vw,2.3rem) 24px 0;pointer-events:none}
-  .lstcta .kick{font-size:.76rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);text-shadow:0 1px 10px rgba(0,0,0,.7)}
-  .lstcta h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:#fff;margin:.45rem 0 0;text-shadow:0 2px 16px rgba(0,0,0,.7)}
+  /* header — inline, above the photo band, on the light base */
+  .lstcta .head{text-align:center;padding:clamp(2.6rem,5vw,3.6rem) 24px clamp(1.8rem,3.5vw,2.4rem)}
+  .lstcta .kick{font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
+  .lstcta h2{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,3.6vw,2.7rem);line-height:1.1;color:var(--char);margin:.5rem 0 0}
 
   @media(max-width:900px){
     .lstcta .panels{grid-template-columns:1fr}
     .lstcta .panel{min-height:300px;align-items:flex-end}
-    .lstcta .head{position:static;padding:clamp(2rem,7vw,2.6rem) 24px clamp(1.4rem,5vw,1.8rem);background:var(--dark)}
   }
 </style>
 
 <section class="lstcta" aria-label="How can we help you move">
+  <div class="head">
+    <span class="kick">How can we help you move?</span>
+    <h2>Three ways to start with Lakeshore</h2>
+  </div>
   <div class="panels">
     <div class="panel p-sell">
       <div class="card">
@@ -61,9 +64,5 @@
         <a class="btn" href="/cash-offer">Get My Cash Offer</a>
       </div>
     </div>
-  </div>
-  <div class="head">
-    <span class="kick">How can we help you move?</span>
-    <h2>Three ways to start with Lakeshore</h2>
   </div>
 </section>

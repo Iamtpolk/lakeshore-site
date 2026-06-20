@@ -1,0 +1,53 @@
+<!-- Lakeshore TEAM (lakeshoreteam.com) — Homepage path-CTA trio (Sell / Buy / Cash). Charcoal + gold, light base. Scoped .lstcta. -->
+<style>
+  .lstcta{--white:#fff;--paper:#F7F4EF;--paper2:#EFEAE2;--char:#262522;--char2:#34322D;--char3:#403D37;--ink:#1F1E1B;--muted:#5C5A54;--line:#E4DDD0;--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif;--serif:'Playfair Display',Georgia,'Times New Roman',serif;
+    background:radial-gradient(120% 90% at 50% 0%,#FBF8F3 0%,var(--paper) 55%,var(--paper2) 100%);font-family:var(--font);color:var(--ink);padding:clamp(3.5rem,7vw,5.5rem) 24px}
+  .lstcta *{box-sizing:border-box}
+  .lstcta .wrap{max-width:1180px;margin:0 auto}
+  .lstcta .head{text-align:center;margin-bottom:clamp(1.8rem,3.5vw,2.6rem)}
+  .lstcta .kick{font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
+  .lstcta h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.1;color:var(--char);margin:.6rem 0 0}
+  .lstcta .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.2vw,1.5rem)}
+  .lstcta .card{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--char2) 0%,var(--char) 100%);border:1px solid #45413a;border-radius:18px;padding:2rem 1.7rem;display:flex;flex-direction:column;box-shadow:0 18px 44px rgba(38,37,34,.18);transition:transform .3s ease,box-shadow .3s ease}
+  .lstcta .card:hover{transform:translateY(-5px);box-shadow:0 26px 56px rgba(38,37,34,.3)}
+  .lstcta .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+  .lstcta .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(177,154,85,.14);border:1px solid rgba(177,154,85,.4);color:var(--gold-soft);margin-bottom:1.1rem}
+  .lstcta .ic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.6}
+  .lstcta .card h3{font-family:var(--serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .5rem;line-height:1.12}
+  .lstcta .card p{font-size:.97rem;color:#cfc9bf;line-height:1.6;margin:0 0 1.5rem;flex:1}
+  .lstcta .btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(95deg,var(--gold-soft),var(--gold) 60%,var(--gold-deep));color:#241c0a;font-weight:700;font-size:.95rem;padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;box-shadow:0 12px 26px rgba(177,154,85,.28);transition:transform .25s ease,box-shadow .25s ease}
+  .lstcta .btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(177,154,85,.42)}
+  .lstcta .btn .ar{transition:transform .3s ease}
+  .lstcta .btn:hover .ar{transform:translateX(3px)}
+  @media(max-width:860px){.lstcta .grid{grid-template-columns:1fr;gap:1.1rem}}
+</style>
+
+<section class="lstcta" aria-label="How can we help you move">
+  <div class="wrap">
+    <div class="head">
+      <span class="kick">How can we help you move?</span>
+      <h2>Three ways to start with Lakeshore</h2>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div>
+        <h3>Thinking of Selling?</h3>
+        <p>Get a precise home value and a plan to sell for top dollar.</p>
+        <a class="btn" href="/evaluation">What's My Home Worth? <span class="ar">→</span></a>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Looking to Buy?</h3>
+        <p>Search every Acadiana listing and tour homes with a local pro.</p>
+        <a class="btn" href="/listing">Search Homes <span class="ar">→</span></a>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Need to Sell Fast?</h3>
+        <p>Get a no-obligation cash offer in 24 hours — no repairs, no showings.</p>
+        <a class="btn" href="/cash-offer">Get My Cash Offer <span class="ar">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>

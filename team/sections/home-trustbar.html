@@ -1,0 +1,28 @@
+<!-- Lakeshore TEAM (lakeshoreteam.com) — Homepage trust bar (stats + awards). Charcoal band + gold. Scoped .lsttb. -->
+<style>
+  .lsttb{--char:#262522;--char2:#2F2D28;--gold:#B19A55;--gold-soft:#cdbb86;--gold-deep:#9c8542;--muted:#b6b0a4;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif;--serif:'Playfair Display',Georgia,'Times New Roman',serif;
+    background:linear-gradient(180deg,var(--char) 0%,var(--char2) 100%);font-family:var(--font);color:#fff;padding:clamp(2.6rem,5vw,3.6rem) 24px;position:relative}
+  .lsttb *{box-sizing:border-box}
+  .lsttb::before,.lsttb::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(177,154,85,.5),transparent)}
+  .lsttb::before{top:0}.lsttb::after{bottom:0}
+  .lsttb .wrap{max-width:1100px;margin:0 auto}
+  .lsttb .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;max-width:620px;margin:0 auto;text-align:center}
+  .lsttb .stat .num{font-family:var(--serif);font-weight:700;font-size:clamp(2.3rem,5vw,3.2rem);line-height:1;background:linear-gradient(92deg,#f1e6cd 10%,var(--gold) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lsttb .stat .lbl{margin-top:.5rem;font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .lsttb .awards{margin-top:clamp(1.8rem,3.5vw,2.4rem);padding-top:1.5rem;border-top:1px solid rgba(177,154,85,.22);text-align:center;font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);line-height:2}
+  .lsttb .awards .dot{color:rgba(177,154,85,.5);margin:0 .5rem}
+  @media(max-width:560px){.lsttb .awards{letter-spacing:.1em}}
+</style>
+
+<section class="lsttb" aria-label="Lakeshore Team track record">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">$49.5M+</div><div class="lbl">In Sales</div></div>
+      <div class="stat"><div class="num">225+</div><div class="lbl">Families Served</div></div>
+    </div>
+    <div class="awards">
+      Top Agent Magazine Cover <span class="dot">&middot;</span> People's Choice Top 5 <span class="dot">&middot;</span> HomeSnap &amp; Homes.com Client Service Award
+    </div>
+  </div>
+</section>

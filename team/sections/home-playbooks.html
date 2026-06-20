@@ -15,7 +15,8 @@
   /* panel grid */
   .lspb .panel{display:none;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;animation:lspbFade .55s ease both}
   .lspb .panel.show{display:grid}
-  @keyframes lspbFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* carousel slide-in (auto-advances between Seller / Buyer) */
+  @keyframes lspbFade{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
 
   /* copy side */
   .lspb .copy{position:relative}
@@ -79,9 +80,18 @@
   /* top + bottom page edges */
   .lspb .ptop{width:var(--bw);height:var(--bt);left:0;top:0;transform-origin:center top;transform:rotateX(90deg) translateY(calc(var(--hf) * -1));background:repeating-linear-gradient(to bottom,#f6f0e3 0,#f6f0e3 1px,#d8caa9 1.7px,#f6f0e3 2.7px)}
   .lspb .pbot{width:var(--bw);height:var(--bt);left:0;top:auto;bottom:0;transform-origin:center bottom;transform:rotateX(-90deg) translateY(var(--hf));background:repeating-linear-gradient(to bottom,#ece4d0 0,#ece4d0 1px,#cabd9c 1.7px,#ece4d0 2.7px)}
-  /* ===== Buyer book — black / charcoal variant ===== */
-  .lspb [data-panel="buyer"] .cover{background:linear-gradient(150deg,#2d2d2d 0%,#101010 45%,#000 100%)}
-  .lspb [data-panel="buyer"] .spine{background:linear-gradient(90deg,#000 0%,#242424 16%,#303030 50%,#242424 84%,#000 100%)}
+  /* ===== Seller book — GOLD cover with white/cream detailing ===== */
+  .lspb [data-panel="seller"] .cover{background:linear-gradient(150deg,#CDB36B 0%,#A98F45 44%,#866B2E 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 0 70px rgba(74,54,12,.4),inset 16px 0 24px -12px rgba(58,42,10,.5)}
+  .lspb [data-panel="seller"] .cover:before{border-color:rgba(255,255,255,.55)}
+  .lspb [data-panel="seller"] .spine{background:linear-gradient(90deg,#6e5826 0%,#a78c43 16%,#c6aa5e 50%,#a78c43 84%,#6e5826 100%)}
+  .lspb [data-panel="seller"] .spine .hb{background:repeating-linear-gradient(90deg,#fff 0 3px,#b89a52 3px 6px)}
+  .lspb [data-panel="seller"] .cv-kind{color:rgba(255,255,255,.92)}
+  .lspb [data-panel="seller"] .cv-srule,.lspb [data-panel="seller"] .cv-rule{background:rgba(255,255,255,.85)}
+  .lspb [data-panel="seller"] .cv-seal{border-color:rgba(255,255,255,.7);color:#fff;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.25),transparent 70%)}
+  .lspb [data-panel="seller"] .cv-title{text-shadow:0 1px 8px rgba(58,42,10,.55)}
+  /* ===== Buyer book — CHARCOAL cover with gold detailing ===== */
+  .lspb [data-panel="buyer"] .cover{background:linear-gradient(150deg,#3a3a37 0%,#262522 46%,#17150F 100%)}
+  .lspb [data-panel="buyer"] .spine{background:linear-gradient(90deg,#121212 0%,#2c2c2a 16%,#3a3a37 50%,#2c2c2a 84%,#121212 100%)}
   .lspb [data-panel="buyer"] .shadow{background:radial-gradient(ellipse at center,rgba(0,0,0,.42),transparent 70%)}
   .lspb .shadow{position:absolute;left:50%;bottom:-50px;width:320px;height:46px;transform:translateX(-50%) rotateX(80deg);background:radial-gradient(ellipse at center,rgba(38,37,34,.38),transparent 70%);filter:blur(8px);z-index:-1}
   /* gold shine sweep */
@@ -227,16 +237,24 @@
   var root = document.querySelector('.lspb');
   if(!root) return;
 
-  /* ---------- Tabs (For Sellers / For Buyers) ---------- */
+  /* ---------- Tabs + auto carousel (For Sellers / For Buyers) ---------- */
   var tabs   = root.querySelectorAll('.tab[data-tab]');
   var panels = root.querySelectorAll('.panel[data-panel]');
+  var slides = ['seller','buyer'], idx = 0, IV = 5500, timer = null, reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches; } catch(e){}
   function showTab(name){
     tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-tab')===name); });
     panels.forEach(function(p){ p.classList.toggle('show', p.getAttribute('data-panel')===name); });
+    var i = slides.indexOf(name); if(i > -1) idx = i;
   }
+  /* pause auto-advance while hovering, when a lead form is open, or the tab is hidden */
+  function paused(){ return reduce || document.hidden || root.matches(':hover') || !!root.querySelector('.form.open'); }
+  function tick(){ if(paused()) return; showTab(slides[(idx + 1) % slides.length]); }
+  function arm(){ if(reduce) return; if(timer) clearInterval(timer); timer = setInterval(tick, IV); }
   tabs.forEach(function(t){
-    t.addEventListener('click', function(){ showTab(t.getAttribute('data-tab')); });
+    t.addEventListener('click', function(){ showTab(t.getAttribute('data-tab')); arm(); });  /* manual click resets the timer */
   });
+  arm();
 
   /* ---------- "Get Your Playbook" inline dropdown form ---------- */
   root.querySelectorAll('.cta[data-form]').forEach(function(btn){
@@ -350,150 +368,5 @@
       });
     });
   });
-})();
-</script>
-
-<!-- Homepage enhancements (hero CTA + pinch-zoom accessibility fix). Runs via the playbooks loader on the homepage. -->
-<script>
-(function(){
-  'use strict';
-  /* 1) Accessibility: re-enable pinch-zoom (template viewport blocks it) */
-  try{ var vp=document.querySelector('meta[name=viewport]'); if(vp){ vp.setAttribute('content','width=device-width, initial-scale=1, viewport-fit=cover'); } }catch(e){}
-  /* 2) Hero primary CTA: "Get Your Home's Value" -> /evaluation */
-  function addHeroCta(){
-    if(document.getElementById('lst-hero-cta')) return true;
-    var hero=document.querySelector('.md-hero'); if(!hero) return false;
-    var h1=hero.querySelector('h1'); if(!h1) return false;
-    var container=h1.parentElement || hero;
-    var wrap=document.createElement('div');
-    wrap.style.cssText='text-align:center;width:100%;margin-top:1.4rem';
-    var a=document.createElement('a');
-    a.id='lst-hero-cta'; a.href='/evaluation'; a.setAttribute('aria-label','Get your home’s value');
-    a.innerHTML='Get Your Home’s Value <span aria-hidden="true" style="margin-left:.4rem">→</span>';
-    a.style.cssText=['display:inline-flex','align-items:center','justify-content:center','padding:0.95rem 2.2rem','font:700 1.02rem/1 Inter,system-ui,Arial,sans-serif','letter-spacing:.01em','color:#1a1916','text-decoration:none','background:linear-gradient(135deg,#C7A75A 0%,#B19A55 100%)','border-radius:999px','box-shadow:0 14px 34px rgba(0,0,0,.35)','cursor:pointer','transition:transform .2s ease,box-shadow .2s ease'].join(';');
-    a.addEventListener('mouseenter',function(){a.style.transform='translateY(-2px)';a.style.boxShadow='0 18px 42px rgba(0,0,0,.45)';});
-    a.addEventListener('mouseleave',function(){a.style.transform='';a.style.boxShadow='0 14px 34px rgba(0,0,0,.35)';});
-    wrap.appendChild(a); container.appendChild(wrap);
-    return true;
-  }
-  var n=0, iv=setInterval(function(){ if(addHeroCta()||++n>60) clearInterval(iv); },150);
-  if(document.readyState!=='loading') addHeroCta();
-})();
-</script>
-
-<!-- Homepage enhancements 2: stats/awards trust bar (after the 3-path cards) + sticky Call/Text Tyler button. -->
-<script>
-(function(){
-  'use strict';
-  function animate(scope){
-    scope.querySelectorAll('.lst-num').forEach(function(el){
-      var raw=el.getAttribute('data-to'), to=parseFloat(raw), pre=el.getAttribute('data-prefix')||'', suf=el.getAttribute('data-suffix')||'', dec=(raw.indexOf('.')>-1)?1:0, start=null, dur=1500;
-      function tick(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1), e=1-Math.pow(1-p,3); el.textContent=pre+(to*e).toFixed(dec)+suf; if(p<1)requestAnimationFrame(tick); else el.textContent=pre+to.toFixed(dec)+suf; }
-      requestAnimationFrame(tick);
-    });
-  }
-  function addTrustBar(){
-    if(document.getElementById('lst-trust-bar')) return true;
-    var anchor=document.getElementById('lst-cta-root'); if(!anchor) return false;
-    var bar=document.createElement('section'); bar.id='lst-trust-bar';
-    bar.style.cssText='background:linear-gradient(180deg,#F7F2EB,#EFE8DE);padding:clamp(2.2rem,4vw,3.2rem) 1.2rem;text-align:center;font-family:Inter,system-ui,Arial,sans-serif';
-    bar.innerHTML=''
-      +'<div style="max-width:1080px;margin:0 auto">'
-      +'<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(2rem,7vw,5.5rem);align-items:flex-start">'
-      +'<div><div class="lst-num" data-to="49.5" data-prefix="$" data-suffix="M+" style="font:700 clamp(2.3rem,5vw,3.3rem)/1 Georgia,Times,serif;color:#2e2a24">$49.5M+</div><div style="margin-top:.45rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#5C5C5C">In Sales</div></div>'
-      +'<div><div class="lst-num" data-to="225" data-suffix="+" style="font:700 clamp(2.3rem,5vw,3.3rem)/1 Georgia,Times,serif;color:#2e2a24">225+</div><div style="margin-top:.45rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#5C5C5C">Families Served</div></div>'
-      +'</div>'
-      +'<div style="width:46px;height:2px;background:#B19A55;margin:1.4rem auto"></div>'
-      +'<div style="font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#5C5C5C;line-height:1.95">Top Agent Magazine Cover &nbsp;&middot;&nbsp; People&#39;s Choice Top 5 &nbsp;&middot;&nbsp; Homesnap &amp; Homes.com Client Service Award</div>'
-      +'</div>';
-    anchor.parentNode.insertBefore(bar, anchor.nextSibling);
-    try{ var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){animate(en.target);io.unobserve(en.target);}});},{threshold:.35}); io.observe(bar); }catch(e){ animate(bar); }
-    return true;
-  }
-  function addStickyCall(){
-    if(document.getElementById('lst-sticky-call')) return true;
-    var a=document.createElement('a'); a.id='lst-sticky-call'; a.href='https://popl.co/profile/tpolktherealtor'; a.target='_blank'; a.rel='noopener';
-    a.setAttribute('aria-label','Open Tyler Polk\u2019s digital contact card');
-    a.innerHTML='<span aria-hidden="true" style="font-size:1.02rem">☎</span> Connect Directly with Tyler';
-    a.style.cssText='position:fixed;left:18px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.25rem;font:700 .9rem/1 Inter,system-ui,Arial,sans-serif;color:#fff;text-decoration:none;background:linear-gradient(135deg,#2e2a24,#3c3830);border:1px solid rgba(177,154,85,.5);border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.35)';
-    document.body.appendChild(a); return true;
-  }
-  var n=0, iv=setInterval(function(){ var done=addTrustBar(); addStickyCall(); if(done||++n>60) clearInterval(iv); },150);
-  if(document.readyState!=='loading'){ addTrustBar(); addStickyCall(); }
-})();
-</script>
-
-<!-- Homepage polish: hero subtext readability + kicker contrast (AA). -->
-<style>
-.md-hero .media-content-v2{font-size:clamp(15px,1.55vw,18px)!important;font-weight:500!important;line-height:1.6!important;text-shadow:0 1px 10px rgba(0,0,0,.55)!important}
-.lspb .kick{color:#6E5E2A!important}
-</style>
-
-<!-- Homepage section reorder (DOM-order, mobile+desktop consistent; re-runs to catch late-loading sections).
-     Order: Hero > Search > Paths > Trust bar > Reviews > Featured Listings > Buyer Roadmap > Playbooks > Meet Agent > Luxury > Footer. (Reversible: remove this block.) -->
-<script>
-(function(){
-  function reorder(){
-    var main=document.querySelector('main.page-content'); if(!main) return;
-    main.style.display=''; main.style.flexDirection='';
-    var pbm=document.getElementById('lakeshore-playbooks-mount'); var pb=pbm?pbm.closest('.md-custom-code'):null;
-    var ccs=Array.prototype.slice.call(main.querySelectorAll(':scope > .md-custom-code'));
-    var road=null; for(var i=0;i<ccs.length;i++){ if(ccs[i]!==pb && /roadmap/i.test(ccs[i].textContent||'')){ road=ccs[i]; break; } }
-    var seq=[
-      main.querySelector(':scope > .md-hero'),
-      main.querySelector(':scope > .md-listing-search'),
-      document.getElementById('lst-cta-root'),
-      document.getElementById('lst-trust-bar'),
-      document.getElementById('lst-rv-root'),
-      main.querySelector(':scope > .md-house'),
-      road, pb,
-      document.getElementById('lst-agent-root'),
-      document.getElementById('lst-banner-root'),
-      main.querySelector(':scope > .md-footer')
-    ];
-    seq.forEach(function(el){ if(el){ el.style.order=''; main.appendChild(el); } });
-  }
-  if(document.readyState!=='loading') reorder();
-  document.addEventListener('DOMContentLoaded', reorder);
-  window.addEventListener('load', reorder);
-  [400,900,1600,2600,4000,6000,8500].forEach(function(t){ setTimeout(reorder, t); });
-})();
-</script>
-
-
-<!-- Homepage refinements: playbooks full-bleed + distinct (white) Featured Listings background -->
-<style>
-.md-custom-code:has(#lakeshore-playbooks-mount) .mg-container,
-.md-custom-code:has(#lakeshore-playbooks-mount) .custom-code-html-content,
-#lakeshore-playbooks-mount{width:100%!important;max-width:100%!important}
-.lspb{width:100%!important;max-width:100%!important}
-main.page-content > .md-house{background:#FFFFFF!important}
-</style>
-
-<!-- Meet Tyler section: large, subtle eXp Luxury | Sports & Entertainment background watermark -->
-<style>
-#lst-agent-root::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("https://iamtpolk.github.io/lakeshore-site/exp-se-white.png") no-repeat center;background-size:min(1400px,90%) auto;opacity:.12}
-#lst-agent-root .la-wrap{position:relative;z-index:2}
-#lst-agent-root .la-brandmark{display:none!important}
-</style>
-
-
-<!-- Mobile: clear hero content below the fixed nav + size hero subtext for small screens -->
-<style>
-@media (max-width:768px){
-  .md-hero{padding-top:96px!important;padding-bottom:34px!important}
-  .md-hero .media-content-v2{font-size:14px!important;line-height:1.5!important}
-}
-</style>
-<!-- Reviews insurance: if the reviews section failed to inject (mobile timing), re-run its loader (its own guard prevents duplicates). -->
-<script>
-(function(){
-  function ensureReviews(tag){
-    if(document.getElementById('lst-rv-root')) return;
-    var s=document.createElement('script');
-    s.src='https://iamtpolk.github.io/lakeshore-site/lakeshore-reviews.js?ins='+tag+Date.now();
-    s.defer=true; document.body.appendChild(s);
-  }
-  [3500,7000,11000].forEach(function(t,i){ setTimeout(function(){ ensureReviews(i); }, t); });
 })();
 </script>

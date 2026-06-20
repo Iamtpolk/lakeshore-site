@@ -1,0 +1,64 @@
+/* Lakeshore TEAM (lakeshoreteam.com) — Homepage builder.
+   Injects, in .homes order (recolored charcoal+gold):
+     before Featured Listings:  CTA trio -> Trust bar -> Reviews
+     after  Sold Listings:      Playbooks
+   (Meet the Team is injected separately by meet-the-team.js, before the footer.)
+   Native blocks .md-team-desc and .md-cta are hidden (render-blocking <head> CSS does this too;
+   this is a backup). MutationObserver disconnects once everything is settled — no timer chains. */
+(function(){
+  if(window.__lstHome) return; window.__lstHome = 1;
+  var path = location.pathname.replace(/\/+$/,''); if(path !== '') return;  /* homepage only */
+  var BASE = 'https://iamtpolk.github.io/lakeshore-site/team/sections/';
+
+  if(!document.getElementById('lst-team-fonts')){
+    var l=document.createElement('link'); l.id='lst-team-fonts'; l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap';
+    document.head.appendChild(l);
+  }
+
+  var BEFORE = [
+    {id:'lst-home-cta',   file:'home-cta.html'},
+    {id:'lst-home-trust', file:'home-trustbar.html'},
+    {id:'lst-home-rv',    file:'home-reviews.html'}
+  ];
+  var AFTER = {id:'lst-home-pb', file:'home-playbooks.html'};
+  var ALL = BEFORE.concat([AFTER]);
+  var html = {};
+
+  ALL.forEach(function(s){
+    fetch(BASE + s.file).then(function(r){return r.text();}).then(function(t){
+      html[s.id] = t; try{ if(place()) mo.disconnect(); }catch(e){}
+    });
+  });
+
+  function el(id, h){ var d=document.createElement('div'); d.id=id; d.innerHTML=h; return d; }
+
+  function place(){
+    var pc = document.querySelector('main.page-content, .page-content'); if(!pc) return false;
+
+    /* hide native clutter (backup to head CSS) */
+    var desc = pc.querySelector('.md-team-desc'); if(desc) desc.style.display='none';
+    pc.querySelectorAll(':scope > .md-cta').forEach(function(n){ n.style.display='none'; });
+
+    var houses = pc.querySelectorAll(':scope > .md-house');
+    var featured = houses[0];
+    var sold = houses[houses.length-1];
+
+    /* CTA -> Trust -> Reviews, immediately before Featured Listings (each insertBefore keeps order) */
+    if(featured){
+      BEFORE.forEach(function(s){
+        if(html[s.id] && !document.getElementById(s.id)){ pc.insertBefore(el(s.id, html[s.id]), featured); }
+      });
+    }
+    /* Playbooks right after Sold Listings (lands between Sold and Meet the Team) */
+    if(sold && html[AFTER.id] && !document.getElementById(AFTER.id)){
+      sold.insertAdjacentElement('afterend', el(AFTER.id, html[AFTER.id]));
+    }
+
+    return ALL.every(function(s){ return !!document.getElementById(s.id); });
+  }
+
+  var mo = new MutationObserver(function(){ try{ if(place()) mo.disconnect(); }catch(e){} });
+  mo.observe(document.documentElement, {childList:true, subtree:true});
+  if(document.readyState !== 'loading'){ try{ if(place()) mo.disconnect(); }catch(e){} }
+})();

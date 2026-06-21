@@ -22,7 +22,7 @@
   }
 
   var HTML = null;
-  fetch(BASE + 'sections/meet-the-team.html')
+  fetch(BASE + 'sections/meet-the-team.html?v=' + Date.now())   /* cache-bust so edits appear immediately */
     .then(function(r){ return r.text(); })
     .then(function(t){ HTML = t; try{ if(inject()) mo.disconnect(); }catch(e){} });
 

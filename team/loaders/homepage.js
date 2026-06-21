@@ -7,7 +7,27 @@
    this is a backup). MutationObserver disconnects once everything is settled — no timer chains. */
 (function(){
   if(window.__lstHome) return; window.__lstHome = 1;
-  var path = location.pathname.replace(/\/+$/,''); if(path !== '') return;  /* homepage only */
+
+  /* ===== Site-wide extras — run on EVERY page (this file is loaded site-wide; the homepage-only
+     guard is below). a) re-enable pinch-zoom (template viewport caps maximum-scale=1, fails WCAG 1.4.4);
+     b) team click-to-call/text button (bottom-left, charcoal + gold). ===== */
+  try{ var _vp=document.querySelector('meta[name=viewport]'); if(_vp){ _vp.setAttribute('content','width=device-width, initial-scale=1, viewport-fit=cover'); } }catch(e){}
+  (function(){
+    function addCall(){
+      if(document.getElementById('lst-team-call')) return true;
+      if(!document.body) return false;
+      var a=document.createElement('a'); a.id='lst-team-call'; a.href='tel:+13373525238';
+      a.setAttribute('aria-label','Call or text the Lakeshore Team at (337) 352-5238');
+      a.innerHTML='<span aria-hidden="true" style="font-size:1rem;line-height:1">☎</span><span style="white-space:nowrap">Call or Text</span>';
+      a.style.cssText='position:fixed;left:18px;bottom:18px;z-index:2147482000;display:inline-flex;align-items:center;gap:.5rem;padding:.72rem 1.15rem;border-radius:999px;font:700 .86rem/1 Inter,system-ui,Arial,sans-serif;letter-spacing:.02em;color:#fff;text-decoration:none;background:linear-gradient(135deg,#2b2a26 0%,#17150F 100%);border:1px solid rgba(177,154,85,.55);box-shadow:0 10px 26px rgba(0,0,0,.34);transition:transform .2s ease, box-shadow .2s ease';
+      a.addEventListener('mouseenter',function(){a.style.transform='translateY(-2px)';a.style.boxShadow='0 16px 34px rgba(0,0,0,.42)';});
+      a.addEventListener('mouseleave',function(){a.style.transform='';a.style.boxShadow='0 10px 26px rgba(0,0,0,.34)';});
+      document.body.appendChild(a); return true;
+    }
+    if(document.readyState!=='loading'){ addCall(); } else { document.addEventListener('DOMContentLoaded', addCall); }
+  })();
+
+  var path = location.pathname.replace(/\/+$/,''); if(path !== '') return;  /* homepage only (sections below) */
   var BASE = 'https://iamtpolk.github.io/lakeshore-site/team/sections/';
 
   if(!document.getElementById('lst-team-fonts')){

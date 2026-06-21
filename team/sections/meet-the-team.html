@@ -44,6 +44,17 @@
   .lstm .mem .cta .ar{transition:transform .3s ease}
   .lstm .mem .cta:hover .ar{transform:translateX(3px)}
 
+  /* per-card action buttons: Buy (→ agent listings) / Sell (→ agent home-value form) + Connect */
+  .lstm .mem .acts{align-self:stretch;display:flex;flex-direction:column;gap:.55rem;margin-top:.1rem}
+  .lstm .mem .act-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+  .lstm .mem .b2{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:.85rem;line-height:1.15;padding:.64rem .45rem;border-radius:11px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+  .lstm .mem .b2.buy{background:linear-gradient(135deg,var(--gold-soft) 0%,var(--gold) 60%,var(--gold-deep) 100%);color:#241c0a;box-shadow:0 8px 18px rgba(177,154,85,.26)}
+  .lstm .mem .b2.sell{background:linear-gradient(135deg,var(--burgundy) 0%,#403d37 100%);color:#fff;box-shadow:0 8px 18px rgba(38,37,34,.24)}
+  .lstm .mem .b2:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  /* Connect becomes the lighter, full-width secondary action under Buy/Sell */
+  .lstm .mem .acts .cta{align-self:stretch;justify-content:center;width:100%;background:transparent;color:var(--burgundy);border:1px solid var(--line);box-shadow:none;font-size:.9rem;padding:.62rem 1.1rem}
+  .lstm .mem .acts .cta:hover{transform:translateY(-1px);background:#fff;border-color:var(--gold-soft);box-shadow:0 8px 18px rgba(38,37,34,.10)}
+
   /* communities-served band (local SEO copy) */
   .lstm .local{max-width:900px;margin:clamp(2.2rem,4.5vw,3.4rem) auto 0;text-align:center;border-top:1px solid var(--line);padding-top:clamp(1.7rem,3.2vw,2.3rem)}
   .lstm .local h3{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--black);margin:0 0 .6rem}
@@ -83,7 +94,13 @@
           <a class="s-li" href="https://www.linkedin.com/in/carlie-trahan-709671345" target="_blank" rel="noopener" aria-label="Carlie on LinkedIn"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.94 5a2 2 0 11-4 0 2 2 0 014 0zM7 8.5H3V21h4V8.5zm6.3 0H9.5V21h3.8v-6.6c0-3.5 4.5-3.8 4.5 0V21H21v-7.9c0-5.9-6.4-5.7-7.7-2.8V8.5z"/></svg></a>
           <a class="s-g" href="https://www.google.com/search?q=Carlie+Trahan+eXp+Realty+Lakeshore+Team+Lafayette" target="_blank" rel="noopener" aria-label="Carlie on Google"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.06-1.2-.2-1.8H12v3.4h5.4c-.1.9-.7 2.2-1.9 3l2.8 2.2c1.7-1.6 2.7-3.9 2.7-6.8z"/><path fill="#34A853" d="M12 22c2.6 0 4.7-.8 6.3-2.3l-2.8-2.2c-.8.5-1.9.9-3.5.9-2.6 0-4.8-1.8-5.6-4.1l-2.9 2.2A10 10 0 0012 22z"/><path fill="#FBBC05" d="M6.4 14.3a6 6 0 010-3.8L3.5 8.3a10 10 0 000 8.2z"/><path fill="#EA4335" d="M12 6.5c1.5 0 2.8.5 3.8 1.5l2.5-2.5A10 10 0 003.5 8.3l2.9 2.2C7.2 8.2 9.4 6.5 12 6.5z"/></svg></a>
         </div>
-        <a class="cta" href="https://popl.co/card/pGPkjtrU/1/dash" target="_blank" rel="noopener">Connect with Carlie <span class="ar">→</span></a>
+        <div class="acts">
+          <div class="act-row">
+            <a class="b2 buy" href="https://movewithcarlie.lakeshoreteam.com/listing" target="_blank" rel="noopener">Buy with Carlie</a>
+            <a class="b2 sell" href="https://movewithcarlie.lakeshoreteam.com/evaluation" target="_blank" rel="noopener">Sell with Carlie</a>
+          </div>
+          <a class="cta" href="https://popl.co/card/pGPkjtrU/1/dash" target="_blank" rel="noopener">Connect with Carlie <span class="ar">→</span></a>
+        </div>
       </article>
 
       <!-- Chelsea (center) -->
@@ -99,7 +116,13 @@
           <a class="s-li" href="https://www.linkedin.com/in/chelsea-porter-16b64138b" target="_blank" rel="noopener" aria-label="Chelsea on LinkedIn"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.94 5a2 2 0 11-4 0 2 2 0 014 0zM7 8.5H3V21h4V8.5zm6.3 0H9.5V21h3.8v-6.6c0-3.5 4.5-3.8 4.5 0V21H21v-7.9c0-5.9-6.4-5.7-7.7-2.8V8.5z"/></svg></a>
           <a class="s-g" href="https://www.google.com/search?q=Chelsea+Porter+eXp+Realty+Lakeshore+Team+Lafayette" target="_blank" rel="noopener" aria-label="Chelsea on Google"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.06-1.2-.2-1.8H12v3.4h5.4c-.1.9-.7 2.2-1.9 3l2.8 2.2c1.7-1.6 2.7-3.9 2.7-6.8z"/><path fill="#34A853" d="M12 22c2.6 0 4.7-.8 6.3-2.3l-2.8-2.2c-.8.5-1.9.9-3.5.9-2.6 0-4.8-1.8-5.6-4.1l-2.9 2.2A10 10 0 0012 22z"/><path fill="#FBBC05" d="M6.4 14.3a6 6 0 010-3.8L3.5 8.3a10 10 0 000 8.2z"/><path fill="#EA4335" d="M12 6.5c1.5 0 2.8.5 3.8 1.5l2.5-2.5A10 10 0 003.5 8.3l2.9 2.2C7.2 8.2 9.4 6.5 12 6.5z"/></svg></a>
         </div>
-        <a class="cta" href="/contact">Connect with Chelsea <span class="ar">→</span></a>
+        <div class="acts">
+          <div class="act-row">
+            <a class="b2 buy" href="https://chelseaporter.lakeshoreteam.com/listing" target="_blank" rel="noopener">Buy with Chelsea</a>
+            <a class="b2 sell" href="https://chelseaporter.lakeshoreteam.com/evaluation" target="_blank" rel="noopener">Sell with Chelsea</a>
+          </div>
+          <a class="cta" href="/contact">Connect with Chelsea <span class="ar">→</span></a>
+        </div>
       </article>
 
       <!-- Tyler (right) -->
@@ -117,7 +140,13 @@
           <a class="s-yt" href="https://www.youtube.com/@tyler_polk" target="_blank" rel="noopener" aria-label="Tyler on YouTube"><svg viewBox="0 0 24 24"><path fill="#fff" d="M23 7.5a3 3 0 00-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 001 7.5C.6 9.4.6 12 .6 12s0 2.6.4 4.5a3 3 0 002.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 002.1-2.1c.4-1.9.4-4.5.4-4.5s0-2.6-.4-4.5zM9.7 15.5v-7l6 3.5-6 3.5z"/></svg></a>
           <a class="s-g" href="https://www.google.com/search?q=Tyler+Polk+eXp+Realty+Lakeshore+Team+Lafayette" target="_blank" rel="noopener" aria-label="Tyler on Google"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.06-1.2-.2-1.8H12v3.4h5.4c-.1.9-.7 2.2-1.9 3l2.8 2.2c1.7-1.6 2.7-3.9 2.7-6.8z"/><path fill="#34A853" d="M12 22c2.6 0 4.7-.8 6.3-2.3l-2.8-2.2c-.8.5-1.9.9-3.5.9-2.6 0-4.8-1.8-5.6-4.1l-2.9 2.2A10 10 0 0012 22z"/><path fill="#FBBC05" d="M6.4 14.3a6 6 0 010-3.8L3.5 8.3a10 10 0 000 8.2z"/><path fill="#EA4335" d="M12 6.5c1.5 0 2.8.5 3.8 1.5l2.5-2.5A10 10 0 003.5 8.3l2.9 2.2C7.2 8.2 9.4 6.5 12 6.5z"/></svg></a>
         </div>
-        <a class="cta" href="https://calendly.com/tyler-lakeshoreteam/30min" target="_blank" rel="noopener">Connect with Tyler <span class="ar">→</span></a>
+        <div class="acts">
+          <div class="act-row">
+            <a class="b2 buy" href="https://lakeshoreteam.homes/listing" target="_blank" rel="noopener">Buy with Tyler</a>
+            <a class="b2 sell" href="https://lakeshoreteam.homes/evaluation" target="_blank" rel="noopener">Sell with Tyler</a>
+          </div>
+          <a class="cta" href="https://calendly.com/tyler-lakeshoreteam/30min" target="_blank" rel="noopener">Connect with Tyler <span class="ar">→</span></a>
+        </div>
       </article>
     </div>
 

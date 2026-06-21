@@ -32,13 +32,18 @@
   (function(){
     function ensureH1(){
       if(document.querySelector('h1')) return true;             /* homepage & pages that already have one */
-      var hero=document.querySelector('.md-hero'); if(!hero) return false;
-      var txt=(((hero.innerText||'').trim().split('\n')[0])||'').trim().slice(0,140);
+      var hero=document.querySelector('.md-hero');
+      var txt='';
+      if(hero){ txt=(((hero.innerText||'').trim().split('\n')[0])||'').trim(); }   /* prefer the hero heading */
+      if(!txt){ txt=(document.title||'').split(/\s[|–—-]\s/)[0].trim(); } /* fallback: page title minus brand suffix */
+      txt=txt.slice(0,140);
       if(!txt) return false;
+      var anchor=hero||document.querySelector('main.page-content,main,.page-content')||document.body;
+      if(!anchor) return false;
       var h1=document.createElement('h1');
       h1.textContent=txt;
       h1.style.cssText='position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0';
-      hero.insertBefore(h1, hero.firstChild);
+      anchor.insertBefore(h1, anchor.firstChild);
       return true;
     }
     if(document.readyState!=='loading'){ ensureH1(); } else { document.addEventListener('DOMContentLoaded', ensureH1); }
